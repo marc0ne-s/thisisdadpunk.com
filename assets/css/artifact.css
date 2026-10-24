@@ -222,6 +222,32 @@ body::before {
   letter-spacing: 0.2em;
   margin-top: 1rem;
 }
+/* Front-door link to the tapes. The project card alone is three columns down and
+   nobody scrolls to find a video link — this sits under the tagline on load. */
+.artifact-hero__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  align-self: flex-start;
+  margin-top: clamp(1.25rem, 3vh, 2rem);
+  padding: 0.7rem 1.15rem;
+  border: 1px solid rgba(232, 93, 4, 0.55);
+  background: rgba(10, 10, 10, 0.45);
+  color: var(--color-orange);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.18s, color 0.18s, border-color 0.18s, transform 0.18s;
+}
+.artifact-hero__cta:hover,
+.artifact-hero__cta:focus-visible {
+  background: var(--color-orange);
+  border-color: var(--color-orange);
+  color: #0a0a0a;
+  transform: translateY(-1px);
+}
 /* Zine stamp cluster — off to the right */
 .artifact-hero__stamps {
   position: absolute;
