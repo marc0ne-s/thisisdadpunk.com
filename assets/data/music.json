@@ -1,0 +1,7 @@
+{
+  "_comment": "Tombstone, not data. The shared-playlist shelf was removed; this file stays so that a browser holding a cached copy of the old /music/ page — which still fetches it — gets an empty list instead of a 404. Safe to delete once no client can be running pre-July-2026 HTML.",
+  "profile": null,
+  "updated": "2026-10-24T04:00:00Z",
+  "note": "No playlists. The page is fed by recent.json only.",
+  "playlists": []
+}

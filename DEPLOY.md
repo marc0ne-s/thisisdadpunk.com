@@ -130,6 +130,13 @@ on request: a playlist that gets re-shared or re-created reads stale next to a l
 library feed, and mixing the two made the page look half-updated. Don't reintroduce
 playlist embeds without asking.
 
+`assets/data/music.json` is now a **tombstone** — an empty playlist list, deliberately
+still served. Nothing on the current page reads it, but Pages caches HTML for ten
+minutes, so a browser holding the pre-removal `/music/` will still fetch that path.
+Deleting the file turned a stale cached page into "Shelf unreachable (HTTP 404)" for
+a real visitor within a minute of the deploy. When you remove a data file that
+already-deployed HTML references, leave a stub behind.
+
 ```bash
 python3 ~/.hermes/profiles/dadpunk/scripts/fetch_recent_music.py         # recent.json + covers
 python3 ~/.hermes/profiles/dadpunk/scripts/fetch_recent_music.py --dry-run
@@ -142,9 +149,13 @@ Things that will bite you:
 - **The iTunes Search API is keyless** — `itunes.apple.com/search?term=…&entity=album&country=au`.
   That is how a library album becomes a catalog id and therefore an embed. No
   developer token, no MusicKit.
-- **New releases are often missing from that index.** A missing id is normal;
-  the row then renders "Find on Apple Music ↗" instead of a player. Never guess a
-  catalog id — a player pointed at the wrong album is worse than no player.
+- **New releases are often missing from that index.** A missing id is normal; the
+  row then links to the **artist page** (`entity=musicArtist`, matched on name) and,
+  failing that, says "Not on Apple Music yet". Never guess a catalog id — a player on
+  the wrong album is worse than no player.
+- **Never link `music.apple.com/au/search?term=…`.** It returns HTTP 200 server-side
+  and then lands on an empty results page in the browser, so every one of those links
+  reads as broken. Artist pages are the reliable fallback.
 - **Artwork must be written from AppleScript directly to a file.** Piping the raw
   image data back through `stdout` corrupts it.
 - **The cron refuses to launch Music.app.** `refresh_site_data.sh` only runs this
