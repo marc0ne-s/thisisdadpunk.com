@@ -96,6 +96,39 @@
     .btn--ghost{border-color:rgba(232,228,222,.22);background:transparent;color:var(--grey);font-size:.58rem}
     .btn--ghost:hover{background:transparent;border-color:rgba(232,228,222,.5);color:var(--paper)}
 
+    /* recently-added album rows */
+    .rail-title{
+      display:flex;align-items:center;gap:1rem;
+      font-size:.64rem;letter-spacing:.3em;text-transform:uppercase;color:var(--grey);
+      margin-bottom:1rem;
+    }
+    .rail-title::after{content:'';flex:1;height:1px;background:rgba(232,228,222,.14)}
+    .rail-title--spaced{margin-top:clamp(2rem,5vh,3rem)}
+    .rail-count{color:var(--orange)}
+
+    .album{
+      display:grid;
+      grid-template-columns:76px 1fr auto;
+      gap:clamp(.9rem,2vw,1.3rem);
+      align-items:center;
+      border:1px solid rgba(232,228,222,.14);
+      background:linear-gradient(135deg, rgba(232,228,222,.04), rgba(232,228,222,.006));
+      padding:.8rem;
+    }
+    .album__art{
+      width:76px;height:76px;object-fit:cover;display:block;
+      border:1px solid rgba(232,228,222,.12);background:#141414;
+      filter:saturate(.92) contrast(1.04);
+    }
+    .album__art--none{
+      width:76px;height:76px;border:1px dashed rgba(232,228,222,.2);
+      display:grid;place-items:center;color:var(--olive);font-size:.6rem;
+    }
+    .album__title{font-weight:600;font-size:.95rem;line-height:1.35}
+    .album__artist{margin-top:.25rem;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grey)}
+    .album__added{margin-top:.35rem;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(232,93,4,.8)}
+    .album__body{min-width:0}
+
     .player{
       border:1px solid rgba(232,93,4,.4);
       background:#0d0d0d;
@@ -141,14 +174,20 @@
     <div class="kicker">// 05 — Rotation</div>
     <h1>THE <span class="tape">ROTATION</span></h1>
     <p class="sub">
-      Playlists out of my own library, served by Apple Music. <b>No brand playlist, no
-      algorithm bait, no thirty-second trailer</b> — just what was actually on. Apple hosts
-      the audio; nothing gets re-uploaded to this site.
+      Top of the page is whatever actually landed in my library, read straight off this
+      machine — not a playlist I curate to look current. Below that, playlists I've shared.
+      <b>No brand playlist, no algorithm bait, no thirty-second trailer.</b> Apple hosts the
+      audio; nothing gets re-uploaded to this site.
     </p>
     <div class="meta-line" id="meta-line"><span>loading shelf…</span></div>
   </header>
 
   <main>
+    <div class="rail-title"><span>// Just landed</span><span class="rail-count" id="recent-count"></span></div>
+    <div class="shelf shelf--recent" id="recent"></div>
+    <div class="state" id="recent-state" hidden></div>
+
+    <div class="rail-title rail-title--spaced"><span>// Shared playlists</span></div>
     <div class="shelf" id="shelf"></div>
     <div class="state" id="state" hidden></div>
   </main>
@@ -234,6 +273,90 @@
 
       return wrap;
     }
+
+    /* ── JUST LANDED — read straight out of the library by fetch_recent_music.py ── */
+    const recentEl = document.getElementById('recent');
+    const recentState = document.getElementById('recent-state');
+    const recentCount = document.getElementById('recent-count');
+
+    const MONTHS = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+    const stamp = iso => {
+      const d = new Date(iso);
+      if (!iso || isNaN(d)) return null;
+      return d.getUTCDate() + ' ' + MONTHS[d.getUTCMonth()] + ' ' + d.getUTCFullYear();
+    };
+
+    function albumRow(a) {
+      const row = el('div', 'album');
+
+      if (a.artwork) {
+        const img = el('img', 'album__art');
+        img.src = '../' + a.artwork;   // paths are stored relative to the site root
+        img.alt = a.album + ' cover';
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        img.addEventListener('error', () => {
+          const ph = el('div', 'album__art--none', '—');
+          img.replaceWith(ph);
+        });
+        row.appendChild(img);
+      } else {
+        row.appendChild(el('div', 'album__art--none', '—'));
+      }
+
+      const body = el('div', 'album__body');
+      body.appendChild(el('div', 'album__title', a.album || 'Untitled'));
+      body.appendChild(el('div', 'album__artist', a.artist || ''));
+      const added = stamp(a.added);
+      if (added) body.appendChild(el('div', 'album__added', 'added ' + added));
+      row.appendChild(body);
+
+      const actions = el('div', 'sleeve__actions');
+      if (a.embed) {
+        const play = el('button', 'btn', 'Play album');
+        play.type = 'button';
+        // The player needs its own row, so it goes after the album line.
+        play.addEventListener('click', () => {
+          if (row.parentNode.querySelector('.player[data-for="' + a.catalog_id + '"]')) return;
+          const box = el('div', 'player');
+          box.dataset.for = String(a.catalog_id);
+          box.appendChild(embed(a.embed, 450));
+          box.appendChild(el('div', 'player__note', 'served by Apple Music'));
+          row.after(box);
+          play.textContent = 'Loaded';
+          play.disabled = true;
+          play.style.opacity = '.5';
+        });
+        actions.appendChild(play);
+      } else {
+        const find = el('a', 'btn btn--ghost', 'Find on Apple Music ↗');
+        find.href = a.search_url;
+        find.target = '_blank';
+        find.rel = 'noopener noreferrer';
+        actions.appendChild(find);
+      }
+      row.appendChild(actions);
+      return row;
+    }
+
+    fetch('../assets/data/recent.json', { cache: 'no-cache' })
+      .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then(data => {
+        const list = Array.isArray(data.albums) ? data.albums : [];
+        if (!list.length) {
+          recentState.hidden = false;
+          recentState.innerHTML = '<b>Nothing landed yet</b>' +
+            'recent.json has no albums. Better empty than padded with things that were not actually added.';
+          return;
+        }
+        recentCount.textContent = list.length + (list.length === 1 ? ' album' : ' albums') + ' · read ' + stamp(data.updated);
+        list.forEach(a => recentEl.appendChild(albumRow(a)));
+      })
+      .catch(err => {
+        recentState.hidden = false;
+        recentState.innerHTML = '<b>Library feed unreachable</b>' +
+          'recent.json could not be read (' + err.message + ').';
+      });
 
     fetch('../assets/data/music.json', { cache: 'no-cache' })
       .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })

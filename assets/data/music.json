@@ -5,7 +5,7 @@
     "url": null
   },
   "updated": "2026-10-24T03:15:00Z",
-  "note": "Hand-curated. Apple serves the audio from its own embed; nothing is re-hosted here.",
+  "note": "A monthly snapshot by name. The live list sits above it.",
   "playlists": [
     {
       "id": "pl.u-yb7LtVjAzd",
@@ -13,7 +13,7 @@
       "title": "Added Last Month",
       "curator": "Marcus Sullivan",
       "tracks": 97,
-      "note": "Whatever landed in the library that month. No curation, no theme — the honest version."
+      "note": "Whatever landed in the library that month — a snapshot, frozen at share time. The live list is at the top of this page."
     }
   ]
 }

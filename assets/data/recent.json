@@ -1,0 +1,113 @@
+{
+  "source": "Music.app playlist \"Recently Added\"",
+  "storefront": "au",
+  "updated": "2026-10-24T03:12:12Z",
+  "count": 8,
+  "embedded": 5,
+  "albums": [
+    {
+      "title": "Where White Boys Dance",
+      "artist": "The Killers",
+      "album": "Sam's Town",
+      "added": "2026-10-23T17:20:43",
+      "added_raw": "Friday, 23 October 2026 at 5:20:43 pm",
+      "artwork": "assets/img/albums/the-killers-sam-s-town.jpg",
+      "embed": "https://embed.music.apple.com/au/album/1440891236",
+      "store_url": "https://music.apple.com/au/album/sams-town/1440891236?uo=4",
+      "catalog_id": 1440891236,
+      "match": "album",
+      "search_url": "https://music.apple.com/au/search?term=The%20Killers%20Sam%27s%20Town"
+    },
+    {
+      "title": "Measures of Dispersion (Mixed)",
+      "artist": "A.Fruit",
+      "album": "DJ - Kicks: Djrum (DJ Mix)",
+      "added": "2026-10-17T00:19:37",
+      "added_raw": "Saturday, 17 October 2026 at 12:19:37 am",
+      "artwork": "assets/img/albums/a-fruit-dj-kicks-djrum-dj-mix.jpg",
+      "embed": null,
+      "store_url": null,
+      "catalog_id": null,
+      "match": null,
+      "search_url": "https://music.apple.com/au/search?term=A.Fruit%20DJ%20-%20Kicks%3A%20Djrum%20%28DJ%20Mix%29"
+    },
+    {
+      "title": "Disgruntled (feat. J Hus & IRAH)",
+      "artist": "Chase & Status",
+      "album": "Generic Everything",
+      "added": "2026-10-17T00:18:12",
+      "added_raw": "Saturday, 17 October 2026 at 12:18:12 am",
+      "artwork": "assets/img/albums/chase-status-generic-everything.jpg",
+      "embed": null,
+      "store_url": null,
+      "catalog_id": null,
+      "match": null,
+      "search_url": "https://music.apple.com/au/search?term=Chase%20%26%20Status%20Generic%20Everything"
+    },
+    {
+      "title": "Printerlude",
+      "artist": "HAAi",
+      "album": "DIGITiSE",
+      "added": "2026-10-16T20:38:20",
+      "added_raw": "Friday, 16 October 2026 at 8:38:20 pm",
+      "artwork": "assets/img/albums/haai-digitise.jpg",
+      "embed": "https://embed.music.apple.com/au/album/6781656816",
+      "store_url": "https://music.apple.com/au/album/digitise/6781656816?uo=4",
+      "catalog_id": 6781656816,
+      "match": "album",
+      "search_url": "https://music.apple.com/au/search?term=HAAi%20DIGITiSE"
+    },
+    {
+      "title": "Bd-R",
+      "artist": "The Avalanches",
+      "album": "No Bad Memories",
+      "added": "2026-10-16T15:12:42",
+      "added_raw": "Friday, 16 October 2026 at 3:12:42 pm",
+      "artwork": "assets/img/albums/the-avalanches-no-bad-memories.jpg",
+      "embed": null,
+      "store_url": null,
+      "catalog_id": null,
+      "match": null,
+      "search_url": "https://music.apple.com/au/search?term=The%20Avalanches%20No%20Bad%20Memories"
+    },
+    {
+      "title": "Switch Up",
+      "artist": "Mike D",
+      "album": "Thank You",
+      "added": "2026-10-14T13:45:10",
+      "added_raw": "Wednesday, 14 October 2026 at 1:45:10 pm",
+      "artwork": "assets/img/albums/mike-d-thank-you.jpg",
+      "embed": "https://embed.music.apple.com/au/album/6801308856",
+      "store_url": "https://music.apple.com/au/album/thank-you/6801308856?uo=4",
+      "catalog_id": 6801308856,
+      "match": "album",
+      "search_url": "https://music.apple.com/au/search?term=Mike%20D%20Thank%20You"
+    },
+    {
+      "title": "Silk",
+      "artist": "Wage War",
+      "album": "Landfall",
+      "added": "2026-10-09T15:19:02",
+      "added_raw": "Friday, 9 October 2026 at 3:19:02 pm",
+      "artwork": "assets/img/albums/wage-war-landfall.jpg",
+      "embed": "https://embed.music.apple.com/au/album/6805676802",
+      "store_url": "https://music.apple.com/au/album/landfall/6805676802?uo=4",
+      "catalog_id": 6805676802,
+      "match": "album",
+      "search_url": "https://music.apple.com/au/search?term=Wage%20War%20Landfall"
+    },
+    {
+      "title": "Voice In My Knives / Poseedora De Mi Sombra",
+      "artist": "The Mars Volta",
+      "album": "Lucro Sucio; Unfinished Business",
+      "added": "2026-10-09T15:11:46",
+      "added_raw": "Friday, 9 October 2026 at 3:11:46 pm",
+      "artwork": "assets/img/albums/the-mars-volta-lucro-sucio-unfinished-business.jpg",
+      "embed": "https://embed.music.apple.com/au/album/6782105299",
+      "store_url": "https://music.apple.com/au/album/lucro-sucio-unfinished-business/6782105299?uo=4",
+      "catalog_id": 6782105299,
+      "match": "album",
+      "search_url": "https://music.apple.com/au/search?term=The%20Mars%20Volta%20Lucro%20Sucio%3B%20Unfinished%20Business"
+    }
+  ]
+}
