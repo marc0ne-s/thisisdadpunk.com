@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VIDEOS — DADPUNK</title>
+  <meta name="description" content="Every clip from the DadPunkTV channel — SynthRiders first-plays, mapping runs, and the Mental Elf series. No channel trailer, no algorithm bait, just the tapes.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://i.ytimg.com">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="canonical" href="https://thisisdadpunk.com/videos/">
+  <style>
+    :root{
+      --black:#0a0a0a;
+      --paper:#e8e4de;
+      --orange:#e85d04;
+      --olive:#5c5b3a;
+      --grey:#8a8a80;
+      --mono:'IBM Plex Mono', ui-monospace, 'SF Mono', monospace;
+      --display:'Archivo Black', 'Impact', sans-serif;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{-webkit-font-smoothing:antialiased;background:var(--black)}
+    body{
+      background:var(--black);
+      color:var(--paper);
+      font-family:var(--mono);
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      overflow-x:hidden;
+    }
+    body::after{
+      content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
+      background-size:256px 256px;
+      opacity:.55;
+    }
+    a{color:inherit;text-decoration:none}
+
+    /* ── top bar ── */
+    .bar{
+      display:flex;align-items:center;gap:1.5rem;
+      padding:1rem clamp(1.25rem,4vw,3rem);
+      border-bottom:1px solid rgba(232,228,222,.12);
+      font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;
+      color:var(--grey);
+    }
+    .bar__brand{
+      font-family:var(--display);font-size:.95rem;letter-spacing:.02em;
+      color:var(--paper);
+    }
+    .bar__brand span{color:var(--orange)}
+    .bar__spacer{flex:1}
+    .bar a:hover{color:var(--orange)}
+
+    /* ── header ── */
+    header.head{
+      padding:clamp(3rem,9vh,6rem) clamp(1.25rem,4vw,3rem) clamp(2rem,5vh,3rem);
+      border-bottom:1px solid rgba(232,228,222,.12);
+    }
+    .kicker{
+      font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;
+      color:var(--orange);margin-bottom:1.4rem;
+    }
+    h1{
+      font-family:var(--display);
+      font-size:clamp(2.6rem,8vw,5.4rem);
+      line-height:.92;letter-spacing:-.02em;
+      text-transform:uppercase;
+    }
+    h1 .tape{
+      display:inline-block;background:var(--orange);color:var(--black);
+      padding:.02em .22em;transform:rotate(-1.2deg);
+    }
+    .sub{
+      margin-top:1.6rem;max-width:56ch;
+      font-size:.9rem;line-height:1.75;color:#b9b5ad;
+    }
+    .sub b{color:var(--paper);font-weight:600}
+    .channel-line{
+      margin-top:1.4rem;display:flex;flex-wrap:wrap;gap:.6rem 1.6rem;
+      font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--grey);
+    }
+    .channel-line a{color:var(--orange);border-bottom:1px solid rgba(232,93,4,.4)}
+    .channel-line a:hover{color:var(--paper);border-color:var(--paper)}
+
+    /* ── grid ── */
+    main{flex:1;padding:clamp(2rem,5vh,3.5rem) clamp(1.25rem,4vw,3rem)}
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));
+      gap:clamp(1.5rem,3vw,2.5rem);
+      list-style:none;
+    }
+    .card{
+      display:flex;flex-direction:column;
+      border:1px solid rgba(232,228,222,.14);
+      background:linear-gradient(180deg,rgba(232,228,222,.035),rgba(232,228,222,.008));
+      transition:border-color .18s ease, transform .18s ease;
+    }
+    .card:hover,.card:focus-within{
+      border-color:rgba(232,93,4,.55);
+      transform:translateY(-2px);
+    }
+    .card__thumb{
+      position:relative;aspect-ratio:16/9;overflow:hidden;background:#111;
+      border-bottom:1px solid rgba(232,228,222,.1);
+    }
+    .card__thumb img{
+      width:100%;height:100%;object-fit:cover;display:block;
+      filter:saturate(.85) contrast(1.05);
+      transition:filter .2s ease, transform .4s ease;
+    }
+    .card:hover .card__thumb img{filter:saturate(1.05) contrast(1.08);transform:scale(1.02)}
+    .card__dur{
+      position:absolute;right:.55rem;bottom:.55rem;
+      background:rgba(10,10,10,.86);color:var(--paper);
+      font-size:.64rem;letter-spacing:.06em;padding:.18rem .45rem;
+      border:1px solid rgba(232,228,222,.18);
+    }
+    .card__play{
+      position:absolute;left:.6rem;top:.6rem;
+      width:2.1rem;height:2.1rem;border-radius:50%;
+      display:grid;place-items:center;
+      background:rgba(232,93,4,.92);color:var(--black);
+      font-size:.7rem;opacity:0;transition:opacity .18s ease;
+    }
+    .card:hover .card__play,.card:focus-within .card__play{opacity:1}
+    .card__body{padding:1rem 1.1rem 1.2rem;display:flex;flex-direction:column;gap:.7rem}
+    .card__title{
+      font-family:var(--mono);font-weight:600;font-size:.95rem;line-height:1.45;
+      color:var(--paper);text-wrap:balance;
+    }
+    .card__meta{
+      display:flex;flex-wrap:wrap;gap:.4rem 1rem;
+      font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--grey);
+      margin-top:auto;
+    }
+    .card__meta .dot{color:var(--orange)}
+
+    /* ── states ── */
+    .state{
+      border:1px dashed rgba(232,228,222,.25);
+      padding:2.5rem;max-width:60ch;
+      font-size:.85rem;line-height:1.8;color:#b9b5ad;
+    }
+    .state b{color:var(--orange);display:block;margin-bottom:.6rem;
+      font-size:.68rem;letter-spacing:.26em;text-transform:uppercase}
+
+    footer{
+      display:flex;flex-wrap:wrap;gap:.7rem 1.5rem;align-items:center;
+      padding:1.2rem clamp(1.25rem,4vw,3rem);
+      border-top:1px solid rgba(232,228,222,.12);
+      font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--grey);
+    }
+    footer .spacer{flex:1}
+    footer a:hover{color:var(--orange)}
+
+    @media (prefers-reduced-motion:reduce){
+      *{animation:none!important;transition:none!important}
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bar">
+    <a class="bar__brand" href="../">THIS IS <span>DAD</span>PUNK</a>
+    <span class="bar__spacer"></span>
+    <a href="../">← artifact</a>
+  </div>
+
+  <header class="head">
+    <div class="kicker">// 04 — Transmissions</div>
+    <h1>THE <span class="tape">TAPES</span></h1>
+    <p class="sub">
+      Everything on the channel, newest first. SynthRiders first-plays, mapping runs,
+      and the Mental Elf series — <b>shot in one take, no edits to hide behind</b>.
+      This page reads the channel's own feed, so what you see here is what's actually up.
+    </p>
+    <div class="channel-line" id="channel-line">
+      <span>loading feed…</span>
+    </div>
+  </header>
+
+  <main>
+    <ul class="grid" id="grid" aria-live="polite"></ul>
+    <div class="state" id="state" hidden></div>
+  </main>
+
+  <footer>
+    <span>© 2026 // BUDGEWOI, NSW</span>
+    <span class="spacer"></span>
+    <a href="https://github.com/marc0ne-s">GitHub</a>
+    <a href="https://www.youtube.com/@dadpunktv">YouTube</a>
+    <a href="../punksurveyor/">/surveyor</a>
+  </footer>
+
+  <script>
+  (function () {
+    const grid = document.getElementById('grid');
+    const state = document.getElementById('state');
+    const chanLine = document.getElementById('channel-line');
+
+    const MONTHS = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+
+    function stamp(iso) {
+      if (!iso) return null;
+      const d = new Date(iso);
+      if (isNaN(d)) return null;
+      return d.getUTCDate() + ' ' + MONTHS[d.getUTCMonth()] + ' ' + d.getUTCFullYear();
+    }
+
+    function runtime(secs) {
+      if (!secs || secs < 1) return null;
+      const h = Math.floor(secs / 3600);
+      const m = Math.floor((secs % 3600) / 60);
+      const s = secs % 60;
+      const pad = n => String(n).padStart(2, '0');
+      return h ? h + ':' + pad(m) + ':' + pad(s) : m + ':' + pad(s);
+    }
+
+    function views(n) {
+      if (n == null) return null;
+      if (n >= 1000000) return (n / 1000000).toFixed(1).replace('.0', '') + 'M';
+      if (n >= 1000) return (n / 1000).toFixed(1).replace('.0', '') + 'K';
+      return String(n);
+    }
+
+    function el(tag, cls, text) {
+      const n = document.createElement(tag);
+      if (cls) n.className = cls;
+      if (text != null) n.textContent = text;
+      return n;
+    }
+
+    function card(v) {
+      const li = el('li', 'card');
+      const a = el('a');
+      a.href = v.url;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.setAttribute('aria-label', v.title + ' — opens on YouTube');
+
+      const thumb = el('div', 'card__thumb');
+      const img = el('img');
+      img.src = v.thumbnail;
+      img.alt = '';
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.addEventListener('error', () => { img.remove(); });
+      thumb.appendChild(img);
+      thumb.appendChild(el('span', 'card__play', '▶'));
+      const dur = runtime(v.duration);
+      if (dur) thumb.appendChild(el('span', 'card__dur', dur));
+
+      const body = el('div', 'card__body');
+      body.appendChild(el('div', 'card__title', v.title));
+
+      const meta = el('div', 'card__meta');
+      const bits = [stamp(v.published), views(v.views) ? views(v.views) + ' VIEWS' : null]
+        .filter(Boolean);
+      bits.forEach((t, i) => {
+        if (i) meta.appendChild(el('span', 'dot', '·'));
+        meta.appendChild(el('span', null, t));
+      });
+      body.appendChild(meta);
+
+      a.appendChild(thumb);
+      a.appendChild(body);
+      li.appendChild(a);
+      return li;
+    }
+
+    fetch('../assets/data/videos.json', { cache: 'no-cache' })
+      .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then(data => {
+        const c = data.channel || {};
+        const vids = Array.isArray(data.videos) ? data.videos : [];
+
+        if (c.title || c.handle) {
+          chanLine.innerHTML = '';
+          const name = el('span', null, c.title || c.handle);
+          chanLine.appendChild(name);
+          if (c.handle) chanLine.appendChild(el('span', null, c.handle));
+          const link = el('a', null, 'open channel ↗');
+          link.href = c.handle ? 'https://www.youtube.com/' + c.handle.replace(/^@?/, '@') : c.url;
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+          chanLine.appendChild(link);
+          if (data.updated) {
+            const u = stamp(data.updated);
+            chanLine.appendChild(el('span', null, 'feed read ' + u));
+          }
+        }
+
+        if (!vids.length) {
+          state.hidden = false;
+          state.innerHTML = '<b>No videos in the feed</b>' +
+            'The channel feed returned nothing. Nothing is being faked in its place.';
+          return;
+        }
+
+        const frag = document.createDocumentFragment();
+        vids.forEach(v => frag.appendChild(card(v)));
+        grid.appendChild(frag);
+      })
+      .catch(err => {
+        state.hidden = false;
+        state.innerHTML = '<b>Feed unreachable</b>' +
+          'videos.json could not be read (' + err.message + '). ' +
+          'Rather than show stale or invented clips, this space stays empty. ' +
+          'Watch direct on <a href="https://www.youtube.com/@dadpunktv" style="color:#e85d04">YouTube</a>.';
+      });
+  })();
+  </script>
+
+</body>
+</html>

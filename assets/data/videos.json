@@ -1,0 +1,45 @@
+{
+  "channel": {
+    "id": "UC5nj0RESdbOilqeDzAL8RBQ",
+    "title": "DadPunkTV",
+    "author": "DadPunkTV",
+    "url": "https://www.youtube.com/channel/UC5nj0RESdbOilqeDzAL8RBQ",
+    "feed": "https://www.youtube.com/feeds/videos.xml?channel_id=UC5nj0RESdbOilqeDzAL8RBQ",
+    "handle": "@dadpunktv"
+  },
+  "source": "youtube rss feed",
+  "updated": "2026-10-24T02:37:34Z",
+  "count": 3,
+  "videos": [
+    {
+      "id": "LfJEtcAcJ3k",
+      "title": "10 a day for my Mental Elf   day 49",
+      "url": "https://www.youtube.com/watch?v=LfJEtcAcJ3k",
+      "published": "2026-10-19T07:16:28+00:00",
+      "thumbnail": "https://i.ytimg.com/vi/LfJEtcAcJ3k/hqdefault.jpg",
+      "views": 8,
+      "description": "#mentalhealth #mentalhealthawareness #synthridersvr\n To keep my Mental Elf at bay I'm doing 10 OST/DLC tracks non stop in #synthridersvr a day.",
+      "duration": 2336
+    },
+    {
+      "id": "D2x0ZJVz0eY",
+      "title": "10 a day for my Mental Elf   day 45",
+      "url": "https://www.youtube.com/watch?v=D2x0ZJVz0eY",
+      "published": "2026-10-15T02:36:34+00:00",
+      "thumbnail": "https://i.ytimg.com/vi/D2x0ZJVz0eY/hqdefault.jpg",
+      "views": 21,
+      "description": "To keep my Mental Elf at bay I'm doing 10 OST/DLC tracks non stop in #synthridersvr a day.\n\nThis is actually day 45, but the first day I've recorded it.\n\n#synthriders #mentalhealth #mentalhealthawareness",
+      "duration": 2284
+    },
+    {
+      "id": "MH9dSlQeFj4",
+      "title": "Give Em Hell Kid - My Chemical Romance- Mapped by TheDrewcifer - FirstPlay",
+      "url": "https://www.youtube.com/watch?v=MH9dSlQeFj4",
+      "published": "2026-10-13T01:13:49+00:00",
+      "thumbnail": "https://i.ytimg.com/vi/MH9dSlQeFj4/hqdefault.jpg",
+      "views": 101,
+      "description": "",
+      "duration": 177
+    }
+  ]
+}
