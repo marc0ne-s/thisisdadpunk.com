@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DADPUNK — under construction</title>
+<meta name="description" content="DadPunk — local AI, hand-built systems, punk ethos. Built in Budgewoi, NSW. Site under construction.">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0a0a0a;
+    --paper:#e8e4de;
+    --orange:#e85d04;
+    --olive:#5c5b3a;
+    --olive-dim:#3a3925;
+    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    --black:"Archivo Black",Impact,Haettenschweiler,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--paper);
+    font-family:var(--mono);
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    display:flex;
+    flex-direction:column;
+    min-height:100vh;
+  }
+
+  /* ── grain + scanline bed ── */
+  .grain{
+    position:fixed; inset:-50%;
+    z-index:3; pointer-events:none;
+    opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+    animation:grain 7s steps(6) infinite;
+  }
+  @keyframes grain{
+    0%{transform:translate(0,0)}
+    20%{transform:translate(-3%,2%)}
+    40%{transform:translate(2%,-3%)}
+    60%{transform:translate(-2%,-2%)}
+    80%{transform:translate(3%,1%)}
+    100%{transform:translate(0,0)}
+  }
+  .scan{
+    position:fixed; inset:0; z-index:2; pointer-events:none;
+    background:repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,.035) 0 1px,
+      transparent 1px 3px);
+    mix-blend-mode:overlay;
+  }
+  .glow{
+    position:fixed; z-index:0; pointer-events:none;
+    width:min(78vw,900px); aspect-ratio:1;
+    left:-18vw; top:-28vh;
+    background:radial-gradient(circle at 50% 50%, rgba(232,93,4,.20), rgba(92,91,58,.10) 42%, transparent 70%);
+    filter:blur(6px);
+  }
+
+  /* ── system bar ── */
+  .bar{
+    position:relative; z-index:4;
+    display:flex; align-items:center; gap:1.4rem;
+    padding:.7rem clamp(1rem,4vw,2.6rem);
+    border-bottom:1px solid rgba(232,228,222,.12);
+    font-size:.66rem; letter-spacing:.16em; text-transform:uppercase;
+    color:rgba(232,228,222,.62);
+    background:rgba(10,10,10,.72);
+    backdrop-filter:blur(6px);
+    flex-wrap:wrap;
+  }
+  .bar__brand{color:var(--orange); font-weight:600; letter-spacing:.22em}
+  .bar__item{margin-left:auto; white-space:nowrap}
+  .bar__item ~ .bar__item{margin-left:0}
+  .dot{color:var(--orange)}
+  @media (max-width:640px){
+    .bar{gap:.9rem; font-size:.58rem}
+    .bar__item{margin-left:0}
+  }
+
+  /* ── stage ── */
+  main{
+    position:relative; z-index:4;
+    flex:1;
+    display:flex; flex-direction:column; justify-content:center;
+    padding:clamp(3rem,9vh,7rem) clamp(1rem,6vw,5rem);
+    max-width:1180px;
+  }
+
+  .kicker{
+    font-size:.68rem; letter-spacing:.34em; text-transform:uppercase;
+    color:var(--olive);
+    display:flex; align-items:center; gap:.9rem;
+    margin-bottom:clamp(1rem,3vh,2rem);
+  }
+  .kicker::after{
+    content:""; flex:1; height:1px; max-width:220px;
+    background:linear-gradient(to right,var(--olive-dim),transparent);
+  }
+
+  h1{
+    font-family:var(--black);
+    font-size:clamp(3.4rem,13vw,10.5rem);
+    line-height:.82;
+    letter-spacing:-.03em;
+    margin:0;
+    text-transform:uppercase;
+  }
+  h1 .line{display:block}
+  /* xerox misregistration on DAD — cyan-less, orange-knocked-offset */
+  h1 .dad{
+    position:relative;
+    color:var(--orange);
+    display:inline-block;
+  }
+  h1 .dad::before{
+    content:attr(data-text);
+    position:absolute; left:.055em; top:.028em;
+    color:var(--olive);
+    opacity:.55;
+    mix-blend-mode:screen;
+    z-index:-1;
+    clip-path:polygon(0 0,100% 0,100% 46%,0 52%);
+  }
+  h1 .dad::after{
+    content:attr(data-text);
+    position:absolute; left:-.03em; top:-.018em;
+    color:var(--paper);
+    opacity:.14;
+    z-index:-2;
+  }
+
+  .lede{
+    margin:clamp(1.6rem,4vh,2.6rem) 0 0;
+    max-width:46ch;
+    font-size:clamp(.86rem,1.5vw,1rem);
+    line-height:1.75;
+    color:rgba(232,228,222,.74);
+  }
+  .lede strong{color:var(--paper); font-weight:600}
+
+  .status{
+    margin-top:clamp(2rem,5vh,3rem);
+    display:inline-flex; align-items:center; gap:.8rem;
+    padding:.7rem 1.1rem;
+    border:1px solid rgba(232,93,4,.42);
+    font-size:.68rem; letter-spacing:.26em; text-transform:uppercase;
+    color:var(--orange);
+    background:rgba(232,93,4,.05);
+  }
+  .status__pulse{
+    width:6px; height:6px; background:var(--orange); border-radius:50%;
+    box-shadow:0 0 0 0 rgba(232,93,4,.55);
+    animation:pulse 2.4s ease-out infinite;
+  }
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(232,93,4,.55)}
+    70%{box-shadow:0 0 0 9px rgba(232,93,4,0)}
+    100%{box-shadow:0 0 0 0 rgba(232,93,4,0)}
+  }
+
+  /* ── tape line + footer ── */
+  .tape{
+    position:relative; z-index:4;
+    height:10px;
+    border-top:1px solid rgba(232,228,222,.14);
+    border-bottom:1px solid rgba(232,228,222,.08);
+    background:
+      repeating-linear-gradient(-45deg,
+        rgba(92,91,58,.30) 0 8px,
+        transparent 8px 16px);
+    opacity:.7;
+  }
+  footer{
+    position:relative; z-index:4;
+    display:flex; gap:1.4rem; flex-wrap:wrap; align-items:center;
+    padding:1rem clamp(1rem,4vw,2.6rem);
+    font-size:.62rem; letter-spacing:.18em; text-transform:uppercase;
+    color:rgba(232,228,222,.45);
+  }
+  footer a{
+    color:rgba(232,228,222,.62);
+    text-decoration:none;
+    border-bottom:1px solid rgba(232,228,222,.22);
+    padding-bottom:1px;
+    transition:color .18s ease, border-color .18s ease;
+  }
+  footer a:hover,footer a:focus-visible{color:var(--orange); border-color:var(--orange)}
+  footer .spacer{margin-left:auto}
+  @media (max-width:640px){
+    footer .spacer{margin-left:0}
+    footer{font-size:.56rem; gap:.9rem}
+  }
+  a:focus-visible{outline:2px solid var(--orange); outline-offset:3px}
+
+  @media (prefers-reduced-motion:reduce){
+    .grain{animation:none}
+    .status__pulse{animation:none}
+  }
+</style>
+</head>
+<body>
+
+  <div class="glow" aria-hidden="true"></div>
+  <div class="scan" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <div class="bar">
+    <span class="bar__brand">DADPUNK</span>
+    <span class="bar__item"><span class="dot">●</span> UNDER CONSTRUCTION</span>
+    <span class="bar__item">BUDGEWOI, NSW</span>
+    <span class="bar__item" id="clock">--:--</span>
+  </div>
+
+  <main>
+    <div class="kicker">Site rebuild in progress</div>
+
+    <h1>
+      <span class="line">This is</span>
+      <span class="line"><span class="dad" data-text="DAD">DAD</span>PUNK</span>
+    </h1>
+
+    <p class="lede">
+      <strong>Not live yet.</strong> Local AI, hand-built systems, and cameras pointed at real
+      things — running on a desk in Budgewoi. No email list, no countdown clock,
+      no launch theatre. It goes up when it's worth looking at.
+    </p>
+
+    <div class="status">
+      <span class="status__pulse" aria-hidden="true"></span>
+      Building in public
+    </div>
+  </main>
+
+  <div class="tape" aria-hidden="true"></div>
+
+  <footer>
+    <span>© 2026 // BUDGEWOI, NSW</span>
+    <a href="https://github.com/marc0ne-s">GitHub</a>
+    <a href="https://github.com/marc0ne-s/thisisdadpunk.com">Repo</a>
+    <span class="spacer" id="build-stamp">EST. GEN X</span>
+  </footer>
+
+<script>
+  // Clock + build stamp. No dependencies, fails silent if either is unavailable.
+  (function () {
+    var clock = document.getElementById('clock');
+    var stamp = document.getElementById('build-stamp');
+    function tick() {
+      if (!clock) return;
+      var d = new Date();
+      clock.textContent = d.toLocaleTimeString('en-AU', { hour: '2-digit', minute: '2-digit', hour12: false });
+    }
+    tick();
+    setInterval(tick, 30000);
+    if (stamp) {
+      var built = new Date(document.lastModified);
+      if (!isNaN(built.getTime())) {
+        stamp.textContent = 'BUILD ' + built.toLocaleDateString('en-AU', { day: '2-digit', month: 'short' }).toUpperCase();
+      }
+    }
+  })();
+</script>
+</body>
+</html>
