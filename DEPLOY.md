@@ -1,6 +1,7 @@
 # thisisdadpunk.com
 
-Live: **https://marc0ne-s.github.io/thisisdadpunk.com/**
+Live: **https://thisisdadpunk.com/** (custom domain, Let's Encrypt, HTTPS enforced)
+Mirror: https://marc0ne-s.github.io/thisisdadpunk.com/
 
 The DadPunk artifact site. Static HTML/CSS/JS, no build step, no framework.
 Content is data-driven — edit the JSON in `assets/data/`, never the HTML.
@@ -17,9 +18,10 @@ Build and push from the working copy, not by hand:
 ```
 
 That script builds a clean bundle first and refuses to push if any media
-master leaked in. **Do not deploy the project directory directly** — it holds
-~965 MB of video masters and audio stems that are not web assets. The served
-site is ~508 KB / 31 files.
+master leaked in, **or if `CNAME` is missing** (a force-push without it
+unpublishes the custom domain). **Do not deploy the project directory
+directly** — it holds ~965 MB of video masters and audio stems that are not
+web assets. The served site is ~512 KB / 33 files.
 
 Excluded from the bundle: `audio/`, `*.mp4`, `*.bak*`, `memory-wiki/`,
 `node_modules/`, `.DS_Store`, `*.log`.
@@ -74,26 +76,19 @@ macOS reports the read-only system snapshot and understates real usage badly.
 
 ## Outstanding
 
-- Custom domain `thisisdadpunk.com` not yet pointed here — DNS still at
-  Hostinger parking (`2.57.91.91`, ns1/ns2.dns-parking.com). Required records:
-  ```
-  A     @    185.199.108.153
-  A     @    185.199.109.153
-  A     @    185.199.110.153
-  A     @    185.199.111.153
-  AAAA  @    2606:50c0:8000::153
-  AAAA  @    2606:50c0:8001::153
-  AAAA  @    2606:50c0:8002::153
-  AAAA  @    2606:50c0:8003::153
-  CNAME www  marc0ne-s.github.io
-  ```
-  Then repo Settings → Pages → custom domain + enforce HTTPS.
-  Do not set the custom domain in Pages before DNS resolves, or the working
-  github.io URL redirects to a dead host.
 - `hello@dadpunk.xyz` is published on the Punk Surveyor contact page but
   dadpunk.xyz has no MX records — that address does not receive mail. Needs a
   real mailbox or removal; not changed here because it's Marcus's call.
+  (Both dadpunk.xyz and dadpunk.shop expire 2026-10-27, auto-renew off.)
 - Traces only refresh when something writes a `## [date time] Agent | …` header
   to `~/ObsidianVault/Log/log.md`. Right now only DadPunk does, so the other
   five traces sit at their June dates (shown as dates, not "5mo ago", so the
   staleness is legible rather than disguised).
+- `/soon/` holds a self-contained coming-soon page. It's not the root; the
+  artifact is. To make the placeholder the front door, point `index.html` at it
+  (or move `soon/index.html` over `index.html`) and keep the artifact under
+  `/artifact/`.
+- Hero backdrop (`three-scene.js`, the "organic flow" shader) renders as a
+  saturated amber/olive marble filling the viewport — louder than the "dark
+  void, orange embers" the brand spec and project copy describe. Deliberate
+  code, unverified as intentional. Flagged, not changed.
