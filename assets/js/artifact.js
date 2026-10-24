@@ -17,6 +17,10 @@
   const footerBuild = document.getElementById('footer-build');
   const footerAgents= document.getElementById('footer-agents');
 
+  const rotationRail = document.getElementById('rotation-rail');
+  const rotationNote = document.getElementById('rotation-note');
+  const rotationSec  = document.getElementById('rotation');
+
   /* ── Fetch all data ── */
   Promise.all([
     fetch('assets/data/fleet.json').then(r => r.json()).catch(() => null),
@@ -31,6 +35,62 @@
     if (fleet) renderAmbientFooter(fleet);
     observeAll();
   });
+
+  // Music is optional: if the library feed is missing or stale the strip hides
+  // itself rather than standing there empty with a promise it can't keep.
+  if (rotationRail) {
+    fetch('assets/data/recent.json')
+      .then(r => r.ok ? r.json() : null)
+      .then(data => {
+        const albums = data && Array.isArray(data.albums) ? data.albums : [];
+        if (!albums.length) { rotationSec.hidden = true; return; }
+
+        const MONTHS = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+        const stamp = iso => {
+          const d = new Date(iso);
+          return isNaN(d) ? '' : d.getUTCDate() + ' ' + MONTHS[d.getUTCMonth()];
+        };
+
+        albums.slice(0, 8).forEach(a => {
+          const link = document.createElement('a');
+          link.className = 'rotation__item';
+          link.href = 'music/';
+          link.title = a.album + ' — ' + a.artist;
+
+          if (a.artwork) {
+            const img = document.createElement('img');
+            img.src = a.artwork;
+            img.alt = a.album + ' cover';
+            img.loading = 'lazy';
+            img.decoding = 'async';
+            img.className = 'rotation__art';
+            link.appendChild(img);
+          } else {
+            const ph = document.createElement('span');
+            ph.className = 'rotation__art rotation__art--none';
+            ph.textContent = '—';
+            link.appendChild(ph);
+          }
+
+          const name = document.createElement('span');
+          name.className = 'rotation__album';
+          name.textContent = a.album;
+          link.appendChild(name);
+
+          const who = document.createElement('span');
+          who.className = 'rotation__artist';
+          who.textContent = a.artist + (a.added ? ' · ' + stamp(a.added) : '');
+          link.appendChild(who);
+
+          rotationRail.appendChild(link);
+        });
+
+        if (rotationNote && albums[0] && albums[0].added) {
+          rotationNote.textContent = 'latest ' + stamp(albums[0].added) + ' — ' + albums[0].album;
+        }
+      })
+      .catch(() => { if (rotationSec) rotationSec.hidden = true; });
+  }
 
   /* ── SYSTEM BAR ── */
   function renderSystemBar(fleet) {
