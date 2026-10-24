@@ -120,11 +120,11 @@
     "name": "FlatBread Agent Fleet",
     "status": "BETA",
     "one_line": "Eight autonomous AI agents coordinating music, infrastructure, research, and documentation across three Apple Silicon Macs.",
-    "description": "Local-first multi-agent system. arTHRRR makes music. RubyHawk manages operations. BrainBot runs IT. DadPunk documents. HerBB orchestrates. Connected via Tailscale, coordinated through a shared kanban board, specialized by domain. All documented. None depends on the cloud. The fleet manages its own project registry, writes its own documentation, and produces its own content — including the music for Episode Zero.",
+    "description": "Open-source multi-agent system. arTHRRR makes music. RubyHawk manages operations. BrainBot runs IT. DadPunk documents. HerBB orchestrates. Connected via Tailscale, coordinated through a shared kanban board, specialized by domain. All documented. Open models on hardware we own, no vendor account in the loop. The fleet manages its own project registry, writes its own documentation, and produces its own content — including the music for Episode Zero.",
     "description_long": "The FlatBread fleet is what happens when you stop treating AI as a service and start treating it as infrastructure. Eight agents, each with a defined role, personality, and domain expertise, running on Apple Silicon across three physical machines. They share a kanban board (TASK_BOARD.md), coordinate through bridge files, and hand off work through a pickup-queue system. The infrastructure is local-first: MLX models on PunkPlanet and SlagHeap, Ollama router on port 4000, Tailscale for inter-machine communication. Cloud inference exists but is rate-limited and cost-audited. The fleet manages its own project registry, writes its own documentation, and produces its own content.",
     "tags": [
       "agents",
-      "local-first",
+      "open-source",
       "infrastructure",
       "apple-silicon",
       "mlx"

@@ -87,7 +87,10 @@
         : '<div class="' + cls + '" data-reveal>' + inner + '</div>';
     });
 
-    const interruptHTML = '<div class="interrupt" data-reveal><p>Creative engineering practice. Music, hardware, local AI, and punk ethos — running on a Mac mini in Budgewoi. No cloud dependencies. No platform lock-in. No algorithm chasing. <span style="color:var(--color-orange);">Documented honestly. Sold directly. Shared openly.</span></p></div>';
+    // Open-source, not "local-only": models run on this machine when they can and
+    // through Ollama Cloud when they can't. Claiming otherwise would be the exact
+    // dishonesty the rest of the site is built to avoid.
+    const interruptHTML = '<div class="interrupt" data-reveal><p>Creative engineering practice. Music, hardware, open-source AI, and punk ethos — running on Apple Silicon in Budgewoi. Open models, own hardware, no platform lock-in, no algorithm chasing. <span style="color:var(--color-orange);">Documented honestly. Sold directly. Shared openly.</span></p></div>';
 
     // Interrupt lands after the third card, not mid-markup: joining an array is
     // sturdier than splitting the rendered HTML on '</div>'.
