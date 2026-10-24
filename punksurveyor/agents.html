@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Agents — Punk Surveyor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&family=IBM+Plex+Mono:wght@400;700&family=Archivo+Black&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/punksurveyor.css">
+  <style>
+    /* Override DadPunk chrome for this page — keep the brand but lead with real estate */
+    .re-frame { background: var(--bg, #f7f6f3); }
+    .re-frame .hud-top-left .brand { color: #1a1a1a; font-family: 'Playfair Display', serif; text-transform: uppercase; }
+    .re-frame .hud-top-left .brand .logo-mark { background: #1a1a1a; color: #f7f6f3; }
+  </style>
+  <script type="importmap">
+  { "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js", "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/" } }
+  </script>
+</head>
+<body>
+  <nav class="top">
+    <a href="index.html" class="brand">PUNK<span class="dot">/</span>SURVEYOR</a>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="process.html">Process</a></li>
+      <li><a href="proof.html">The Proof</a></li>
+      <li><a href="packages.html">Engage</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="agents.html" class="active">For Agents</a></li>
+      <li><a href="contact.html" class="cta">Book a shoot</a></li>
+    </ul>
+  </nav>
+
+  <section style="padding-top: 160px;">
+    <div class="container">
+      <div class="num">// FOR AGENTS</div>
+      <h1 style="margin-bottom: 24px;">A WALKTHROUGH YOUR CLIENTS WILL ACTUALLY USE</h1>
+      <p class="lead" style="max-width: 60ch;">Bright. Clean. Branded to your agency. Looks like a real property, not a videogame. Open in any browser, mobile, or VR headset.</p>
+    </div>
+  </section>
+
+  <section class="tight re-frame">
+    <div class="container">
+      <div class="demo-frame" style="height: 75vh;">
+        <div class="badge" style="background: #1a1a1a; color: #f7f6f3;">LIVE DEMO · Property: 3-bed rental · Central Coast NSW</div>
+        <iframe src="walk-realestate.html" style="border: none; width: 100%; height: 100%;"></iframe>
+      </div>
+      <p style="text-align: center; margin-top: 16px; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--olive-light);">drag · scroll · WASD · click pins · enter VR</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="num">// WHAT'S IN THE BOX</div>
+      <h2 style="margin-bottom: 48px;">EVERYTHING AN AGENT NEEDS</h2>
+      <div class="grid grid-3">
+        <div class="card">
+          <div class="num">A</div>
+          <h3>Your brand, on the viewer</h3>
+          <p>Agent name, agency logo, listing price, address, beds/baths/cars. White-label or co-brand. No "Powered by Punk Surveyor" unless you want it.</p>
+        </div>
+        <div class="card">
+          <div class="num">B</div>
+          <h3>Property pins</h3>
+          <p>Click any pin to read the room card: dimensions, fixtures, finishes, anything you want to surface. Five pins included; more on request.</p>
+        </div>
+        <div class="card">
+          <div class="num">C</div>
+          <h3>Embed in your listing</h3>
+          <p>Drop the iframe into your Domain, realestate.com.au, or agency website. No API. No JS. No friction.</p>
+        </div>
+        <div class="card">
+          <div class="num">D</div>
+          <h3>VR-ready for headset clients</h3>
+          <p>The same URL works in a Quest 3 or Vision Pro browser. Buyers can do a real walkthrough before inspection.</p>
+        </div>
+        <div class="card">
+          <div class="num">E</div>
+          <h3>Mobile-first</h3>
+          <p>80% of buyers will see it on a phone. Loads fast, works on 4G, gyroscope head-tracking included.</p>
+        </div>
+        <div class="card">
+          <div class="num">F</div>
+          <h3>No monthly fee</h3>
+          <p>One-off capture. Hosted free for the first 12 months. After that, A$20/year or self-host. Your data is yours.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="container">
+      <div class="num">// COMPARE</div>
+      <h2 style="margin-bottom: 24px;">VS. THE OTHER GUYS</h2>
+      <table class="compare">
+        <thead>
+          <tr>
+            <th></th>
+            <th class="us">Punk Surveyor</th>
+            <th>Matterport</th>
+            <th>Domain 3D</th>
+            <th>Zillow 3D</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><b>White-label for your agency</b></td><td class="us"><span class="check">✓</span></td><td>Extra $$</td><td>Domain only</td><td><span class="x">✗</span></td></tr>
+          <tr><td><b>VR in any headset browser</b></td><td class="us"><span class="check">✓</span> Native WebXR</td><td>App</td><td>App</td><td><span class="x">✗</span></td></tr>
+          <tr><td><b>Mobile-first</b></td><td class="us"><span class="check">✓</span></td><td>Heavy</td><td>Heavy</td><td>OK</td></tr>
+          <tr><td><b>Monthly sub</b></td><td class="us">None</td><td>$30-150/mo</td><td>Bundled</td><td>Free</td></tr>
+          <tr><td><b>Aesthetic</b></td><td class="us">Clean, real</td><td>Corporate</td><td>Corporate</td><td>Basic</td></tr>
+          <tr><td><b>Turnaround</b></td><td class="us">48h</td><td>3-5 days</td><td>5-10 days</td><td>Same day</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="container" style="text-align: center;">
+      <h2 style="margin-bottom: 24px;">TALK ABOUT YOUR LISTINGS</h2>
+      <p class="lead" style="margin: 0 auto 32px; max-width: 50ch;">Tell me how many listings, when they need to go live, and what branding you want on the viewer. I usually quote within 24 hours.</p>
+      <a href="contact.html" class="btn">Talk about your listings →</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="grid grid-3">
+        <div><h4>PUNK SURVEYOR</h4><p>Photoreal 3D walkthroughs for the spaces that matter.</p></div>
+        <div><h4>SITE</h4><ul><li><a href="index.html">Home</a></li><li><a href="process.html">Process</a></li><li><a href="proof.html">The Proof</a></li><li><a href="packages.html">Engage</a></li><li><a href="about.html">About</a></li><li><a href="agents.html">For Agents</a></li></ul></div>
+        <div><h4>CONTACT</h4><ul><li><a href="contact.html">Book a shoot</a></li><li>Budgewoi, NSW</li><li>Travel: Central Coast, Sydney, Hunter</li></ul></div>
+      </div>
+      <div class="copyright"><span>© 2026 Punk Surveyor · a DadPunk project</span><span>BUILT IN BUDGEWOI, NSW</span></div>
+    </div>
+  </footer>
+</body>
+</html>

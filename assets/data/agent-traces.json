@@ -1,0 +1,32 @@
+[
+  {
+    "agent": "DadPunk",
+    "text": "Repo marc0ne-s/thisisdadpunk.com (public, gh-pages branch), GitHub Pages status built.",
+    "ts": "2026-10-21T14:25:00+11:00"
+  },
+  {
+    "agent": "BrainBot",
+    "text": "Router :4000 — 6/9 backends healthy. SlagHeap disk at 98% — cleanup in progress.",
+    "ts": "2026-06-01T14:12:21+10:00"
+  },
+  {
+    "agent": "HerBB",
+    "text": "T-001 SlagHeap cleanup plan delivered. T-004 AB-GEMINI status confirmed. Awaiting Marcus decisions.",
+    "ts": "2026-06-01T13:12:21+10:00"
+  },
+  {
+    "agent": "arTHRRR",
+    "text": "5 DadPunk MIDI grooves complete. Episode Zero cue specs ready: STING-001 through BED-001.",
+    "ts": "2026-06-01T12:12:21+10:00"
+  },
+  {
+    "agent": "Scripter",
+    "text": "Daily 6am cron running. Episode Zero cold open Treatment B selected. Script v1 pending review.",
+    "ts": "2026-05-31T15:12:21+10:00"
+  },
+  {
+    "agent": "RubyHawk",
+    "text": "Fleet documentation v4 published. 12 agents catalogued. 16 projects tracked. 15 volumes mapped.",
+    "ts": "2026-05-29T15:12:21+10:00"
+  }
+]

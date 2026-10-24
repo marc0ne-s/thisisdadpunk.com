@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Punk Surveyor — 3D walkthroughs for the spaces that matter</title>
+  <meta name="description" content="Photorealistic 3D walkthroughs for real estate, rentals, venues, and creative spaces. Captured with iPhone + Osmo, delivered as WebXR-ready tours. The punk alternative to Matterport.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/punksurveyor.css">
+  <script type="importmap">
+  { "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js", "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/" } }
+  </script>
+</head>
+<body>
+  <div class="grain"></div>
+
+  <nav class="top">
+    <a href="index.html" class="brand">PUNK<span class="dot">/</span>SURVEYOR</a>
+    <ul>
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="process.html">Process</a></li>
+      <li><a href="proof.html">The Proof</a></li>
+      <li><a href="packages.html">Engage</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="agents.html" class="cta">For Agents</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO — cinematic flythrough -->
+  <section class="hero">
+    <div class="stage" id="heroStage"></div>
+    <div class="overlay">
+      <div>
+        <div class="num">// 01 — PUNK SURVEYOR</div>
+        <h1>3D WALKTHROUGHS<br>FOR <span class="orange">SPACES THAT MATTER</span></h1>
+        <p class="tagline">Photoreal, WebXR-ready, punk-textured. Captured with iPhone LiDAR, gimbal walkthrough video, and a Mac. One person. No $3,500 camera. No per-scan fee. No sterile corporate scan.</p>
+        <a href="proof.html" class="btn">Walk through the proof →</a>
+        <a href="contact.html" class="btn ghost">Talk about your space</a>
+        <div class="meta" style="margin-top: 48px;">
+          <span><b>1 person</b> · <b>3 devices</b></span>
+          <span><b>$1,500 of gear</b> total</span>
+          <span><b>0 monthly subs</b> for the client</span>
+        </div>
+      </div>
+      <div>
+        <div class="stat">
+          <div class="n">1</div>
+          <div class="l">iPhone Pro (LiDAR)</div>
+        </div>
+        <div class="stat" style="margin-top: 24px;">
+          <div class="n">1</div>
+          <div class="l">Osmo Pocket 3 (gimbal)</div>
+        </div>
+        <div class="stat" style="margin-top: 24px;">
+          <div class="n">1</div>
+          <div class="l">Mac mini M4 Pro</div>
+        </div>
+        <div class="stat" style="margin-top: 24px;">
+          <div class="n">∞</div>
+          <div class="l">Possible spaces</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee">
+    <div class="track">
+      <span>REAL ESTATE</span>
+      <span>RENTALS</span>
+      <span>VENUES</span>
+      <span>STUDIOS</span>
+      <span>AIRBNB</span>
+      <span>SKATE PARKS</span>
+      <span>SMALL AGENCIES</span>
+      <span>REAL ESTATE</span>
+      <span>RENTALS</span>
+      <span>VENUES</span>
+      <span>STUDIOS</span>
+      <span>AIRBNB</span>
+      <span>SKATE PARKS</span>
+      <span>SMALL AGENCIES</span>
+    </div>
+  </div>
+
+  <!-- WHY PUNK SURVEYOR -->
+  <section>
+    <div class="container">
+      <div class="num">// 02 — WHY</div>
+      <h2 style="max-width: 18ch; margin-bottom: 48px;">OTHER SCANS LOOK LIKE VIDEO GAMES. <em>YOURS LOOKS LIKE THE ROOM.</em></h2>
+      <div class="grid grid-3">
+        <div class="card">
+          <div class="num">A</div>
+          <h3>Photoreal, not sanitised</h3>
+          <p>Gaussian splat rendering captures the actual light, texture, and lived-in feel of the space. Not a clean, generic 3D model. The scuffs. The light leaks. The texture of the carpet. Buyers and tenants see what they'll actually walk into.</p>
+        </div>
+        <div class="card">
+          <div class="num">B</div>
+          <h3>WebXR first, not app-first</h3>
+          <p>Open the link in a Quest 3, Vision Pro, or phone. Walk through the space in VR. No app to install. No proprietary hardware. The same link works on desktop for your buyers who don't have headsets.</p>
+        </div>
+        <div class="card">
+          <div class="num">C</div>
+          <h3>One-off, not subscription</h3>
+          <p>You pay once for the capture. You own the data. Hosting is free or one-shot. No $30-100/month to keep your listing live. No per-scan fee to a SaaS that holds your work hostage.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARISON -->
+  <section class="alt">
+    <div class="container">
+      <div class="num">// 03 — COMPARE</div>
+      <h2 style="margin-bottom: 32px;">VS. THE OTHER GUYS</h2>
+      <p class="lead" style="margin-bottom: 32px;">Honest comparison. Matterport, Domain, Little Hinges, Zillow — they're not bad. They're just solving a different problem.</p>
+      <table class="compare">
+        <thead>
+          <tr>
+            <th></th>
+            <th class="us">Punk Surveyor</th>
+            <th>Matterport</th>
+            <th>Domain 3D</th>
+            <th>Zillow 3D</th>
+            <th>Little Hinges</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>Photoreal rendering</b></td>
+            <td class="us"><span class="check">✓</span> Splat</td>
+            <td>Stitched pano</td>
+            <td><span class="check">✓</span> Splat</td>
+            <td>360° stills</td>
+            <td>Stitched pano</td>
+          </tr>
+          <tr>
+            <td><b>WebXR / VR in headset</b></td>
+            <td class="us"><span class="check">✓</span> Native</td>
+            <td>App required</td>
+            <td>App required</td>
+            <td><span class="x">✗</span></td>
+            <td><span class="x">✗</span></td>
+          </tr>
+          <tr>
+            <td><b>You own the data</b></td>
+            <td class="us"><span class="check">✓</span> Always</td>
+            <td><span class="x">✗</span> Locked</td>
+            <td><span class="x">✗</span> On Domain</td>
+            <td><span class="x">✗</span> On Zillow</td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td><b>Monthly sub</b></td>
+            <td class="us">None</td>
+            <td>$30-150/mo</td>
+            <td>Bundled w/ sub</td>
+            <td>Free</td>
+            <td>None</td>
+          </tr>
+          <tr>
+            <td><b>Capture hardware cost</b></td>
+            <td class="us">~$1,500 (yours already)</td>
+            <td>$3,500 Pro3</td>
+            <td>N/A (in-house)</td>
+            <td>Phone only</td>
+            <td>$3,500+ rig</td>
+          </tr>
+          <tr>
+            <td><b>Captures rentals economically</b></td>
+            <td class="us"><span class="check">✓</span></td>
+            <td>Marginal</td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span> at $299</td>
+          </tr>
+          <tr>
+            <td><b>Aesthetic</b></td>
+            <td class="us">Punk. Textured. Real.</td>
+            <td>Corporate. Clean.</td>
+            <td>Corporate. Clean.</td>
+            <td>Basic.</td>
+            <td>Clean.</td>
+          </tr>
+          <tr>
+            <td><b>Best for</b></td>
+            <td class="us">Niche, creative, agents who want a story</td>
+            <td>Volume / standard listings</td>
+            <td>Domain agents in metro</td>
+            <td>Zillow-only listings</td>
+            <td>Volume / speed</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- THREE WAYS TO ENGAGE -->
+  <section>
+    <div class="container">
+      <div class="num">// 04 — ENGAGE</div>
+      <h2 style="margin-bottom: 48px;">THREE WAYS TO WORK TOGETHER</h2>
+      <div class="grid grid-3">
+        <div class="card">
+          <div class="tag">Direct</div>
+          <h3>For agents &amp; owners</h3>
+          <p>You hire me, I come shoot, you get the 3D + WebXR tour delivered in 48 hours. Listings, rentals, sales. One off, no commitment, the data is yours.</p>
+        </div>
+        <div class="card">
+          <div class="tag olive">White-label</div>
+          <h3>For agencies</h3>
+          <p>You need 3D tours on a regular basis. I shoot under your brand. You bill the client. We split it. Volume play, no client-facing marketing on my end.</p>
+        </div>
+        <div class="card">
+          <div class="tag">Punk Surveyor</div>
+          <h3>For the weird ones</h3>
+          <p>Studios, venues, skate parks, recording rooms, pop-up retail. The places where the punk-textured, story-told, art-piece tour beats the corporate scan. Bespoke. Priced per project.</p>
+        </div>
+      </div>
+      <p style="margin-top: 32px;"><a href="packages.html" class="btn">See the engagement models →</a> <a href="contact.html" class="btn ghost">Or just talk about your space</a></p>
+    </div>
+  </section>
+
+  <!-- PULL QUOTE -->
+  <section class="alt">
+    <div class="container">
+      <p class="quote">"Other capture services give you a <em>sanitised model</em>. We capture the room — the scuff marks, the light leaks, the lived-in feel. No cloud. Your data never leaves the property unless you say so."</p>
+      <p style="font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--olive-light); margin-top: 24px;">— Punk Surveyor design statement</p>
+    </div>
+  </section>
+
+  <div class="marquee">
+    <div class="track">
+      <span>iPHONE LIDAR</span>
+      <span>OSMO GIMBAL</span>
+      <span>COLMAP PHOTOGRAMMETRY</span>
+      <span>GAUSSIAN SPLATS</span>
+      <span>THREE.JS</span>
+      <span>WEBXR</span>
+      <span>QUEST 3</span>
+      <span>VISION PRO</span>
+      <span>iPHONE LIDAR</span>
+      <span>OSMO GIMBAL</span>
+      <span>COLMAP PHOTOGRAMMETRY</span>
+      <span>GAUSSIAN SPLATS</span>
+      <span>THREE.JS</span>
+      <span>WEBXR</span>
+      <span>QUEST 3</span>
+      <span>VISION PRO</span>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="grid grid-3">
+        <div>
+          <h4>PUNK SURVEYOR</h4>
+          <p>Photoreal 3D walkthroughs for the spaces that matter. Captured locally, delivered as WebXR tours, owned by you forever.</p>
+        </div>
+        <div>
+          <h4>SITE</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="process.html">Process</a></li>
+            <li><a href="proof.html">The Proof</a></li>
+            <li><a href="packages.html">Engage</a></li>
+            <li><a href="about.html">About</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>CONTACT</h4>
+          <ul>
+            <li><a href="contact.html">Book a shoot</a></li>
+            <li>Budgewoi, NSW</li>
+            <li>Travel: Central Coast, Sydney, Hunter</li>
+          </ul>
+        </div>
+      </div>
+      <div class="copyright">
+        <span>© 2026 Punk Surveyor · a DadPunk project</span>
+        <span>BUILT IN BUDGEWOI, NSW</span>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module">
+    import * as THREE from 'three';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+    import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+    import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+    import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+    import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
+    import { GammaCorrectionShader } from 'three/addons/shaders/GammaCorrectionShader.js';
+
+    // Cinematic flythrough — orbital camera move around the scan
+    const stage = document.getElementById('heroStage');
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x0a0a0a);
+    scene.fog = new THREE.Fog(0x0a0a0a, 5, 25);
+
+    const camera = new THREE.PerspectiveCamera(60, stage.clientWidth / stage.clientHeight, 0.05, 100);
+    camera.position.set(8, 4, 8);
+    camera.lookAt(0, 1, 0);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(stage.clientWidth, stage.clientHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.0;
+    stage.appendChild(renderer.domElement);
+
+    scene.add(new THREE.AmbientLight(0xffffff, 0.2));
+    const key = new THREE.DirectionalLight(0xffe6cc, 1.0);
+    key.position.set(4, 8, 3);
+    scene.add(key);
+    const fill = new THREE.DirectionalLight(0x5c5b3a, 0.3);
+    fill.position.set(-4, 2, -3);
+    scene.add(fill);
+    const rim = new THREE.PointLight(0xe85d04, 0.6, 12);
+    rim.position.set(0, 1.5, 0);
+    scene.add(rim);
+
+    const composer = new EffectComposer(renderer);
+    composer.addPass(new RenderPass(scene, camera));
+    composer.addPass(new UnrealBloomPass(new THREE.Vector2(stage.clientWidth, stage.clientHeight), 0.5, 0.7, 0.85));
+    const scanShader = {
+      uniforms: { tDiffuse: { value: null }, time: { value: 0 } },
+      vertexShader: `varying vec2 vUv; void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`,
+      fragmentShader: `
+        uniform sampler2D tDiffuse; uniform float time; varying vec2 vUv;
+        void main() {
+          vec4 c = texture2D(tDiffuse, vUv);
+          float scan = sin(vUv.y * 1200.0) * 0.04;
+          c.rgb -= scan;
+          vec2 q = vUv - 0.5;
+          float vig = smoothstep(0.95, 0.3, length(q));
+          c.rgb *= vig;
+          float n = fract(sin(dot(vUv * 1000.0 + time, vec2(12.9898, 78.233))) * 43758.5453);
+          c.rgb += (n - 0.5) * 0.04;
+          gl_FragColor = c;
+        }`
+    };
+    composer.addPass(new ShaderPass(scanShader));
+    composer.addPass(new ShaderPass(GammaCorrectionShader));
+
+    const loader = new GLTFLoader();
+    loader.load('./assets/meshes/flatbread.glb', (gltf) => {
+      const root = gltf.scene;
+      root.traverse((o) => {
+        if (o.isMesh) {
+          o.geometry.computeBoundingBox();
+          const bb = o.geometry.boundingBox;
+          o.geometry.translate(0, -(bb.max.y + bb.min.y)/2, 0);
+        }
+      });
+      scene.add(root);
+    }, undefined, (e) => console.error('GLB load failed', e));
+
+    // Cinematic camera path: slow orbit, slight vertical bob, looking at scene centre
+    const start = performance.now();
+    function animate() {
+      requestAnimationFrame(animate);
+      const t = (performance.now() - start) / 1000;
+      const r = 8 + Math.sin(t * 0.15) * 2;
+      const a = t * 0.08;
+      camera.position.x = Math.cos(a) * r;
+      camera.position.z = Math.sin(a) * r;
+      camera.position.y = 3.5 + Math.sin(t * 0.3) * 0.8;
+      camera.lookAt(0, 1, 0);
+      rim.position.x = Math.sin(t * 0.3) * 5;
+      rim.position.z = Math.cos(t * 0.3) * 5;
+      scanShader.uniforms.time.value = t;
+      composer.render();
+    }
+    animate();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = stage.clientWidth / stage.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(stage.clientWidth, stage.clientHeight);
+      composer.setSize(stage.clientWidth, stage.clientHeight);
+    });
+  </script>
+</body>
+</html>

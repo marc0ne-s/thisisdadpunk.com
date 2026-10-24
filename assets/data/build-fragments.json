@@ -1,0 +1,30 @@
+[
+  {
+    "id": "frag-001",
+    "date": "2026.05.12",
+    "title": "Idea Recovery",
+    "text": "Built a system that scans my entire digital life — Apple Notes exports, Obsidian vault, project directories, Hermes sessions, 50+ Git repos — looking for ideas I forgot I had.",
+    "tags": ["#idea-recovery", "#obsidian"]
+  },
+  {
+    "id": "frag-002",
+    "date": "2026.05.12",
+    "title": "Fleet Audit",
+    "text": "Cleaned 14 dead services. Three launchd services running stale duplicates. Eleven plist files dead stubs from old experiments. Port 8001 had an MLX server that accepted TCP but never responded.",
+    "tags": ["#fleet", "#infrastructure"]
+  },
+  {
+    "id": "frag-003",
+    "date": "2026.05.12",
+    "title": "Kinetic Hero",
+    "text": "7 orbital debris objects with independent mechanics. 800 turbulent ember particles via custom GLSL shaders. 4-pass post-processing stack. Zero dependencies beyond Three.js. No React. No build step.",
+    "tags": ["#threejs", "#webgl"]
+  },
+  {
+    "id": "frag-004",
+    "date": "2026.04.22",
+    "title": "Brand System",
+    "text": "Seventeen design iterations. Not Figma right — photocopied-at-Kinkos, sharpie-on-a-CD-cover right. Creed blocks got 3D tilt. Statement section got depth shadows. The design IS the identity.",
+    "tags": ["#brand", "#design-system"]
+  }
+]

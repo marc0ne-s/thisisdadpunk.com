@@ -1,0 +1,136 @@
+[
+  {
+    "id": "threejs-hero",
+    "name": "Three.js Hero Scene",
+    "status": "SHIPPED",
+    "one_line": "A real-time WebGL punk rock composition \u2014 orbital debris, ember particles, and VHS post-processing.",
+    "description": "The hero section of thisisdadpunk.com. 7 orbital debris objects with independent physics, 800 turbulent ember particles via custom GLSL shaders, dynamic constellation lines, and a 4-pass post-processing stack (bloom \u2192 VHS/scanlines \u2192 chromatic aberration glitch \u2192 filmic grain). Zero frameworks. No build step. One module file and raw WebGL. Runs at 60fps on any modern browser.",
+    "description_long": "When you land on thisisdadpunk.com, the first thing you see is a scene that takes 698 lines of JavaScript and two custom GLSL shaders to render. Seven debris objects \u2014 wireframe cubes, glowing rods, ghost planes, tetrahedrons \u2014 orbit and spiral in 3D space, each with independent rotation, float, and acceleration physics. Eight hundred ember particles drift through the scene with turbulent motion, rendered via a vertex/fragment shader pair to create soft orange glow against the dark background. Constellation lines connect nearby debris, pulsing on glitch events. The camera breathes on a sine wave, follows the mouse, and shakes during glitch bursts. Post-processing stack: UnrealBloom (subtle, threshold 0.87) \u2192 VHS shader (scanlines, chromatic aberration, noise dither, vignette) \u2192 flash/strobe on glitch. Every parameter was chosen by hand, tested at 2am, and tuned until it felt right. That's the DadPunk ethos in code form.",
+    "tags": [
+      "threejs",
+      "webgl",
+      "glsl",
+      "creative-coding"
+    ],
+    "url": null,
+    "visual": "Live on this page \u2014 scroll up. Code-driven aesthetic: dark void, safety orange embers, constellation lines, VHS grain."
+  },
+  {
+    "id": "synthriders-ai",
+    "name": "SynthRiders AI Beatmap Pipeline",
+    "status": "BETA",
+    "one_line": "A transformer model trained on 4,000+ community maps, generating playable VR rhythm game beatmaps from any audio.",
+    "description": "The most technically ambitious project in the fleet. Ingests audio, analyzes structure, and generates beatmaps using a transformer model trained on 4,000+ community-created SynthRiders maps. Phase 12b model: 74.3% F1 on note placement. Separate Scorer model at 0.9988 AUROC for quality ranking. RL fine-tuning in progress targeting Easy mode difficulty. Companion web editor (see below) closes the loop between AI generation and human curation.",
+    "description_long": "SynthRiders is a VR rhythm game with a passionate mapping community. Marcus's pipeline \u2014 codenamed Antigravity \u2014 ingests audio, analyzes structure, and generates beatmaps using a transformer model trained on 4,000+ community maps. After Phase 12b, the model hits 74.3% F1 on note placement, with a separate Scorer model at 0.9988 AUROC for quality ranking. RL fine-tuning in progress to fix Easy mode difficulty (0.32 \u2192 0.80). The web app (SynthGen, React + Python + Docker) lets users upload a track and get a playable map back. A companion web-based beatmap editor (MVP 3, 2,742 lines of Three.js) lets creators refine AI-generated maps by hand, matching real gameplay camera perspective. This is the most technically ambitious project in the fleet and the most likely to become a commercial product.",
+    "tags": [
+      "ai",
+      "vr",
+      "transformer",
+      "python",
+      "rl"
+    ],
+    "url": "https://github.com/marc0ne-s/synth-beatmap-gen",
+    "visual": "Split-screen: AI-generated map vs. human-made map. 3D gameplay captures. Training loss curves. Pipeline architecture diagram."
+  },
+  {
+    "id": "synthriders-editor",
+    "name": "SynthRiders Web Beatmap Editor",
+    "status": "BETA",
+    "one_line": "A browser-based 3D beatmap editor for SynthRiders, perspective-matched to real VR gameplay.",
+    "description": "Three.js-based beatmap editor running in any browser. 3D waveform ribbon, note placement on timeline, camera presets matching real SynthRiders gameplay perspective. MVP 3 complete: 2,742 lines, beat marker placement, vertical target rings at hand height, dark runway floor. Serves as the human-in-the-loop interface for the AI beatmap pipeline. Camera perspective was fixed frame-by-frame against real gameplay captures \u2014 craft work disguised as engineering.",
+    "description_long": "Building an AI that generates beatmaps is only half the problem. You need a way for humans to review, edit, and refine the output. The SynthRiders Web Editor is that interface \u2014 a browser-based 3D environment where creators can place notes on a timeline, see them in a perspective-matched gameplay view, and export .synth files for use in SynthRiders. MVP 3 added beat marker placement, 3D waveform rendering, vertical beat target rings at hand height, and a dark runway floor with subtle center glow. After a perspective fix session (analyzing real VR gameplay frames with local LLM), the camera now matches the first-person player view: standing behind the hit rings, looking down the tunnel of oncoming notes.",
+    "tags": [
+      "threejs",
+      "vr",
+      "editor",
+      "webgl",
+      "creative-tool"
+    ],
+    "url": null,
+    "visual": "Side-by-side: editor view vs. real gameplay. Animated GIF of note placement. Three.js runway with notes hitting rings."
+  },
+  {
+    "id": "synthgen",
+    "name": "SynthGen Web App",
+    "status": "BETA",
+    "one_line": "Upload a track, get a playable SynthRiders beatmap back. The consumer-facing output of the AI pipeline.",
+    "description": "React + Python + Docker web app. Wraps the SynthRiders AI beatmap pipeline in a usable interface: upload audio, the model generates a beatmap, download the .synth file. Deployable now on dadpunk.shop. This is what turns the research project into a product. No account needed. No API key. Just a track and a generation.",
+    "description_long": "SynthGen is the bridge between the AI research and an actual user. Upload a track \u2014 MP3, WAV, whatever. The backend runs it through the full Antigravity pipeline: audio analysis, beat detection, structure mapping, note placement, difficulty balancing. The output is a .synth file you can load directly into SynthRiders on your headset. React frontend, Python backend, Docker container. Deployable on any VPS or local server. The web editor (separate project) gives power users a way to refine the output before playing.",
+    "tags": [
+      "ai",
+      "vr",
+      "react",
+      "python",
+      "docker"
+    ],
+    "url": null,
+    "visual": "Upload screen \u2192 generation progress \u2192 beatmap preview \u2192 download. Clean dark UI. Waveform visualization."
+  },
+  {
+    "id": "episode-zero",
+    "name": "DadPunk Episode Zero",
+    "status": "ACTIVE",
+    "one_line": "A documentary about a dad who built an AI agent fleet on his dining table.",
+    "description": "8-12 minute documentary. Marcus narration + scripted inserts + original music by arTHRRR. Script draft complete. 17 shot locations mapped. Music cues spec'd with full Ableton production recipes. Talking Terminal interview format developed. Cold opens written. Currently in pre-production \u2014 awaiting recording approval. This is the origin story of the FlatBread fleet: not the tech specs, but the vibe.",
+    "description_long": "Episode Zero opens on a cold night in Budgewoi. Three Mac Minis on a desk. Cables everywhere. A man talks to his machines like they're bandmates \u2014 because at this point, they kind of are. This is the story of how the house got loud: from one guy with a terminal to a fleet of autonomous agents making music, managing infrastructure, and documenting the whole strange operation. It's not a tech tutorial. It's not an AI hype piece. It's the honest, slightly unhinged story of what happens when a Gen X dad with punk ethos and Apple Silicon decides the cloud is optional.",
+    "tags": [
+      "documentary",
+      "film",
+      "music",
+      "mockumentary",
+      "creative-direction"
+    ],
+    "url": null,
+    "visual": "Dark, low-light cinematography. Terminal glow as practical lighting. Static tripod shots. Grain overlay. Screen capture mixed with room footage."
+  },
+  {
+    "id": "dj-drop",
+    "name": "DJ Drop Generator",
+    "status": "SHIPPED",
+    "one_line": "Free web tool. Type your DJ name. Get a custom vocal drop. No account needed.",
+    "description": "Browser-based tool that generates custom DJ name drops using TTS with style controls. Type a name, choose a style, get an MP3. Free. Deployable to dadpunk.shop. Part of a suite of small, useful creative tools built without build steps or frameworks. The DadPunk approach: ship something small that actually works, then iterate.",
+    "description_long": "Every DJ needs drops. Most pay for them. This tool generates them for free using local TTS engines (OmniVoice + Supertonic) with style controls for delivery \u2014 whispered, shouted, reverent, menacing. Type your name, pick a style, download the MP3. Built in vanilla HTML/CSS/JS. No framework. No backend. No database. The TTS happens server-side but the tool itself is less than 200 lines of UI code. It's the smallest useful thing we could ship, and it's exactly what it says it is.",
+    "tags": [
+      "tool",
+      "audio",
+      "tts",
+      "music",
+      "dj"
+    ],
+    "url": null,
+    "visual": "Text input \u2192 style selector \u2192 waveform preview \u2192 download button. Dark card. Terminal aesthetic."
+  },
+  {
+    "id": "agent-fleet",
+    "name": "FlatBread Agent Fleet",
+    "status": "BETA",
+    "one_line": "Eight autonomous AI agents coordinating music, infrastructure, research, and documentation across three Apple Silicon Macs.",
+    "description": "Local-first multi-agent system. arTHRRR makes music. RubyHawk manages operations. BrainBot runs IT. DadPunk documents. HerBB orchestrates. Connected via Tailscale, coordinated through a shared kanban board, specialized by domain. All documented. None depends on the cloud. The fleet manages its own project registry, writes its own documentation, and produces its own content \u2014 including the music for Episode Zero.",
+    "description_long": "The FlatBread fleet is what happens when you stop treating AI as a service and start treating it as infrastructure. Eight agents, each with a defined role, personality, and domain expertise, running on Apple Silicon across three physical machines. They share a kanban board (TASK_BOARD.md), coordinate through bridge files, and hand off work through a pickup-queue system. The infrastructure is local-first: MLX models on PunkPlanet and SlagHeap, Ollama router on port 4000, Tailscale for inter-machine communication. Cloud inference exists but is rate-limited and cost-audited. The fleet manages its own project registry, writes its own documentation, and produces its own content.",
+    "tags": [
+      "agents",
+      "local-first",
+      "infrastructure",
+      "apple-silicon",
+      "mlx"
+    ],
+    "url": null,
+    "visual": "Network graph \u2014 nodes are agents, edges are handoffs. Dark background, orange nodes, olive connections. Animated data flow."
+  },
+  {
+    "id": "idea-recovery",
+    "name": "Idea Recovery Pipeline",
+    "status": "BETA",
+    "one_line": "An AI system that scans your entire digital life looking for ideas you forgot you had. Not a todo list \u2014 an archaeological dig.",
+    "description": "Scans Apple Notes exports, Obsidian vault, project directories, Hermes sessions, and 50+ Git repos for abandoned ideas. Found 30 candidates in first pass. Six promoted to full idea cards with scoring rubrics, source maps, and completion pipelines. Nothing gets deleted \u2014 every half-finished thought deserves preservation. Built on top of Obsidian as source of truth. Designed to run continuously: capture daily, review weekly, shape monthly.",
+    "description_long": "Built a system that scans my entire digital life \u2014 Apple Notes exports, Obsidian vault, project directories, Hermes sessions, 50+ Git repos \u2014 looking for ideas I forgot I had. Not a todo list. An archaeological dig. Found 30 candidate ideas in the first pass. Six got promoted to proper idea cards with scoring rubrics, source maps, and completion pipelines. Two are genuinely novel. One \u2014 the AI assistant personality skin format \u2014 might actually be worth building. Another \u2014 a full VR rhythm game PRD from 2023 \u2014 is more feasible now than when it was written, because the SynthRiders AI beatmap pipeline exists. The DadPunk Revenue Engine scored highest (31/45) and is now the first active project.",
+    "tags": [
+      "obsidian",
+      "automation",
+      "idea-mining",
+      "pipeline"
+    ],
+    "url": null,
+    "visual": "Vault directory tree \u2192 scan output \u2192 idea card \u2192 scoring rubric. Terminal-style with Obsidian purple accents."
+  }
+]

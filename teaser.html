@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DADPUNK TV — FIRST TRANSMISSION INCOMING</title>
+<meta name="description" content="A dad on the Central Coast builds AI agents, a VR beatmap pipeline, and punk rock engineering in public. First transmission soon.">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --off-white: #e8e4de;
+    --orange: #e85d04;
+    --orange-dim: #c44d03;
+    --olive: #8a8960;
+    --olive-dark: #3a3925;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    background: var(--black);
+    color: var(--off-white);
+    font-family: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    padding: 2rem;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* film grain */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: -50%;
+    width: 200%; height: 200%;
+    pointer-events: none;
+    opacity: 0.06;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation: grain 0.9s steps(4) infinite;
+  }
+  @keyframes grain {
+    0% { transform: translate(0,0); }
+    25% { transform: translate(-2%,3%); }
+    50% { transform: translate(3%,-2%); }
+    75% { transform: translate(-3%,-3%); }
+    100% { transform: translate(2%,2%); }
+  }
+  .kicker {
+    color: var(--orange);
+    font-size: 0.85rem;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    margin-bottom: 2.5rem;
+    animation: flicker 4s infinite;
+  }
+  @keyframes flicker {
+    0%, 100% { opacity: 1; }
+    92% { opacity: 1; }
+    93% { opacity: 0.3; }
+    94% { opacity: 1; }
+    96% { opacity: 0.5; }
+    97% { opacity: 1; }
+  }
+  .title {
+    font-family: 'Archivo Black', 'Arial Black', sans-serif;
+    font-size: clamp(3rem, 14vw, 10rem);
+    line-height: 0.95;
+    text-transform: uppercase;
+    position: relative;
+    color: var(--off-white);
+    user-select: none;
+  }
+  .title::before, .title::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    overflow: hidden;
+  }
+  .title::before {
+    color: var(--orange);
+    z-index: -1;
+    animation: misreg-a 3.5s ease-in-out infinite alternate;
+  }
+  .title::after {
+    color: var(--olive);
+    z-index: -2;
+    animation: misreg-b 4.2s ease-in-out infinite alternate;
+  }
+  @keyframes misreg-a {
+    0%, 88%, 100% { transform: translate(4px, -3px); opacity: 0.85; }
+    90% { transform: translate(-8px, 2px); }
+    93% { transform: translate(12px, 0); opacity: 0.4; }
+  }
+  @keyframes misreg-b {
+    0%, 85%, 100% { transform: translate(-4px, 3px); opacity: 0.6; }
+    91% { transform: translate(10px, -4px); opacity: 0.9; }
+    95% { transform: translate(-12px, 2px); opacity: 0.3; }
+  }
+  .sub {
+    margin-top: 2.5rem;
+    color: var(--olive);
+    font-size: clamp(0.85rem, 2vw, 1.1rem);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    line-height: 2;
+    max-width: 34rem;
+  }
+  .sub strong { color: var(--off-white); font-weight: 400; }
+  .signal {
+    margin-top: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--orange);
+    font-size: 0.8rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+  .signal .dot {
+    width: 10px; height: 10px;
+    background: var(--orange);
+    border-radius: 50%;
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 12px var(--orange); }
+    50% { opacity: 0.25; box-shadow: none; }
+  }
+  .stamp {
+    position: fixed;
+    bottom: 1.2rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--olive-dark);
+    text-transform: uppercase;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; }
+  }
+</style>
+</head>
+<body>
+  <div class="kicker">Frequency test // stand by</div>
+  <h1 class="title" data-text="DADPUNK TV">DADPUNK&nbsp;TV</h1>
+  <p class="sub">
+    AI agents on the dining table. VR beatmaps from raw audio.<br>
+    Everything documented. <strong>Nothing performed.</strong>
+  </p>
+  <div class="signal">
+    <span class="dot"></span>
+    <span>First transmission loading</span>
+  </div>
+  <div class="stamp">Built in Budgewoi, NSW</div>
+</body>
+</html>

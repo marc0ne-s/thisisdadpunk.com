@@ -1,0 +1,674 @@
+/* ============================================
+   DADPUNK ARTIFACT — Living Digital Artifact v2
+   Asymmetric, layered, alive. Not a portfolio.
+   Body is transparent — fixed Three.js canvas shows through.
+   Content zones use controlled translucency for depth.
+   ============================================ */
+
+/* ── FIXED ATMOSPHERIC VEIL ── */
+html::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(232,93,4,0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 80%, rgba(92,91,58,0.04) 0%, transparent 45%);
+}
+
+/* ── AMBIENT SIDE BEAMS — thin vertical signal traces ──
+   Fixed to the viewport so the lines are always present
+   at the same on-screen x position regardless of scroll —
+   the wall markings behind every document the user passes.
+   Two faint lines, one each side, with subtle scan animation. */
+.ambient-side-beam {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  pointer-events: none;
+  z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(232, 93, 4, 0.12) 8%,
+    rgba(232, 93, 4, 0.18) 50%,
+    rgba(92, 91, 58, 0.12) 92%,
+    transparent 100%
+  );
+}
+.ambient-side-beam--left  { left: 1.25rem; }
+.ambient-side-beam--right { right: 1.25rem; background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(92, 91, 58, 0.10) 8%,
+    rgba(92, 91, 58, 0.16) 50%,
+    rgba(232, 93, 4, 0.10) 92%,
+    transparent 100%
+  ); }
+.ambient-side-beam::before {
+  content: '';
+  position: absolute;
+  left: -2px;
+  width: 5px;
+  height: 30px;
+  background: rgba(232, 93, 4, 0.5);
+  filter: blur(4px);
+  animation: beamScroll 9s linear infinite;
+  animation-delay: var(--beam-delay, 0s);
+}
+.ambient-side-beam--right::before { animation-delay: var(--beam-delay, 4.5s); }
+@keyframes beamScroll {
+  0%   { top: -10%; opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { top: 110%; opacity: 0; }
+}
+
+/* ── FAILED SCAN GRID — machine-room floor texture in gutters ── */
+.artifact-body::before,
+.artifact-body::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(to right, rgba(92,91,58,0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(92,91,58,0.04) 1px, transparent 1px);
+  background-size: 24px 100%, 100% 64px;
+  mask-image: linear-gradient(to bottom, transparent 0%, black 6%, black 94%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 6%, black 94%, transparent 100%);
+}
+.artifact-body::after {
+  background-image:
+    linear-gradient(to right, rgba(232,93,4,0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(232,93,4,0.02) 1px, transparent 1px);
+  background-size: 96px 100%, 100% 96px;
+  opacity: 0.5;
+}
+
+/* ── SCAN LINE — periodic horizontal beam sweeping the page ──
+   Subtle, low-contrast, very slow. Acts as a "machine is
+   scanning" signal that's present everywhere but never
+   dominant. Respects reduced motion. */
+@keyframes pageScan {
+  0%   { transform: translateY(-5vh); opacity: 0; }
+  10%  { opacity: 0.4; }
+  90%  { opacity: 0.4; }
+  100% { transform: translateY(105vh); opacity: 0; }
+}
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(232, 93, 4, 0.18) 30%,
+    rgba(232, 93, 4, 0.28) 50%,
+    rgba(232, 93, 4, 0.18) 70%,
+    transparent 100%
+  );
+  filter: blur(1px);
+  z-index: 1;
+  pointer-events: none;
+  animation: pageScan 22s linear infinite;
+  animation-delay: 7s;
+}
+@media (prefers-reduced-motion: reduce) {
+  body::before { animation: none; opacity: 0.2; }
+  .ambient-side-beam::before,
+  .breather--signal::before,
+  .breather--signal::after,
+  .breather--ghost .breather__text,
+  .ambient-footer::before { animation: none; }
+}
+
+/* ── SCROLL DEPTH FADE ── */
+.artifact-depth-fade {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 30vh;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(to top, rgba(10,10,10,0.85), transparent);
+}
+
+/* ── SYSTEM BAR ── */
+.sysbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  background: rgba(10,10,10,0.94);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--color-olive-dark);
+  padding: 0.45rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.sysbar__item {
+  color: var(--color-olive-light);
+  white-space: nowrap;
+}
+.sysbar__pulse {
+  color: var(--color-orange);
+  animation: sysPulse 2s ease-in-out infinite;
+}
+@keyframes sysPulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+.sysbar__brand {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--color-orange);
+}
+
+/* ── HERO — off-center, layered, punk zine ── */
+.artifact-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 4rem 2rem 1rem;
+  overflow: hidden;
+}
+.artifact-hero__content {
+  position: relative;
+  z-index: 2;
+  max-width: 55vw;
+  margin-left: 4vw;
+}
+.artifact-hero__content h1 {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 10vw, 9rem);
+  line-height: 0.85;
+  letter-spacing: -0.02em;
+  color: var(--color-off-white);
+  text-shadow: 3px 3px 0px rgba(232,93,4,0.12), 6px 6px 0px rgba(92,91,58,0.05);
+}
+.artifact-hero__content .dad-accent {
+  color: var(--color-orange);
+  position: relative;
+}
+.artifact-hero__content .dad-accent::before {
+  content: 'DAD';
+  position: absolute;
+  top: 4px; left: 5px;
+  color: var(--color-olive);
+  opacity: 0.3;
+  z-index: -1;
+}
+.artifact-hero__tagline {
+  font-family: var(--font-mono);
+  font-size: clamp(0.8rem, 1.5vw, 1rem);
+  color: var(--color-olive);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  margin-top: 1rem;
+}
+/* Zine stamp cluster — off to the right */
+.artifact-hero__stamps {
+  position: absolute;
+  right: 3vw;
+  bottom: 8vh;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-end;
+}
+.artifact-hero__stamp {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.25em;
+  color: var(--color-olive-light);
+  border: 1px solid var(--color-olive-dark);
+  padding: 0.3rem 0.7rem;
+  text-transform: uppercase;
+  background: rgba(10,10,10,0.7);
+  transform: rotate(-2deg);
+}
+.artifact-hero__stamp:nth-child(2) { transform: rotate(1.5deg); }
+.artifact-hero__stamp:nth-child(3) { transform: rotate(-0.5deg); }
+
+/* ── BREATHER — full-bleed moment where the wall shows ──
+   These are intentional pauses in the document where the
+   canvas is fully exposed. Single-line machine text floating
+   in atmosphere. No backing, no card, no panel — just the wall
+   and a whisper of signal. */
+.breather {
+  position: relative;
+  z-index: 2;
+  padding: 4rem 2.5rem;
+  min-height: 14vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  pointer-events: none;
+}
+.breather__text {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.4em;
+  color: var(--color-olive-light);
+  text-transform: uppercase;
+  text-align: center;
+  opacity: 0.55;
+  position: relative;
+  padding: 0.6rem 1.2rem;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(10, 10, 10, 0.55) 20%,
+    rgba(10, 10, 10, 0.55) 80%,
+    transparent 100%
+  );
+}
+.breather__text::before,
+.breather__text::after {
+  content: '─';
+  color: var(--color-olive-dark);
+  margin: 0 0.8rem;
+  letter-spacing: -0.1em;
+}
+.breather--tape .breather__text {
+  letter-spacing: 0.55em;
+  font-size: 0.6rem;
+  color: var(--color-olive-dark);
+}
+.breather--tape .breather__text::before,
+.breather--tape .breather__text::after {
+  content: '═══';
+  color: rgba(232, 93, 4, 0.4);
+}
+.breather--signal {
+  min-height: 22vh;
+}
+.breather--signal::before {
+  /* a horizontal scan-line that pulses across the wall */
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(232, 93, 4, 0.55) 20%,
+    rgba(232, 93, 4, 0.85) 50%,
+    rgba(232, 93, 4, 0.55) 80%,
+    transparent 100%
+  );
+  filter: blur(0.5px);
+  animation: signalSweep 5s ease-in-out infinite;
+}
+.breather--signal::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 80px;
+  margin-top: -40px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(232, 93, 4, 0.12) 0%,
+    rgba(232, 93, 4, 0.04) 40%,
+    transparent 70%
+  );
+  animation: signalGlow 4s ease-in-out infinite;
+}
+@keyframes signalSweep {
+  0%   { transform: translateX(-30%); opacity: 0.3; }
+  50%  { opacity: 1; }
+  100% { transform: translateX(30%);  opacity: 0.3; }
+}
+@keyframes signalGlow {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+.breather--ghost .breather__text {
+  color: var(--color-orange);
+  opacity: 0.55;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3.5vw, 2.4rem);
+  letter-spacing: 0.18em;
+  text-shadow:
+    0 0 18px rgba(232, 93, 4, 0.55),
+    0 0 36px rgba(232, 93, 4, 0.25);
+  animation: ghostBreath 6s ease-in-out infinite;
+}
+@keyframes ghostBreath {
+  0%, 100% { opacity: 0.35; }
+  50%      { opacity: 0.75; }
+}
+.breather--ghost .breather__text::before,
+.breather--ghost .breather__text::after {
+  content: '';
+}
+
+/* ── TAPE LINE — horizontal trace between sections ── */
+.tape-line {
+  position: relative;
+  z-index: 2;
+  height: 0;
+  border-top: 1px dashed rgba(92, 91, 58, 0.35);
+  margin: 0 2.5rem;
+  pointer-events: none;
+}
+.tape-line--solid { border-top-style: solid; border-top-color: rgba(232, 93, 4, 0.18); }
+.tape-line--heavy { border-top: 2px solid var(--color-olive-dark); }
+
+/* ── ARTIFACT GRID — asymmetric 3-column ──
+   Wide gutters are deliberate: the canvas must breathe
+   between columns. Content is the documents; the gaps
+   are the machine-room wall. */
+.artifact-body {
+  padding: 4rem 2.5rem;
+  display: grid;
+  grid-template-columns: 200px 1fr 240px;
+  gap: 4rem;
+  max-width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+/* ── BUILD FRAGMENTS (left column, narrow feed) ── */
+.build-feed {
+  font-family: var(--font-mono);
+}
+.build-feed__label {
+  font-size: 0.55rem;
+  letter-spacing: 0.3em;
+  color: var(--color-orange);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--color-olive-dark);
+  padding-bottom: 0.4rem;
+}
+.build-feed__item {
+  border-left: 1px solid var(--color-olive-dark);
+  padding: 0.5rem 0 0.5rem 0.7rem;
+  margin-bottom: 1.2rem;
+}
+.build-feed__date {
+  font-size: 0.55rem;
+  color: var(--color-olive-dark);
+  letter-spacing: 0.15em;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+.build-feed__title {
+  font-size: 0.7rem;
+  color: var(--color-off-white);
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+.build-feed__text {
+  font-size: 0.65rem;
+  color: var(--color-olive-light);
+  line-height: 1.5;
+}
+.build-feed__tags {
+  font-size: 0.55rem;
+  color: var(--color-olive-dark);
+  margin-top: 0.3rem;
+}
+
+/* ── PROJECT SPREAD (center, asymmetric grid) ──
+   Slightly looser gap so the canvas shows between cards.
+   Cards read as opaque documents pinned to the wall. */
+.project-spread {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 0.7rem;
+  position: relative;
+}
+.project-spread__card {
+  border: 1px solid var(--color-olive-dark);
+  padding: 1.2rem;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(8px) saturate(1.1);
+  -webkit-backdrop-filter: blur(8px) saturate(1.1);
+  transition: box-shadow 0.3s, background 0.3s, transform 0.3s;
+  box-shadow:
+    2px 2px 0px rgba(58,57,37,0.5),
+    inset 0 0 0 1px rgba(232,93,4,0.04);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: relative;
+}
+.project-spread__card::before {
+  /* tape corner — subtle paper-on-wall cue */
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid rgba(232,93,4,0.35);
+  border-left: 2px solid rgba(232,93,4,0.35);
+  transition: border-color 0.3s;
+}
+.project-spread__card:hover {
+  box-shadow:
+    6px 6px 0px var(--color-olive-dark),
+    inset 0 0 0 1px rgba(232,93,4,0.10);
+  background: rgba(10, 10, 10, 0.88);
+  transform: translateZ(8px);
+  z-index: 2;
+}
+.project-spread__card:hover::before {
+  border-color: rgba(232,93,4,0.7);
+}
+.project-spread__card--featured {
+  grid-column: span 2;
+}
+.project-spread__name {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--color-off-white);
+  letter-spacing: 0.02em;
+}
+.project-spread__badge {
+  font-family: var(--font-mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.15em;
+  padding: 0.15rem 0.45rem;
+  text-transform: uppercase;
+  align-self: flex-start;
+}
+.project-spread__badge--shipped { background: var(--color-olive); color: var(--color-black); }
+.project-spread__badge--beta { border: 1px solid var(--color-orange); color: var(--color-orange); }
+.project-spread__badge--active { background: var(--color-orange); color: var(--color-black); }
+.project-spread__one-line {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-olive-light);
+  line-height: 1.5;
+}
+.project-spread__tags {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  color: var(--color-olive-dark);
+  margin-top: auto;
+}
+
+/* ── MANIFESTO INTERRUPT (breaks the project grid) ── */
+.interrupt {
+  grid-column: 1 / -1;
+  border: 1px solid var(--color-orange);
+  padding: 2.5rem;
+  margin: 1.5rem 0;
+  background: rgba(10,10,10,0.78);
+  backdrop-filter: blur(10px) saturate(1.1);
+  -webkit-backdrop-filter: blur(10px) saturate(1.1);
+  box-shadow:
+    6px 6px 0px rgba(196,77,3,0.35),
+    inset 0 0 0 1px rgba(232,93,4,0.06);
+  position: relative;
+}
+.interrupt::before {
+  content: '//';
+  position: absolute;
+  top: -0.9rem; left: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-orange);
+  background: var(--color-black);
+  padding: 0 0.5rem;
+  letter-spacing: 0.3em;
+}
+.interrupt p {
+  font-family: var(--font-mono);
+  font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+  line-height: 1.8;
+  color: var(--color-off-white);
+  max-width: 60ch;
+}
+
+/* ── AGENT TRACES (right column, floating marginalia) ── */
+.traces-panel {
+  font-family: var(--font-mono);
+  position: sticky;
+  top: 3rem;
+}
+.traces-panel__label {
+  font-size: 0.55rem;
+  letter-spacing: 0.3em;
+  color: var(--color-orange);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--color-olive-dark);
+  padding-bottom: 0.4rem;
+}
+.traces-panel__item {
+  padding: 0.5rem 0.6rem;
+  margin-bottom: 0.6rem;
+  border-left: 2px solid transparent;
+  transition: border-color 0.3s;
+}
+.traces-panel__item:hover {
+  border-left-color: var(--color-orange);
+}
+.traces-panel__agent {
+  font-size: 0.55rem;
+  color: var(--color-olive-dark);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.2rem;
+}
+.traces-panel__text {
+  font-size: 0.6rem;
+  color: var(--color-olive-light);
+  line-height: 1.5;
+}
+.traces-panel__time {
+  font-size: 0.5rem;
+  color: var(--color-olive-dark);
+  margin-top: 0.2rem;
+  display: block;
+}
+
+/* ── AMBIENT FOOTER (system state, always present) ──
+   Lower opacity so the canvas breathes through. The footer
+   is system state, not a wall — it should feel like a
+   translucent membrane over the machine. */
+.ambient-footer {
+  border-top: 1px solid var(--color-olive-dark);
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  color: var(--color-olive-dark);
+  flex-wrap: wrap;
+  gap: 1rem;
+  background: rgba(10,10,10,0.55);
+  backdrop-filter: blur(4px) saturate(1.1);
+  -webkit-backdrop-filter: blur(4px) saturate(1.1);
+  position: relative;
+  z-index: 2;
+}
+.ambient-footer::before {
+  /* a subtle moving tape — short pulse that slides across
+     the footer's left edge, like a tape-recorder cue mark */
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  border-left: 1px solid rgba(232, 93, 4, 0.25);
+  animation: footerTape 6s ease-in-out infinite;
+}
+@keyframes footerTape {
+  0%   { width: 0;   opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { width: 100%; opacity: 0; }
+}
+.ambient-footer__pulse {
+  color: var(--color-orange);
+}
+.ambient-footer a {
+  color: var(--color-olive-light);
+  text-decoration: none;
+}
+.ambient-footer a:hover { color: var(--color-orange); }
+
+/* ── MOBILE ── */
+@media (max-width: 900px) {
+  .artifact-hero__content {
+    max-width: 85vw;
+    margin-left: 2vw;
+  }
+  .artifact-body {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 2.5rem 1.25rem;
+  }
+  .artifact-body::before, .artifact-body::after { display: none; }
+  .build-feed { display: flex; overflow-x: auto; gap: 1rem; padding-bottom: 1rem; }
+  .build-feed__item { min-width: 180px; flex-shrink: 0; }
+  .traces-panel { position: static; }
+  .project-spread__card--featured { grid-column: span 1; }
+  .breather { padding: 3rem 1.25rem; min-height: 12vh; }
+  .breather__text { font-size: 0.6rem; letter-spacing: 0.3em; }
+  .breather__text::before, .breather__text::after { margin: 0 0.5rem; }
+  .tape-line { margin: 0 1.25rem; }
+  .ambient-side-beam--left  { left: 0.5rem; }
+  .ambient-side-beam--right { right: 0.5rem; }
+  .ambient-footer { padding: 0.75rem 1rem; }
+}
+@media (max-width: 600px) {
+  .sysbar { font-size: 0.5rem; padding: 0.35rem 0.8rem; }
+  .sysbar__brand { font-size: 0.65rem; }
+  .artifact-hero__stamps { display: none; }
+  .artifact-body { padding: 1rem 0.75rem; gap: 1.5rem; }
+  .breather--signal { min-height: 18vh; }
+  .breather--ghost .breather__text { font-size: 1.2rem; letter-spacing: 0.12em; }
+}

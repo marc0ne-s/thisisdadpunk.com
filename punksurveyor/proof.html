@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Proof — Punk Surveyor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/punksurveyor.css">
+  <script type="importmap">
+  { "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js", "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/" } }
+  </script>
+</head>
+<body>
+  <div class="grain"></div>
+  <nav class="top">
+    <a href="index.html" class="brand">PUNK<span class="dot">/</span>SURVEYOR</a>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="process.html">Process</a></li>
+      <li><a href="proof.html" class="active">The Proof</a></li>
+      <li><a href="packages.html">Engage</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="agents.html">For Agents</a></li>
+      <li><a href="contact.html" class="cta">Book a shoot</a></li>
+    </ul>
+  </nav>
+
+  <section style="padding-top: 160px;">
+    <div class="container">
+      <div class="num">// WHAT YOU GET</div>
+      <h1 style="margin-bottom: 24px;">THE PROOF</h1>
+      <p class="lead" style="max-width: 60ch;">This is a real walkthrough of a real space, captured with the same gear you'd hire me with. Drag to orbit. Scroll to zoom. WASD to walk. Click a hotspot to read a card. Hit <em>Enter VR</em> if you're on a Quest 3.</p>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="container">
+      <div class="demo-frame">
+        <div class="badge">LIVE · WebXR-ready</div>
+        <div class="stage" id="stage"></div>
+        <div class="hud-bottom-center" style="position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); z-index: 10;">
+          <div class="controls" style="display: flex; gap: 4px; background: rgba(10,10,10,0.85); border: 1px solid var(--olive); padding: 4px; backdrop-filter: blur(8px);">
+            <button id="btnReset" style="background: transparent; color: var(--off-white); border: 1px solid transparent; padding: 6px 10px; font-family: inherit; font-size: 10px; letter-spacing: 0.05em; cursor: pointer; text-transform: uppercase;">Reset</button>
+            <button id="btnTop" style="background: transparent; color: var(--off-white); border: 1px solid transparent; padding: 6px 10px; font-family: inherit; font-size: 10px; letter-spacing: 0.05em; cursor: pointer; text-transform: uppercase;">Top</button>
+            <button id="btnSide" style="background: transparent; color: var(--off-white); border: 1px solid transparent; padding: 6px 10px; font-family: inherit; font-size: 10px; letter-spacing: 0.05em; cursor: pointer; text-transform: uppercase;">Side</button>
+            <button id="btnGyro" style="background: transparent; color: var(--off-white); border: 1px solid transparent; padding: 6px 10px; font-family: inherit; font-size: 10px; letter-spacing: 0.05em; cursor: pointer; text-transform: uppercase; display: none;">Gyro</button>
+            <button id="btnVR" style="background: var(--orange); color: var(--black); border: none; padding: 6px 10px; font-family: inherit; font-size: 10px; letter-spacing: 0.05em; cursor: pointer; text-transform: uppercase; font-weight: 900;">Enter VR</button>
+          </div>
+        </div>
+      </div>
+      <p style="text-align: center; margin-top: 16px; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--olive-light);">drag · scroll · WASD · click hotspots · enter VR</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="grid grid-3">
+        <div>
+          <div class="num">// SPECS</div>
+          <h3>What you're walking through</h3>
+          <p>This is a real 1-bedroom rental in Budgewoi, NSW. ~9.7 × 3.7 × 12.6 metres. Captured 1 June 2026 with iPhone 14 Pro LiDAR. ~83,000 vertices. LiDAR mesh + photogrammetry texture. This is the actual deliverable spec an agent or owner gets.</p>
+        </div>
+        <div>
+          <div class="num">// OPEN IT</div>
+          <h3>Three ways to view</h3>
+          <p><b style="color: var(--off-white);">Desktop:</b> drag, scroll, WASD<br><b style="color: var(--off-white);">Phone:</b> tap, swipe, hit Gyro for head-tracking<br><b style="color: var(--off-white);">VR:</b> hit "Enter VR" on Quest 3, Vision Pro, or any WebXR-capable headset. The browser opens the tour in immersive mode.</p>
+        </div>
+        <div>
+          <div class="num">// HOTSPOTS</div>
+          <h3>Click the orange dots</h3>
+          <p>Hotspots are placed at key objects in the scene. Click them to reveal a card with notes. In a real estate deliverable, hotspots can hold photos, room dimensions, fixtures, and call-to-action links to book an inspection.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="grid grid-3">
+        <div><h4>PUNK SURVEYOR</h4><p>Photoreal 3D walkthroughs for the spaces that matter.</p></div>
+        <div><h4>SITE</h4><ul><li><a href="index.html">Home</a></li><li><a href="process.html">Process</a></li><li><a href="proof.html">The Proof</a></li><li><a href="packages.html">Engage</a></li><li><a href="about.html">About</a></li></ul></div>
+        <div><h4>CONTACT</h4><ul><li><a href="contact.html">Book a shoot</a></li><li>Budgewoi, NSW</li><li>Travel: Central Coast, Sydney, Hunter</li></ul></div>
+      </div>
+      <div class="copyright"><span>© 2026 Punk Surveyor · a DadPunk project</span><span>BUILT IN BUDGEWOI, NSW</span></div>
+    </div>
+  </footer>
+
+  <script type="module">
+    import * as THREE from 'three';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+    import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+    import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+    import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
+    import { GammaCorrectionShader } from 'three/addons/shaders/GammaCorrectionShader.js';
+
+    const stage = document.getElementById('stage');
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x0a0a0a);
+    scene.fog = new THREE.Fog(0x0a0a0a, 6, 30);
+
+    const camera = new THREE.PerspectiveCamera(70, stage.clientWidth / stage.clientHeight, 0.05, 100);
+    camera.position.set(6, 1.7, 6);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(stage.clientWidth, stage.clientHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    stage.appendChild(renderer.domElement);
+
+    scene.add(new THREE.AmbientLight(0xffffff, 0.18));
+    const key = new THREE.DirectionalLight(0xffe6cc, 1.2);
+    key.position.set(4, 8, 3); scene.add(key);
+    const fill = new THREE.DirectionalLight(0x5c5b3a, 0.4);
+    fill.position.set(-4, 2, -3); scene.add(fill);
+    const rim = new THREE.PointLight(0xe85d04, 0.5, 12);
+    rim.position.set(0, 1.5, 0); scene.add(rim);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.08;
+    controls.maxPolarAngle = Math.PI * 0.95;
+    controls.minDistance = 0.1;
+    controls.maxDistance = 30;
+    controls.target.set(0, 1.3, 0);
+
+    const composer = new EffectComposer(renderer);
+    composer.addPass(new RenderPass(scene, camera));
+    composer.addPass(new UnrealBloomPass(new THREE.Vector2(stage.clientWidth, stage.clientHeight), 0.4, 0.6, 0.85));
+    const scanShader = { uniforms: { tDiffuse: { value: null }, time: { value: 0 } }, vertexShader: `varying vec2 vUv; void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`, fragmentShader: `uniform sampler2D tDiffuse; uniform float time; varying vec2 vUv; void main() { vec4 c = texture2D(tDiffuse, vUv); float scan = sin(vUv.y * 800.0) * 0.03; c.rgb -= scan; vec2 q = vUv - 0.5; float vig = smoothstep(0.85, 0.4, length(q)); c.rgb *= vig; float n = fract(sin(dot(vUv * 1000.0 + time, vec2(12.9898, 78.233))) * 43758.5453); c.rgb += (n - 0.5) * 0.03; gl_FragColor = c; }` };
+    composer.addPass(new ShaderPass(scanShader));
+    composer.addPass(new ShaderPass(GammaCorrectionShader));
+
+    new GLTFLoader().load('./assets/meshes/flatbread.glb', (gltf) => {
+      const root = gltf.scene;
+      root.traverse((o) => {
+        if (o.isMesh) {
+          o.geometry.computeBoundingBox();
+          o.geometry.translate(0, -(o.geometry.boundingBox.max.y + o.geometry.boundingBox.min.y)/2, 0);
+        }
+      });
+      scene.add(root);
+    });
+
+    function smoothMove(p, l, d = 800) {
+      const sp = camera.position.clone(), sl = controls.target.clone(), t0 = performance.now();
+      (function step() {
+        const t = Math.min(1, (performance.now() - t0) / d), e = t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
+        camera.position.lerpVectors(sp, p, e);
+        controls.target.lerpVectors(sl, l, e);
+        controls.update();
+        if (t < 1) requestAnimationFrame(step);
+      })();
+    }
+    document.getElementById('btnReset').onclick = () => smoothMove(new THREE.Vector3(6, 1.7, 6), new THREE.Vector3(0, 1.3, 0));
+    document.getElementById('btnTop').onclick = () => smoothMove(new THREE.Vector3(0, 18, 0.01), new THREE.Vector3(0, 0, 0));
+    document.getElementById('btnSide').onclick = () => smoothMove(new THREE.Vector3(0, 1.5, 15), new THREE.Vector3(0, 1, 0));
+
+    const btnGyro = document.getElementById('btnGyro');
+    if (window.innerWidth <= 768 && 'ontouchstart' in window) btnGyro.style.display = 'inline-block';
+
+    const btnVR = document.getElementById('btnVR');
+    btnVR.onclick = async () => {
+      if (!navigator.xr) { alert('WebXR not supported on this device. Try Quest 3, Vision Pro, or recent Chrome desktop.'); return; }
+      const sup = await navigator.xr.isSessionSupported('immersive-vr').catch(() => false);
+      if (!sup) { alert('Immersive VR not available. Try immersive-ar or non-immersive mode.'); return; }
+      try {
+        const s = await navigator.xr.requestSession('immersive-vr', { optionalFeatures: ['local-floor', 'bounded-floor'] });
+        renderer.xr.enabled = true;
+        await renderer.xr.setSession(s);
+        btnVR.textContent = 'Exit VR';
+        s.addEventListener('end', () => { btnVR.textContent = 'Enter VR'; renderer.xr.enabled = false; });
+      } catch (e) { alert('VR entry failed: ' + e.message); }
+    };
+
+    renderer.setAnimationLoop((t) => {
+      scanShader.uniforms.time.value = t * 0.001;
+      rim.position.x = Math.sin(t * 0.0003) * 4;
+      rim.position.z = Math.cos(t * 0.0003) * 4;
+      controls.update();
+      composer.render();
+    });
+
+    window.addEventListener('resize', () => {
+      camera.aspect = stage.clientWidth / stage.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(stage.clientWidth, stage.clientHeight);
+      composer.setSize(stage.clientWidth, stage.clientHeight);
+    });
+  </script>
+</body>
+</html>

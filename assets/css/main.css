@@ -1,0 +1,600 @@
+/* ============================================
+   DADPUNK — Visual Identity System v3
+   thisisdadpunk.com — Three.js + CSS 3D
+   ============================================ */
+
+/* --- TOKENS --- */
+:root {
+  --color-black: #0a0a0a;
+  --color-off-white: #e8e4de;
+  --color-orange: #e85d04;
+  --color-olive: #8a8960;
+  --color-orange-dim: #c44d03;
+  --color-olive-dark: #3a3925;
+  --color-olive-light: #a5a478;
+
+  --font-display: 'Archivo Black', 'Impact', sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 8rem;
+}
+
+/* --- RESET --- */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--color-black);
+}
+
+.creed__block p {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--color-off-white);
+  text-shadow: 0 0 8px rgba(0,0,0,0.6);
+  line-height: 1.7;
+  max-width: 280px;
+}
+
+.creed__block--skate, .creed__block--punk { background: rgba(10, 10, 10, 0.55); }
+.creed__block--metal, .creed__block--build { background: rgba(10, 10, 10, 0.45); }
+
+body {
+  color: var(--color-off-white);
+  font-family: var(--font-mono);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  perspective: 1200px;
+  background-color: transparent;
+}
+
+a {
+  color: var(--color-orange);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+a:hover {
+  color: var(--color-off-white);
+}
+
+/* --- GRAIN OVERLAY (global, fixed) --- */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+  pointer-events: none;
+  z-index: 9999;
+  animation: grainShift 0.5s steps(3) infinite;
+}
+
+@keyframes grainShift {
+  0%, 100% { transform: translate(0, 0); }
+  33% { transform: translate(-2px, 1px); }
+  66% { transform: translate(1px, -2px); }
+}
+
+/* ============================
+   HERO — Three.js Backdrop
+   ============================ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transform-style: preserve-3d;
+}
+
+/* Three.js canvas container */
+#hero-3d {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+
+#hero-3d canvas {
+  display: block;
+  width: 100vw !important;
+  height: 100vh !important;
+}
+
+/* Background depth gradient (under Three.js) */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: -10%;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(232, 93, 4, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 30%, rgba(92, 91, 58, 0.04) 0%, transparent 50%);
+  z-index: 0;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: var(--space-md);
+  transform-style: preserve-3d;
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 15vw, 12rem);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  color: var(--color-off-white);
+  animation: heroReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+  text-shadow:
+    2px 2px 0px rgba(232, 93, 4, 0.15),
+    4px 4px 0px rgba(92, 91, 58, 0.06);
+}
+
+.hero__accent {
+  color: var(--color-orange);
+  display: inline-block;
+  position: relative;
+  animation: dadFloat 4s ease-in-out infinite;
+}
+
+/* Xerox misregistration */
+.hero__accent::before {
+  content: 'DAD';
+  position: absolute;
+  top: 3px;
+  left: 4px;
+  color: var(--color-olive);
+  opacity: 0.35;
+  z-index: -1;
+  animation: misregister 3s ease-in-out infinite alternate;
+}
+
+.hero__sub {
+  font-family: var(--font-mono);
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  color: var(--color-olive-light);
+  margin-top: var(--space-md);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  animation: heroReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+}
+
+.hero__stamp {
+  display: inline-block;
+  margin-top: var(--space-lg);
+  padding: var(--space-xs) var(--space-sm);
+  border: 3px solid var(--color-orange);
+  color: var(--color-orange);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.3em;
+  animation: heroReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s;
+  box-shadow: 4px 4px 0px var(--color-orange-dim);
+}
+
+.hero__stamp:hover {
+  transform: rotate(0deg) scale(1.1);
+  box-shadow: 6px 6px 0px var(--color-orange-dim);
+}
+
+@keyframes heroReveal {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dadFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes misregister {
+  0% { transform: translate(3px, 4px); }
+  100% { transform: translate(5px, 6px); }
+}
+
+/* ============================
+   SECTION LABEL
+   ============================ */
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-orange);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-md);
+  border-bottom: 1px solid var(--color-olive-dark);
+  padding-bottom: var(--space-xs);
+  display: inline-block;
+}
+
+/* ============================
+   STATEMENT
+   ============================ */
+.statement {
+  background: transparent;
+  color: var(--color-off-white);
+  padding: var(--space-xl) var(--space-md);
+  position: relative;
+  transform-style: preserve-3d;
+  z-index: 1;
+}
+
+/* Depth shadow — the page lifts off the screen */
+.statement::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.08), transparent);
+  z-index: 1;
+}
+
+.statement__content {
+  max-width: 700px;
+  margin: 0 auto;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.statement__content p {
+  font-family: var(--font-mono);
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  line-height: 1.8;
+  letter-spacing: 0.01em;
+}
+
+.highlight {
+  color: var(--color-orange);
+  font-weight: 600;
+  position: relative;
+}
+
+/* Underline slash on highlight */
+.highlight::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--color-orange);
+  opacity: 0.5;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.statement:hover .highlight::after {
+  transform: scaleX(1);
+}
+
+/* ============================
+   CREED — 3D Tilt Cards
+   ============================ */
+.creed {
+  background: transparent;
+  padding: var(--space-xl) var(--space-md);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2px;
+  transform-style: preserve-3d;
+  z-index: 1;
+  position: relative;
+}
+
+.creed__block {
+  padding: var(--space-lg) var(--space-md);
+  border: 1px solid var(--color-olive-dark);
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.4s ease,
+              background 0.3s;
+  box-shadow: 2px 2px 0px var(--color-olive-dark);
+  will-change: transform;
+  background: rgba(10, 10, 10, 0.7);
+}
+
+.creed__block:hover {
+  background: rgba(232, 93, 4, 0.04);
+  box-shadow: 8px 8px 0px var(--color-olive-dark);
+  z-index: 2;
+}
+
+.creed__label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-orange);
+  letter-spacing: 0.3em;
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+}
+
+.creed__block h3 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  letter-spacing: 0.05em;
+  line-height: 1;
+  margin-bottom: var(--space-sm);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.creed__block:hover h3 {
+  transform: scale(1.05);
+}
+
+.creed__block p {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--color-olive);
+  line-height: 1.7;
+  max-width: 280px;
+}
+
+.creed__block--skate h3, .creed__block--punk h3 { color: var(--color-off-white); }
+.creed__block--metal h3, .creed__block--build h3 { color: var(--color-orange); }
+
+/* ============================
+   MIXTAPE — Zine Cards with Depth
+   ============================ */
+.mixtape {
+  background: rgba(232, 228, 222, 0.55);
+  color: var(--color-black);
+  padding: var(--space-xl) var(--space-md);
+  position: relative;
+  transform-style: preserve-3d;
+  z-index: 1;
+}
+
+.mixtape__content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.mixtape {
+  background: transparent;
+  padding: var(--space-xl) var(--space-md);
+  position: relative;
+  transform-style: preserve-3d;
+  z-index: 1;
+}
+
+.mixtape__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+  transform-style: preserve-3d;
+}
+
+.mixtape__card {
+  border: 2px solid var(--color-off-white);
+  padding: var(--space-md);
+  position: relative;
+  background: rgba(10, 10, 10, 0.75);
+  transform-style: preserve-3d;
+  transform: translateZ(0);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.4s ease;
+  box-shadow: 4px 4px 0px rgba(0,0,0,0.2);
+}
+
+.mixtape__card:hover {
+  transform: translateZ(30px) rotate(-1deg);
+  box-shadow: 10px 10px 0px rgba(0,0,0,0.25);
+}
+
+.mixtape__tag {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
+  color: var(--color-orange);
+  display: block;
+  margin-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--color-olive);
+  padding-bottom: var(--space-xs);
+}
+
+.mixtape__card p {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--color-off-white);
+}
+
+/* Tape line detail on cards */
+.mixtape__card::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+  width: 30px;
+  height: 30px;
+  background: var(--color-off-white);
+  border-left: 2px solid var(--color-black);
+  border-top: 2px solid var(--color-black);
+  transition: transform 0.3s;
+}
+
+.mixtape__card:hover::after {
+  transform: rotate(45deg);
+}
+
+/* ============================
+   OUTRO
+   ============================ */
+.outro {
+  background: transparent;
+  padding: var(--space-xl) var(--space-md);
+  text-align: center;
+  transform-style: preserve-3d;
+  position: relative;
+  z-index: 1;
+}
+
+/* Orange glow behind outro */
+.outro::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(232, 93, 4, 0.06) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  animation: glowPulse 4s ease-in-out infinite;
+}
+
+.outro__content {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.outro__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  color: var(--color-off-white);
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-md);
+  text-shadow: 3px 3px 0px rgba(232, 93, 4, 0.1);
+}
+
+.outro__manifesto {
+  font-family: var(--font-mono);
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  color: var(--color-olive-light);
+  line-height: 2;
+  margin-bottom: var(--space-xl);
+}
+
+.outro__links {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+  transform-style: preserve-3d;
+}
+
+.outro__link {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--color-orange);
+  letter-spacing: 0.15em;
+  padding: var(--space-sm) var(--space-md);
+  border: 2px solid var(--color-orange);
+  transform: translateZ(0);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+              background 0.2s,
+              color 0.2s,
+              box-shadow 0.3s;
+  box-shadow: 3px 3px 0px var(--color-orange-dim);
+}
+
+.outro__link:hover {
+  background: var(--color-orange);
+  color: var(--color-black);
+  transform: translateZ(20px) scale(1.05);
+  box-shadow: 6px 6px 0px var(--color-orange-dim);
+}
+
+.outro__link .arrow {
+  display: inline-block;
+  transition: transform 0.2s;
+}
+
+.outro__link:hover .arrow {
+  transform: translateX(6px);
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.15); }
+}
+
+/* ============================
+   FOOTER
+   ============================ */
+.footer {
+  background: transparent;
+  border-top: 1px solid var(--color-olive-dark);
+  padding: var(--space-md);
+}
+
+.footer__content {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.footer__brand {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
+  color: var(--color-off-white);
+}
+
+.footer__stamp {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-off-white);
+  letter-spacing: 0.15em;
+}
+
+/* ============================
+   RESPONSIVE
+   ============================ */
+@media (max-width: 640px) {
+  .hero__title {
+    font-size: clamp(3rem, 18vw, 6rem);
+  }
+
+  .creed__block {
+    padding: var(--space-md) var(--space-sm);
+  }
+
+  .outro__links {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer__content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  /* Reduce 3D on mobile for performance */
+  body { perspective: 800px; }
+}

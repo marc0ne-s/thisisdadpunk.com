@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DADPUNK</title>
+  <meta name="description" content="A living digital artifact. Local AI, hardware rigging, punk ethos. Built in Budgewoi. Documented by machines.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/artifact.css">
+</head>
+<body>
+
+  <!-- Three.js canvas -->
+  <div id="hero-3d" aria-hidden="true"></div>
+
+  <!-- ═══ SYSTEM BAR — live machine pulse ═══ -->
+  <div class="sysbar">
+    <span class="sysbar__brand">DADPUNK</span>
+    <span class="sysbar__item sysbar__pulse" id="sys-pulse">● ONLINE</span>
+    <span class="sysbar__item" id="sys-agents">— AGENTS</span>
+    <span class="sysbar__item">BUILD <span id="sys-build">--:--</span></span>
+    <span class="sysbar__item">BUDGEWOI, NSW</span>
+  </div>
+
+  <main>
+
+  <!-- ═══ AMBIENT SIDE BEAMS — full-height signal traces in the gutter ═══ -->
+  <div class="ambient-side-beam ambient-side-beam--left" aria-hidden="true" style="--beam-delay: 0s"></div>
+  <div class="ambient-side-beam ambient-side-beam--right" aria-hidden="true" style="--beam-delay: 4.5s"></div>
+
+  <!-- ═══ HERO — punk zine, off-axis ═══ -->
+  <section class="artifact-hero">
+    <div class="artifact-hero__content">
+      <h1>THIS IS <span class="dad-accent">DAD</span>PUNK</h1>
+      <p class="artifact-hero__tagline">Too old for trends. Too punk to care.</p>
+    </div>
+    <div class="artifact-hero__stamps">
+      <span class="artifact-hero__stamp">EST. GEN X</span>
+      <span class="artifact-hero__stamp">LOCAL ONLY</span>
+      <span class="artifact-hero__stamp">MACHINE ROOM</span>
+    </div>
+  </section>
+
+  <!-- ═══ BREATHER 01 — first atmospheric pause after hero ═══ -->
+  <div class="breather breather--tape" aria-hidden="true">
+    <span class="breather__text">// SCROLLING OVER A LIVING MACHINE</span>
+  </div>
+
+  <!-- ═══ ARTIFACT BODY — asymmetric 3-column grid ═══ -->
+  <div class="artifact-body">
+
+    <!-- LEFT: Build Fragments — machine diary feed -->
+    <aside class="build-feed" id="build-feed">
+      <div class="build-feed__label">BUILD LOG</div>
+    </aside>
+
+    <!-- CENTER: Project Spread — asymmetric grid + manifesto interrupt -->
+    <div class="project-spread" id="project-spread"></div>
+
+    <!-- RIGHT: Agent Traces — floating marginalia -->
+    <aside class="traces-panel" id="traces-panel">
+      <div class="traces-panel__label">MACHINE TRACES</div>
+    </aside>
+
+  </div>
+
+  <!-- ═══ BREATHER 02 — signal pulse, full canvas exposure ═══ -->
+  <div class="breather breather--signal" aria-hidden="true">
+    <span class="breather__text">// SIGNAL ── TUNNEL ACTIVE ── DOCUMENTS IN MOTION</span>
+  </div>
+
+  <!-- ═══ TAPE LINE — heavier boundary before footer ═══ -->
+  <div class="tape-line tape-line--heavy" aria-hidden="true"></div>
+
+  <!-- ═══ BREATHER 03 — ghost-text final pause, large atmospheric statement ═══ -->
+  <div class="breather breather--ghost" aria-hidden="true">
+    <span class="breather__text">DOCUMENTS OVER A LIVE MACHINE</span>
+  </div>
+
+  <!-- ═══ AMBIENT FOOTER — system pulse ═══ -->
+  <footer class="ambient-footer">
+    <span class="ambient-footer__pulse" id="footer-pulse">●</span>
+    <span>LAST BUILD <span id="footer-build">--:--</span></span>
+    <span><span id="footer-agents">—/—</span> AGENTS/MACHINES</span>
+    <span>© 2026 // BUDGEWOI, NSW</span>
+    <a href="https://github.com/marc0ne-s">GITHUB</a>
+    <a href="punksurveyor/">/surveyor</a>
+  </footer>
+
+  </main>
+
+  <!-- Three.js -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/"
+    }
+  }
+  </script>
+  <script type="module">
+    import { initHeroScene } from './assets/js/three-scene.js';
+    initHeroScene();
+  </script>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/artifact.js"></script>
+
+</body>
+</html>

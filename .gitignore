@@ -1,0 +1,7 @@
+*.mp4
+audio/
+memory-wiki/
+*.bak*
+.DS_Store
+*.log
+node_modules/

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Process — Punk Surveyor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/punksurveyor.css">
+</head>
+<body>
+  <div class="grain"></div>
+  <nav class="top">
+    <a href="index.html" class="brand">PUNK<span class="dot">/</span>SURVEYOR</a>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="process.html" class="active">Process</a></li>
+      <li><a href="proof.html">The Proof</a></li>
+      <li><a href="packages.html">Engage</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="agents.html">For Agents</a></li>
+      <li><a href="contact.html" class="cta">Book a shoot</a></li>
+    </ul>
+  </nav>
+
+  <section style="padding-top: 160px;">
+    <div class="container">
+      <div class="num">// HOW</div>
+      <h1 style="margin-bottom: 32px;">THE PROCESS</h1>
+      <p class="lead" style="max-width: 60ch;">From arrival to deliverable in 48 hours. No proprietary hardware. No cloud. No waiting on a SaaS to process your space.</p>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="container">
+      <div class="process">
+        <div class="step">
+          <div class="num">01</div>
+          <div>
+            <h3>On-site · capture</h3>
+            <p>I arrive with iPhone Pro (LiDAR) and Osmo Pocket 3 (gimbal). For each room: a slow LiDAR walk for geometry, a 4K gimbal video walk for texture, a few hand-held detail shots for hotspots. 20-30 minutes per typical room. Anchor markers placed for stitching.</p>
+            <div class="meta">~1-3 hours on site · depending on size</div>
+          </div>
+          <div>
+            <div class="card" style="padding: 16px; background: var(--black);">
+              <div class="tag">GEAR</div>
+              <p style="font-size: 12px; margin-bottom: 0;"><b>iPhone 14 Pro</b> · Polycam LiDAR mode<br><b>Osmo Pocket 3</b> · 4K/30fps gimbal walk<br><b>Belkin stand</b> · optional, for sweep shots</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="num">02</div>
+          <div>
+            <h3>Process · geometry</h3>
+            <p>LiDAR frames stitched into a clean per-room mesh. COLMAP runs on the Osmo video to recover camera positions and build a dense point cloud. The mesh is the truth source for dimensions and room layout.</p>
+            <div class="meta">~1-2 hours · Mac mini M4 Pro, local</div>
+          </div>
+          <div>
+            <div class="card" style="padding: 16px; background: var(--black);">
+              <div class="tag">TOOLS</div>
+              <p style="font-size: 12px; margin-bottom: 0;"><b>COLMAP</b> · sparse + dense reconstruction<br><b>trimesh</b> · mesh cleanup, GLB export<br><b>CloudCompare</b> · multi-room alignment</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="num">03</div>
+          <div>
+            <h3>Train · the photoreal</h3>
+            <p>Gaussian splatting on a cloud GPU (Lambda Labs / Modal). The frames + camera poses feed a neural model that learns the actual light, texture, and reflections. What comes out is photoreal — not a stitched panorama, not a flat mesh. The room, as the room is.</p>
+            <div class="meta">~10-15 min on cloud GPU · A100 / H100</div>
+          </div>
+          <div>
+            <div class="card" style="padding: 16px; background: var(--black);">
+              <div class="tag">CLOUD</div>
+              <p style="font-size: 12px; margin-bottom: 0;"><b>nerfstudio + splatfacto</b><br>Data goes up, splat comes back<br>~A$2-3 per scene · 10-15 min runtime</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="num">04</div>
+          <div>
+            <h3>Stitch · the rooms</h3>
+            <p>Per-room splats + LiDAR meshes aligned using the anchor markers I placed on-site. Multi-room scene exported as a single navigable world. Hotspots added at key objects (TV, bed, kitchen, etc.) with click-to-reveal info cards.</p>
+            <div class="meta">~1 hour</div>
+          </div>
+          <div>
+            <div class="card" style="padding: 16px; background: var(--black);">
+              <div class="tag">OUTPUT</div>
+              <p style="font-size: 12px; margin-bottom: 0;"><b>flatbread.splat</b> · compressed splat<br><b>flatbread.glb</b> · Draco-compressed mesh<br><b>flatbread.hotspots.json</b> · 2-4 per room</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="num">05</div>
+          <div>
+            <h3>Deliver · your link</h3>
+            <p>Self-hosted microsite. The link works on desktop, mobile, and any WebXR-capable headset. The viewer is custom-built, DadPunk-styled, mobile-first, no app install. You get the URL, the embed code, and the raw assets. Hosting is one-shot, no monthly fee.</p>
+            <div class="meta">48h from on-site · sometimes faster</div>
+          </div>
+          <div>
+            <div class="card" style="padding: 16px; background: var(--black);">
+              <div class="tag">YOU GET</div>
+              <p style="font-size: 12px; margin-bottom: 0;"><b>yourdomain.com/walk/</b> · live tour<br><b>&lt;iframe&gt;</b> · for your listing<br><b>raw .splat / .glb</b> · for re-use</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container" style="text-align: center;">
+      <h2 style="margin-bottom: 24px;">SEE IT IN ACTION</h2>
+      <p class="lead" style="margin: 0 auto 32px; max-width: 50ch;">The full WebXR walkthrough is on the next page. Open it in your Quest 3 if you have one.</p>
+      <a href="proof.html" class="btn">The Proof →</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="grid grid-3">
+        <div><h4>PUNK SURVEYOR</h4><p>Photoreal 3D walkthroughs for the spaces that matter.</p></div>
+        <div><h4>SITE</h4><ul><li><a href="index.html">Home</a></li><li><a href="process.html">Process</a></li><li><a href="proof.html">The Proof</a></li><li><a href="packages.html">Engage</a></li><li><a href="about.html">About</a></li></ul></div>
+        <div><h4>CONTACT</h4><ul><li><a href="contact.html">Book a shoot</a></li><li>Budgewoi, NSW</li><li>Travel: Central Coast, Sydney, Hunter</li></ul></div>
+      </div>
+      <div class="copyright"><span>© 2026 Punk Surveyor · a DadPunk project</span><span>BUILT IN BUDGEWOI, NSW</span></div>
+    </div>
+  </footer>
+</body>
+</html>

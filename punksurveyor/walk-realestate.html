@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>FLATBREAD — 3D Walkthrough</title>
+  <meta name="description" content="Photoreal 3D walkthrough of this property. Drag, scroll, walk. Open in VR.">
+  <style>
+    :root {
+      --bg: #f7f6f3;
+      --ink: #1a1a1a;
+      --ink-dim: #4a4a4a;
+      --ink-faint: #8a8a85;
+      --line: #e6e3dc;
+      --accent: #1a4d3a;
+      --accent-dim: #143a2c;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; overflow: hidden; background: var(--bg); color: var(--ink); font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+    #stage { position: fixed; inset: 0; }
+    canvas { display: block; }
+
+    /* --- HUD --- */
+    .hud { position: fixed; z-index: 10; pointer-events: none; }
+    .hud > * { pointer-events: auto; }
+
+    .hud-top-left { top: 20px; left: 20px; max-width: 360px; }
+    .hud-top-right { top: 20px; right: 20px; text-align: right; }
+    .hud-bottom-left { bottom: 20px; left: 20px; }
+    .hud-bottom-right { bottom: 20px; right: 20px; text-align: right; }
+
+    .brand {
+      display: flex; align-items: center; gap: 12px;
+      font-family: 'Playfair Display', 'Times New Roman', serif;
+      font-size: 14px; font-weight: 600; letter-spacing: 0.02em;
+      color: var(--ink);
+      text-transform: uppercase;
+    }
+    .brand .logo-mark {
+      width: 28px; height: 28px;
+      background: var(--ink);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--bg);
+      font-family: 'Playfair Display', serif;
+      font-weight: 700; font-size: 14px;
+    }
+    .listing-card {
+      margin-top: 12px;
+      background: rgba(247, 246, 243, 0.92);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--line);
+      padding: 16px 20px;
+      border-radius: 2px;
+    }
+    .listing-card .price {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+    .listing-card .addr {
+      font-size: 13px;
+      color: var(--ink-dim);
+      line-height: 1.5;
+    }
+    .listing-card .meta {
+      display: flex; gap: 16px; margin-top: 8px;
+      font-size: 11px; letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+    }
+    .listing-card .meta span b { color: var(--ink); font-weight: 600; }
+
+    .agent {
+      display: flex; align-items: center; gap: 10px;
+      background: rgba(247, 246, 243, 0.92);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--line);
+      padding: 8px 14px 8px 8px;
+      border-radius: 2px;
+    }
+    .agent .avatar {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dim));
+      color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 600; font-size: 13px;
+    }
+    .agent .name { font-size: 12px; font-weight: 600; }
+    .agent .firm { font-size: 10px; color: var(--ink-faint); letter-spacing: 0.05em; text-transform: uppercase; }
+
+    /* --- Controls --- */
+    .controls {
+      display: flex; gap: 1px; background: var(--line);
+      border: 1px solid var(--line);
+      padding: 0;
+    }
+    .controls button {
+      background: rgba(247, 246, 243, 0.92);
+      color: var(--ink); border: none;
+      padding: 10px 14px;
+      font-family: 'Inter', sans-serif; font-size: 11px;
+      font-weight: 500; letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.15s;
+      backdrop-filter: blur(16px);
+    }
+    .controls button:hover { background: var(--ink); color: var(--bg); }
+    .controls button.primary {
+      background: var(--ink); color: var(--bg);
+    }
+    .controls button.primary:hover { background: var(--accent); }
+    .controls .sep { width: 1px; background: var(--line); }
+
+    /* --- Hint --- */
+    .hint {
+      background: rgba(247, 246, 243, 0.92);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--line);
+      padding: 8px 14px;
+      font-size: 11px; color: var(--ink-dim);
+      letter-spacing: 0.02em;
+    }
+    .hint b { color: var(--ink); font-weight: 600; }
+
+    /* --- Floor-plan minimap (placeholder for now) --- */
+    .minimap {
+      width: 140px; height: 90px;
+      background: rgba(247, 246, 243, 0.92);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--line);
+      padding: 8px;
+      position: relative;
+    }
+    .minimap .label { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 4px; }
+    .minimap .plan { width: 100%; height: calc(100% - 12px); background: var(--line); position: relative; }
+    .minimap .dot { position: absolute; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; transform: translate(-50%, -50%); }
+
+    /* --- Room indicator --- */
+    .room-indicator {
+      background: rgba(247, 246, 243, 0.92);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--line);
+      padding: 10px 16px;
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--ink-dim);
+      transition: all 0.3s;
+    }
+    .room-indicator b { color: var(--ink); font-weight: 600; margin-right: 8px; }
+
+    /* --- Hotspot pin --- */
+    .pin {
+      position: absolute;
+      transform: translate(-50%, -100%);
+      cursor: pointer;
+      pointer-events: auto;
+      z-index: 5;
+    }
+    .pin .dot {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: rgba(255, 255, 255, 0.95);
+      border: 2px solid var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transition: all 0.2s;
+    }
+    .pin .dot:hover { transform: scale(1.15); background: var(--accent); }
+    .pin .dot svg { width: 14px; height: 14px; color: var(--accent); }
+    .pin .dot:hover svg { color: white; }
+    .pin .pulse {
+      position: absolute; top: 50%; left: 50%;
+      width: 28px; height: 28px; border-radius: 50%;
+      border: 2px solid var(--accent);
+      transform: translate(-50%, -50%);
+      animation: pulse 2s ease-out infinite;
+      opacity: 0;
+    }
+    @keyframes pulse {
+      0% { width: 28px; height: 28px; opacity: 0.8; }
+      100% { width: 64px; height: 64px; opacity: 0; }
+    }
+    .pin .label {
+      position: absolute; bottom: -28px; left: 50%; transform: translateX(-50%);
+      background: var(--ink); color: var(--bg);
+      padding: 4px 10px; font-size: 10px; letter-spacing: 0.05em;
+      text-transform: uppercase; white-space: nowrap;
+      opacity: 0; transition: opacity 0.2s; pointer-events: none;
+    }
+    .pin:hover .label { opacity: 1; }
+
+    .pin-card {
+      position: fixed; z-index: 50;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      max-width: 320px;
+      padding: 20px;
+      transform: translate(-50%, calc(-100% - 50px));
+      display: none;
+    }
+    .pin-card.visible { display: block; }
+    .pin-card .pc-cat { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+    .pin-card .pc-title { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; margin: 6px 0 8px; line-height: 1.2; }
+    .pin-card .pc-body { font-size: 13px; color: var(--ink-dim); line-height: 1.6; }
+    .pin-card .close { position: absolute; top: 10px; right: 14px; background: none; border: none; color: var(--ink-faint); cursor: pointer; font-size: 18px; padding: 4px 8px; font-family: inherit; }
+
+    /* --- Loading --- */
+    #loader { position: fixed; inset: 0; background: var(--bg); z-index: 200; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 24px; transition: opacity 0.5s; }
+    #loader.hidden { opacity: 0; pointer-events: none; }
+    .spinner { width: 40px; height: 40px; border: 2px solid var(--line); border-top-color: var(--ink); border-radius: 50%; animation: spin 0.8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loader-text { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-faint); }
+    .loader-brand { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; }
+
+    /* --- Mobile --- */
+    @media (max-width: 768px) {
+      .hud-top-left { max-width: calc(100vw - 40px); }
+      .listing-card { padding: 12px 14px; }
+      .listing-card .price { font-size: 22px; }
+      .controls button { padding: 8px 10px; font-size: 10px; }
+      .minimap { display: none; }
+      .hud-bottom-right { display: none; }
+      .room-indicator { font-size: 10px; padding: 8px 12px; }
+      .pin-card { max-width: 88vw; left: 50% !important; }
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <script type="importmap">
+  { "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js", "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/" } }
+  </script>
+</head>
+<body>
+  <div id="stage"></div>
+
+  <div id="loader">
+    <div class="spinner"></div>
+    <div class="loader-brand">Punk Surveyor</div>
+    <div class="loader-text" id="loaderPct">Loading 3D walkthrough</div>
+  </div>
+
+  <div class="hud hud-top-left">
+    <div class="brand">
+      <div class="logo-mark">PS</div>
+      <div>Punk Surveyor</div>
+    </div>
+    <div class="listing-card">
+      <div class="price" id="priceTag">$650/wk</div>
+      <div class="addr" id="addrTag">3-bed rental · Central Coast NSW</div>
+      <div class="meta">
+        <span><b>3</b> bed</span>
+        <span><b>1</b> bath</span>
+        <span><b>1</b> car</span>
+        <span><b>—</b> available</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hud hud-top-right">
+    <div class="agent">
+      <div class="avatar">MS</div>
+      <div>
+        <div class="name">Marcus Sullivan</div>
+        <div class="firm">Punk Surveyor · direct</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hud hud-bottom-left">
+    <div class="room-indicator">
+      <b>YOU ARE IN</b> <span id="roomName">Living area</span>
+    </div>
+  </div>
+
+  <div class="hud hud-bottom-right" style="display: flex; gap: 8px; align-items: flex-end;">
+    <div class="minimap">
+      <div class="label">Floor plan</div>
+      <div class="plan">
+        <div class="dot" id="minimapDot" style="left: 30%; top: 50%;"></div>
+      </div>
+    </div>
+    <div class="hint">
+      <b>Drag</b> orbit · <b>Scroll</b> zoom · <b>WASD</b> walk
+    </div>
+  </div>
+
+  <div class="hud" style="bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 11; pointer-events: none;">
+    <div class="controls" style="pointer-events: auto;">
+      <button onclick="resetCam()">Reset view</button>
+      <div class="sep"></div>
+      <button onclick="topView()">Top down</button>
+      <button onclick="frontView()">Front</button>
+      <button onclick="backView()">Back</button>
+      <button onclick="walkMode()">Walk mode</button>
+      <div class="sep"></div>
+      <button id="btnGyro" onclick="toggleGyro()" style="display:none;">Gyro</button>
+      <button class="primary" id="btnVR" onclick="toggleVR()">VR mode</button>
+    </div>
+  </div>
+
+  <div class="pin-card" id="pinCard">
+    <button class="close" onclick="closePin()">×</button>
+    <div class="pc-cat" id="pinCat">—</div>
+    <div class="pc-title" id="pinTitle">—</div>
+    <div class="pc-body" id="pinBody">—</div>
+  </div>
+
+  <script type="module">
+    import * as THREE from 'three';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
+    import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+    // ═══════════════════════════════════════
+    //  SCENE — bright, daylight, real estate
+    // ═══════════════════════════════════════
+    const stage = document.getElementById('stage');
+    const scene = new THREE.Scene();
+    // Soft daylight background, not pure white (avoids over-exposed look)
+    scene.background = new THREE.Color(0xeae8e3);
+    scene.fog = new THREE.Fog(0xeae8e3, 18, 40);
+
+    const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.05, 100);
+    camera.position.set(7, 2.2, 7);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.1;  // bright, but not blown out
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    stage.appendChild(renderer.domElement);
+
+    // ═══════════════════════════════════════
+    //  LIGHTING — daylight, soft shadows
+    // ═══════════════════════════════════════
+    // Sky/ambient
+    const pmrem = new THREE.PMREMGenerator(renderer);
+    const envTex = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+    scene.environment = envTex;
+    scene.environmentIntensity = 1.0;
+
+    // Soft ambient
+    scene.add(new THREE.AmbientLight(0xffffff, 0.35));
+
+    // Key sun light
+    const sun = new THREE.DirectionalLight(0xfff4e6, 1.6);
+    sun.position.set(8, 12, 6);
+    sun.castShadow = true;
+    sun.shadow.mapSize.set(2048, 2048);
+    sun.shadow.camera.left = -15;
+    sun.shadow.camera.right = 15;
+    sun.shadow.camera.top = 15;
+    sun.shadow.camera.bottom = -15;
+    sun.shadow.camera.near = 0.5;
+    sun.shadow.camera.far = 40;
+    sun.shadow.bias = -0.0002;
+    sun.shadow.normalBias = 0.02;
+    scene.add(sun);
+
+    // Fill from opposite side
+    const fill = new THREE.DirectionalLight(0xe8f0ff, 0.4);
+    fill.position.set(-6, 4, -4);
+    scene.add(fill);
+
+    // Soft top-down
+    const sky = new THREE.HemisphereLight(0xffffff, 0x8a8a85, 0.5);
+    scene.add(sky);
+
+    // Subtle ground plane (in case the mesh has gaps so the floor doesn't read as black void)
+    const groundGeo = new THREE.PlaneGeometry(40, 40);
+    const groundMat = new THREE.MeshStandardMaterial({ color: 0xd4d0c8, roughness: 0.9, metalness: 0 });
+    const ground = new THREE.Mesh(groundGeo, groundMat);
+    ground.rotation.x = -Math.PI / 2;
+    ground.position.y = -0.01;
+    ground.receiveShadow = true;
+    scene.add(ground);
+
+    // ═══════════════════════════════════════
+    //  CONTROLS — real estate navigation
+    // ═══════════════════════════════════════
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.08;
+    controls.maxPolarAngle = Math.PI * 0.49;  // can't go under floor
+    controls.minDistance = 0.3;
+    controls.maxDistance = 20;
+    controls.target.set(0, 1.5, 0);
+    controls.autoRotate = false;
+
+    // ═══════════════════════════════════════
+    //  LOAD SCAN — bright material treatment
+    // ═══════════════════════════════════════
+    const SCAN_URL = './1_6_2026_session1_cleaned.glb';
+    const loader = document.getElementById('loader');
+    const loaderPct = document.getElementById('loaderPct');
+
+    new GLTFLoader().load(
+      SCAN_URL,
+      (gltf) => {
+        const root = gltf.scene;
+        root.traverse((o) => {
+          if (o.isMesh) {
+            // Recenter on floor (use min Y)
+            o.geometry.computeBoundingBox();
+            const bb = o.geometry.boundingBox;
+            const minY = bb.min.y;
+            o.geometry.translate(0, -minY, 0);
+            // Slightly soften material — real interiors aren't matte
+            if (o.material && o.material.isMeshStandardMaterial) {
+              o.material.roughness = Math.max(0.6, o.material.roughness || 0.8);
+              o.material.metalness = Math.min(0.05, o.material.metalness || 0);
+              o.material.envMapIntensity = 0.6;
+            }
+            o.castShadow = true;
+            o.receiveShadow = true;
+          }
+        });
+        scene.add(root);
+        // Hide loader
+        setTimeout(() => loader.classList.add('hidden'), 200);
+        setTimeout(() => loader.remove(), 800);
+
+        // Show pins after first frame settles
+        setTimeout(() => showPins(), 1200);
+      },
+      (xhr) => {
+        if (xhr.lengthComputable) {
+          loaderPct.textContent = `Loading ${Math.round((xhr.loaded / xhr.total) * 100)}%`;
+        }
+      },
+      (err) => {
+        loaderPct.textContent = 'Load failed: ' + err.message;
+      }
+    );
+
+    // ═══════════════════════════════════════
+    //  PINS — bright, real-estate style
+    // ═══════════════════════════════════════
+    const PINS = [
+      { id: 1, pos: [-2.5, 1.5, 1.5], cat: 'LIVING', title: 'Open-plan living area', body: 'North-facing, gets afternoon sun. Hardwood floors throughout. Reverse-cycle AC.', room: 'Living' },
+      { id: 2, pos: [2.0, 1.5, -1.0], cat: 'KITCHEN', title: 'Kitchen', body: 'Electric cooktop, oven, dishwasher. Pantry. Stone benchtops.', room: 'Kitchen' },
+      { id: 3, pos: [-3.5, 1.5, -3.0], cat: 'BEDROOM', title: 'Main bedroom', body: 'Built-in robe, ceiling fan, room for a king bed + side tables.', room: 'Bedroom 1' },
+      { id: 4, pos: [3.0, 1.5, 2.0], cat: 'BEDROOM', title: 'Second bedroom', body: 'Built-in robe, north-facing window.', room: 'Bedroom 2' },
+      { id: 5, pos: [0, 1.5, 4.0], cat: 'BATHROOM', title: 'Bathroom', body: 'Shower over bath, separate toilet, vanity with storage.', room: 'Bathroom' },
+    ];
+
+    const overlay = document.createElement('div');
+    overlay.style.cssText = 'position:fixed;inset:0;z-index:5;pointer-events:none;';
+    document.body.appendChild(overlay);
+
+    const pinRefs = PINS.map((p) => {
+      const el = document.createElement('div');
+      el.className = 'pin';
+      el.innerHTML = `
+        <div class="pulse"></div>
+        <div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div class="label">${p.title}</div>
+      `;
+      el.style.display = 'none';
+      el.addEventListener('click', (e) => { e.stopPropagation(); showPin(p, el); });
+      overlay.appendChild(el);
+      return { data: p, el };
+    });
+
+    function showPin(p, el) {
+      const r = el.getBoundingClientRect();
+      const card = document.getElementById('pinCard');
+      document.getElementById('pinCat').textContent = p.cat;
+      document.getElementById('pinTitle').textContent = p.title;
+      document.getElementById('pinBody').textContent = p.body;
+      card.style.left = r.left + r.width / 2 + 'px';
+      card.style.top = r.top + 'px';
+      card.classList.add('visible');
+      document.getElementById('roomName').textContent = p.room;
+    }
+    window.closePin = () => document.getElementById('pinCard').classList.remove('visible');
+
+    function showPins() {
+      pinRefs.forEach(({ el }) => { el.style.display = 'block'; });
+    }
+
+    function updatePinPositions() {
+      const w = window.innerWidth, h = window.innerHeight;
+      pinRefs.forEach(({ data, el }) => {
+        const v = new THREE.Vector3(...data.pos);
+        v.project(camera);
+        const x = (v.x * 0.5 + 0.5) * w;
+        const y = (-v.y * 0.5 + 0.5) * h;
+        const inFront = v.z < 1;
+        el.style.left = x + 'px';
+        el.style.top = y + 'px';
+        el.style.display = inFront ? 'block' : 'none';
+        // Update minimap dot (simplified)
+        const mx = Math.max(0, Math.min(1, (v.x * 0.5 + 0.5))) * 100;
+        const my = Math.max(0, Math.min(1, (1 - (-v.y * 0.5 + 0.5)))) * 100;
+        document.getElementById('minimapDot').style.left = mx + '%';
+        document.getElementById('minimapDot').style.top = my + '%';
+      });
+    }
+
+    // ═══════════════════════════════════════
+    //  CAMERA PRESETS — smooth, real-estate style
+    // ═══════════════════════════════════════
+    function smoothMove(p, l, d = 900) {
+      const sp = camera.position.clone(), sl = controls.target.clone(), t0 = performance.now();
+      (function step() {
+        const t = Math.min(1, (performance.now() - t0) / d);
+        const e = t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
+        camera.position.lerpVectors(sp, p, e);
+        controls.target.lerpVectors(sl, l, e);
+        controls.update();
+        if (t < 1) requestAnimationFrame(step);
+      })();
+    }
+    window.resetCam = () => smoothMove(new THREE.Vector3(7, 2.2, 7), new THREE.Vector3(0, 1.5, 0));
+    window.topView = () => smoothMove(new THREE.Vector3(0, 18, 0.01), new THREE.Vector3(0, 0, 0));
+    window.frontView = () => smoothMove(new THREE.Vector3(0, 1.6, 12), new THREE.Vector3(0, 1.5, 0));
+    window.backView = () => smoothMove(new THREE.Vector3(0, 1.6, -12), new THREE.Vector3(0, 1.5, 0));
+    window.walkMode = () => {
+      smoothMove(new THREE.Vector3(0, 1.65, 8), new THREE.Vector3(0, 1.5, 0));
+    };
+
+    // ═══════════════════════════════════════
+    //  KEYBOARD WALK
+    // ═══════════════════════════════════════
+    const keys = {};
+    document.addEventListener('keydown', e => keys[e.code] = true);
+    document.addEventListener('keyup', e => keys[e.code] = false);
+    let walkActive = false;
+    function updateWalk(dt) {
+      if (!walkActive || gyroActive || vrSession) return;
+      const speed = 0.2 * dt * 60;
+      const fwd = new THREE.Vector3();
+      camera.getWorldDirection(fwd);
+      fwd.y = 0; fwd.normalize();
+      const right = new THREE.Vector3();
+      right.crossVectors(fwd, new THREE.Vector3(0, 1, 0));
+      let moved = false;
+      if (keys['KeyW'] || keys['ArrowUp'])    { camera.position.addScaledVector(fwd, speed); moved = true; }
+      if (keys['KeyS'] || keys['ArrowDown'])  { camera.position.addScaledVector(fwd, -speed); moved = true; }
+      if (keys['KeyA'] || keys['ArrowLeft'])  { camera.position.addScaledVector(right, -speed); moved = true; }
+      if (keys['KeyD'] || keys['ArrowRight']) { camera.position.addScaledVector(right, speed); moved = true; }
+      if (moved) {
+        controls.target.copy(camera.position).add(fwd.multiplyScalar(3));
+      }
+    }
+    // Toggle walk mode on R key
+    document.addEventListener('keydown', e => {
+      if (e.code === 'KeyR') {
+        walkActive = !walkActive;
+        if (walkActive) window.walkMode();
+      }
+    });
+
+    // ═══════════════════════════════════════
+    //  GYROSCOPE (mobile)
+    // ═══════════════════════════════════════
+    const btnGyro = document.getElementById('btnGyro');
+    if (window.innerWidth <= 768 && 'ontouchstart' in window) btnGyro.style.display = 'inline-block';
+    let gyroActive = false, baseOrientation = null;
+    function enableGyro() {
+      if (typeof DeviceOrientationEvent === 'undefined') return;
+      if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+        DeviceOrientationEvent.requestPermission().then(state => {
+          if (state === 'granted') startGyro();
+        });
+      } else {
+        startGyro();
+      }
+    }
+    function startGyro() {
+      gyroActive = true;
+      btnGyro.classList.add('primary');
+      btnGyro.textContent = 'Gyro ✓';
+      window.addEventListener('deviceorientation', (e) => {
+        if (!gyroActive) return;
+        if (!baseOrientation) baseOrientation = { alpha: e.alpha, beta: e.beta, gamma: e.gamma };
+        const a = ((e.alpha - baseOrientation.alpha) * Math.PI / 180);
+        const b = ((e.beta - 90) * Math.PI / 180);
+        const r = 4;
+        camera.position.x = Math.sin(a) * Math.cos(b) * r;
+        camera.position.y = 1.6 + Math.sin(b) * 2;
+        camera.position.z = Math.cos(a) * Math.cos(b) * r;
+        camera.lookAt(0, 1.5, 0);
+      });
+    }
+    window.toggleGyro = () => {
+      if (!gyroActive) enableGyro();
+      else { gyroActive = false; btnGyro.classList.remove('primary'); btnGyro.textContent = 'Gyro'; }
+    };
+
+    // ═══════════════════════════════════════
+    //  WEBXR
+    // ═══════════════════════════════════════
+    const btnVR = document.getElementById('btnVR');
+    let vrSession = null;
+    async function toggleVR() {
+      if (vrSession) {
+        vrSession.end();
+        return;
+      }
+      if (!navigator.xr) { alert('WebXR not supported. Try Quest 3, Vision Pro, or recent Chrome desktop.'); return; }
+      try {
+        const sup = await navigator.xr.isSessionSupported('immersive-vr');
+        if (!sup) { alert('Immersive VR not available. Try non-immersive mode.'); return; }
+        vrSession = await navigator.xr.requestSession('immersive-vr', { optionalFeatures: ['local-floor', 'bounded-floor'] });
+        renderer.xr.enabled = true;
+        await renderer.xr.setSession(vrSession);
+        btnVR.textContent = 'Exit VR';
+        btnVR.classList.remove('primary');
+        vrSession.addEventListener('end', () => {
+          btnVR.textContent = 'VR mode';
+          btnVR.classList.add('primary');
+          renderer.xr.enabled = false;
+          vrSession = null;
+        });
+      } catch (err) {
+        alert('VR entry failed: ' + err.message);
+      }
+    }
+    window.toggleVR = toggleVR;
+
+    // ═══════════════════════════════════════
+    //  RENDER LOOP
+    // ═══════════════════════════════════════
+    let lastT = 0;
+    renderer.setAnimationLoop((time, xrFrame) => {
+      const t = time * 0.001;
+      const dt = Math.min(0.05, t - lastT);
+      lastT = t;
+      if (!gyroActive && !vrSession) controls.update();
+      updateWalk(dt);
+      updatePinPositions();
+      renderer.render(scene, camera);
+    });
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
+</body>
+</html>
