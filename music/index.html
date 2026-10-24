@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THE ROTATION — DADPUNK</title>
+  <meta name="description" content="Playlists from the DadPunk library, served by Apple Music. Whatever is on rotation — no curated brand playlist, no algorithm bait.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://thisisdadpunk.com/music/">
+  <style>
+    :root{
+      --black:#0a0a0a;
+      --paper:#e8e4de;
+      --orange:#e85d04;
+      --olive:#8a8960;
+      --grey:#8a8a80;
+      --mono:'IBM Plex Mono', ui-monospace, 'SF Mono', monospace;
+      --display:'Archivo Black', 'Impact', sans-serif;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{-webkit-font-smoothing:antialiased;background:var(--black)}
+    body{
+      background:var(--black);color:var(--paper);font-family:var(--mono);
+      min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden;
+    }
+    body::after{
+      content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
+      background-size:256px 256px;opacity:.55;
+    }
+    a{color:inherit;text-decoration:none}
+    button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+
+    .bar{
+      display:flex;align-items:center;gap:1.5rem;
+      padding:1rem clamp(1.25rem,4vw,3rem);
+      border-bottom:1px solid rgba(232,228,222,.12);
+      font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--grey);
+    }
+    .bar__brand{font-family:var(--display);font-size:.95rem;letter-spacing:.02em;color:var(--paper)}
+    .bar__brand span{color:var(--orange)}
+    .bar__spacer{flex:1}
+    .bar a:hover{color:var(--orange)}
+
+    header.head{
+      padding:clamp(2.75rem,7vh,4.5rem) clamp(1.25rem,4vw,3rem) clamp(1.75rem,4vh,2.5rem);
+      border-bottom:1px solid rgba(232,228,222,.12);
+    }
+    .kicker{font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;color:var(--orange);margin-bottom:1.2rem}
+    h1{
+      font-family:var(--display);font-size:clamp(2.4rem,7.5vw,5rem);
+      line-height:.92;letter-spacing:-.02em;text-transform:uppercase;
+    }
+    h1 .tape{display:inline-block;background:var(--orange);color:var(--black);padding:.02em .22em;transform:rotate(-1.2deg)}
+    .sub{margin-top:1.4rem;max-width:58ch;font-size:.88rem;line-height:1.75;color:#b9b5ad}
+    .sub b{color:var(--paper);font-weight:600}
+    .meta-line{
+      margin-top:1.3rem;display:flex;flex-wrap:wrap;gap:.6rem 1.6rem;
+      font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--grey);
+    }
+    .meta-line a{color:var(--orange);border-bottom:1px solid rgba(232,93,4,.4)}
+    .meta-line a:hover{color:var(--paper);border-color:var(--paper)}
+
+    main{flex:1;padding:clamp(2rem,5vh,3rem) clamp(1.25rem,4vw,3rem)}
+    .shelf{display:flex;flex-direction:column;gap:clamp(1.25rem,3vh,2rem);max-width:900px}
+
+    .sleeve{
+      border:1px solid rgba(232,228,222,.16);
+      background:linear-gradient(135deg, rgba(232,228,222,.045), rgba(232,228,222,.008));
+      padding:clamp(1.1rem,2.5vw,1.6rem);
+      display:grid;
+      grid-template-columns:auto 1fr auto;
+      gap:clamp(1rem,2.5vw,1.6rem);
+      align-items:center;
+    }
+    .sleeve__spine{
+      width:9px;height:100%;min-height:74px;
+      background:repeating-linear-gradient(180deg, var(--orange) 0 10px, var(--olive) 10px 14px);
+      opacity:.85;
+    }
+    .sleeve__title{font-family:var(--display);font-size:clamp(1.05rem,2.4vw,1.45rem);letter-spacing:.01em;text-transform:uppercase;line-height:1.1}
+    .sleeve__line{margin-top:.45rem;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--grey)}
+    .sleeve__note{margin-top:.7rem;font-size:.8rem;line-height:1.65;color:#b9b5ad;max-width:52ch}
+    .sleeve__actions{display:flex;flex-direction:column;gap:.5rem;align-items:flex-end}
+    .btn{
+      display:inline-flex;align-items:center;gap:.55rem;
+      padding:.65rem 1rem;border:1px solid rgba(232,93,4,.55);
+      background:rgba(232,93,4,.05);color:var(--orange);
+      font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;white-space:nowrap;
+      transition:background .18s,color .18s,border-color .18s;
+    }
+    .btn:hover,.btn:focus-visible{background:var(--orange);border-color:var(--orange);color:var(--black)}
+    .btn--ghost{border-color:rgba(232,228,222,.22);background:transparent;color:var(--grey);font-size:.58rem}
+    .btn--ghost:hover{background:transparent;border-color:rgba(232,228,222,.5);color:var(--paper)}
+
+    .player{
+      border:1px solid rgba(232,93,4,.4);
+      background:#0d0d0d;
+      padding:.6rem;
+      margin-top:-.4rem;
+    }
+    .player iframe{display:block;width:100%;border:0;border-radius:0}
+    .player__note{font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--grey);padding:.55rem .2rem 0}
+
+    .state{
+      border:1px dashed rgba(232,228,222,.25);padding:2.25rem;max-width:60ch;
+      font-size:.84rem;line-height:1.8;color:#b9b5ad;
+    }
+    .state b{color:var(--orange);display:block;margin-bottom:.55rem;font-size:.66rem;letter-spacing:.26em;text-transform:uppercase}
+
+    footer{
+      display:flex;flex-wrap:wrap;gap:.7rem 1.5rem;align-items:center;
+      padding:1.2rem clamp(1.25rem,4vw,3rem);
+      border-top:1px solid rgba(232,228,222,.12);
+      font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--grey);
+    }
+    footer .spacer{flex:1}
+    footer a:hover{color:var(--orange)}
+
+    @media (max-width:640px){
+      .sleeve{grid-template-columns:1fr;gap:.9rem}
+      .sleeve__spine{width:100%;height:7px;min-height:0;background:repeating-linear-gradient(90deg, var(--orange) 0 12px, var(--olive) 12px 17px)}
+      .sleeve__actions{flex-direction:row;align-items:center;justify-content:flex-start;flex-wrap:wrap}
+    }
+    @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+  </style>
+</head>
+<body>
+
+  <div class="bar">
+    <a class="bar__brand" href="../">THIS IS <span>DAD</span>PUNK</a>
+    <span class="bar__spacer"></span>
+    <a href="../">← artifact</a>
+    <a href="../videos/">tapes</a>
+  </div>
+
+  <header class="head">
+    <div class="kicker">// 05 — Rotation</div>
+    <h1>THE <span class="tape">ROTATION</span></h1>
+    <p class="sub">
+      Playlists out of my own library, served by Apple Music. <b>No brand playlist, no
+      algorithm bait, no thirty-second trailer</b> — just what was actually on. Apple hosts
+      the audio; nothing gets re-uploaded to this site.
+    </p>
+    <div class="meta-line" id="meta-line"><span>loading shelf…</span></div>
+  </header>
+
+  <main>
+    <div class="shelf" id="shelf"></div>
+    <div class="state" id="state" hidden></div>
+  </main>
+
+  <footer>
+    <span>© 2026 // BUDGEWOI, NSW</span>
+    <span class="spacer"></span>
+    <a href="https://github.com/marc0ne-s">GitHub</a>
+    <a href="https://www.youtube.com/@dadpunktv">YouTube</a>
+    <a href="../videos/">Videos</a>
+    <a href="../punksurveyor/">/surveyor</a>
+  </footer>
+
+  <script>
+  (function () {
+    const shelf = document.getElementById('shelf');
+    const stateBox = document.getElementById('state');
+    const metaLine = document.getElementById('meta-line');
+
+    const el = (tag, cls, text) => {
+      const n = document.createElement(tag);
+      if (cls) n.className = cls;
+      if (text != null) n.textContent = text;
+      return n;
+    };
+
+    // Apple Music web embed. Height is fixed by Apple: ~450px for a playlist,
+    // ~175px for a single song. theme=dark matches the rest of the site.
+    function embed(url, height) {
+      const frame = el('iframe');
+      frame.src = url;
+      frame.height = String(height);
+      frame.setAttribute('loading', 'lazy');
+      frame.setAttribute('allow', 'autoplay *; encrypted-media *; clipboard-write');
+      frame.setAttribute('sandbox', 'allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation');
+      frame.title = 'Apple Music player';
+      return frame;
+    }
+
+    function sleeve(p, storefront) {
+      const path = p.path || '';
+      const pageUrl = p.url || ('https://music.apple.com/' + path);
+      const embedUrl = 'https://embed.music.apple.com/' + path + '?theme=dark';
+
+      const wrap = el('div');
+
+      const card = el('div', 'sleeve');
+      card.appendChild(el('div', 'sleeve__spine'));
+
+      const body = el('div');
+      body.appendChild(el('div', 'sleeve__title', p.title || 'Untitled'));
+      const bits = [];
+      if (p.curator) bits.push(p.curator);
+      if (p.tracks) bits.push(p.tracks + (p.tracks === 1 ? ' song' : ' songs'));
+      body.appendChild(el('div', 'sleeve__line', bits.join('  ·  ')));
+      if (p.note) body.appendChild(el('div', 'sleeve__note', p.note));
+      card.appendChild(body);
+
+      const actions = el('div', 'sleeve__actions');
+      const play = el('button', 'btn', 'Load playlist');
+      play.type = 'button';
+      const openLink = el('a', 'btn btn--ghost', 'Apple Music ↗');
+      openLink.href = pageUrl;
+      openLink.target = '_blank';
+      openLink.rel = 'noopener noreferrer';
+      actions.appendChild(play);
+      actions.appendChild(openLink);
+      card.appendChild(actions);
+      wrap.appendChild(card);
+
+      // Click-to-load: Apple's player pulls in a lot of JS, so nothing loads
+      // until someone actually wants to hear it.
+      play.addEventListener('click', () => {
+        if (wrap.querySelector('.player')) return;
+        const player = el('div', 'player');
+        player.appendChild(embed(embedUrl, 450));
+        player.appendChild(el('div', 'player__note', 'served by Apple Music — playback needs an Apple Music account in some regions'));
+        wrap.appendChild(player);
+        play.textContent = 'Loaded';
+        play.disabled = true;
+        play.style.opacity = '.5';
+      });
+
+      return wrap;
+    }
+
+    fetch('../assets/data/music.json', { cache: 'no-cache' })
+      .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then(data => {
+        const storefront = (data.profile && data.profile.storefront) || 'au';
+        const lists = Array.isArray(data.playlists) ? data.playlists : [];
+
+        if (data.profile && data.profile.name) {
+          metaLine.innerHTML = '';
+          metaLine.appendChild(el('span', null, data.profile.name));
+          metaLine.appendChild(el('span', null, storefront.toUpperCase() + ' STOREFRONT'));
+          if (data.playlists) metaLine.appendChild(el('span', null, lists.length + (lists.length === 1 ? ' playlist' : ' playlists')));
+          if (data.profile.url) {
+            const a = el('a', null, 'open profile ↗');
+            a.href = data.profile.url; a.target = '_blank'; a.rel = 'noopener noreferrer';
+            metaLine.appendChild(a);
+          }
+        }
+
+        if (!lists.length) {
+          stateBox.hidden = false;
+          stateBox.innerHTML = '<b>Nothing on the shelf yet</b>' +
+            'No playlists in music.json. Rather than pad the page with someone else\'s taste, it stays empty.';
+          return;
+        }
+
+        lists.forEach(p => shelf.appendChild(sleeve(p, storefront)));
+      })
+      .catch(err => {
+        stateBox.hidden = false;
+        stateBox.innerHTML = '<b>Shelf unreachable</b>' +
+          'music.json could not be read (' + err.message + '). Nothing is being faked in its place.';
+      });
+  })();
+  </script>
+
+</body>
+</html>

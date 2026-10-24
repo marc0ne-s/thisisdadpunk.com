@@ -1,0 +1,19 @@
+{
+  "profile": {
+    "name": "Marcus Sullivan",
+    "storefront": "au",
+    "url": null
+  },
+  "updated": "2026-10-24T03:15:00Z",
+  "note": "Hand-curated. Apple serves the audio from its own embed; nothing is re-hosted here.",
+  "playlists": [
+    {
+      "id": "pl.u-yb7LtVjAzd",
+      "path": "au/playlist/added-last-month/pl.u-yb7LtVjAzd",
+      "title": "Added Last Month",
+      "curator": "Marcus Sullivan",
+      "tracks": 97,
+      "note": "Whatever landed in the library that month. No curation, no theme — the honest version."
+    }
+  ]
+}

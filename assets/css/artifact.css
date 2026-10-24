@@ -224,12 +224,18 @@ body::before {
 }
 /* Front-door link to the tapes. The project card alone is three columns down and
    nobody scrolls to find a video link — this sits under the tagline on load. */
+.artifact-hero__ctas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: clamp(1.25rem, 3vh, 2rem);
+}
 .artifact-hero__cta {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
   align-self: flex-start;
-  margin-top: clamp(1.25rem, 3vh, 2rem);
   padding: 0.7rem 1.15rem;
   border: 1px solid rgba(232, 93, 4, 0.55);
   background: rgba(10, 10, 10, 0.45);
@@ -240,6 +246,16 @@ body::before {
   text-transform: uppercase;
   text-decoration: none;
   transition: background 0.18s, color 0.18s, border-color 0.18s, transform 0.18s;
+}
+.artifact-hero__cta--alt {
+  border-color: rgba(232, 228, 222, 0.28);
+  color: var(--color-olive-light);
+}
+.artifact-hero__cta--alt:hover,
+.artifact-hero__cta--alt:focus-visible {
+  background: var(--color-off-white);
+  border-color: var(--color-off-white);
+  color: #0a0a0a;
 }
 .artifact-hero__cta:hover,
 .artifact-hero__cta:focus-visible {
