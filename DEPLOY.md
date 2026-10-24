@@ -97,6 +97,25 @@ Feed failures are non-fatal: `videos.json` is left untouched, the hash doesn't
 change, and nothing deploys. The page renders an honest "feed unreachable" state
 rather than stale or invented clips.
 
+### The player
+
+Videos play in-page: a stage at the top of `/videos/` plus a rail of tapes, with
+`?v=<videoId>` deep links so a single tape can be shared. Playback is
+click-to-load — the stage shows the channel's own thumbnail until someone presses
+play, so nothing from YouTube loads (and no cookies are set) on page load. The
+iframe uses `youtube-nocookie.com`.
+
+**Headless Chrome shows "Error 153 — Video player configuration error" for these
+embeds. That is not a real failure.** The embed loads fine in a headed browser,
+with the correct video title and thumbnail in the player chrome; the headless
+error is a referrer/consent artifact. Verify embeds in a real Chrome window
+(`open -a "Google Chrome" <url>` then capture), never with `--headless`.
+
+All three current videos report `playable_in_embed: True` via
+`yt-dlp --print "%(playable_in_embed)s"`, so if one ever shows "unavailable" in a
+real browser, the fix is on the channel side: YouTube Studio → video details →
+**Allow embedding**.
+
 ## Custom domain
 
 `thisisdadpunk.com` is served by Pages with a Let's Encrypt cert and HTTPS
