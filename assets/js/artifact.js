@@ -67,31 +67,32 @@
   function renderProjectSpread(projects) {
     if (!spreadEl) return;
     const badges = { SHIPPED: 'project-spread__badge--shipped', BETA: 'project-spread__badge--beta', ACTIVE: 'project-spread__badge--active' };
-    const html = (projects || []).map((p, i) => {
+
+    const cards = (projects || []).map((p, i) => {
       const isFeatured = (p.status === 'ACTIVE' || p.status === 'SHIPPED') && i < 4;
-      const cls = 'project-spread__card' + (isFeatured ? ' project-spread__card--featured' : '');
-      return '<div class="' + cls + '" data-reveal>' +
+      const cls = 'project-spread__card' +
+        (isFeatured ? ' project-spread__card--featured' : '') +
+        (p.url ? ' project-spread__card--link' : '');
+      const inner =
         '<span class="project-spread__badge ' + (badges[p.status] || '') + '">' + esc(p.status) + '</span>' +
         '<div class="project-spread__name">' + esc(p.name) + '</div>' +
         '<div class="project-spread__one-line">' + esc(p.one_line) + '</div>' +
         '<div class="project-spread__tags">' + (p.tags || []).map(t => '# ' + esc(t)).join('  ') + '</div>' +
-      '</div>';
-    }).join('');
+        (p.url ? '<span class="project-spread__link">' + esc(p.link_label || 'open') + ' →</span>' : '');
 
-    // Insert interrupt after first few cards
-    const parts = html.split('</div>');
+      // A card with a destination is a real link. The rest stay inert documents —
+      // a card that looks clickable and does nothing is worse than no card.
+      return p.url
+        ? '<a class="' + cls + '" href="' + esc(p.url) + '" data-reveal>' + inner + '</a>'
+        : '<div class="' + cls + '" data-reveal>' + inner + '</div>';
+    });
+
     const interruptHTML = '<div class="interrupt" data-reveal><p>Creative engineering practice. Music, hardware, local AI, and punk ethos — running on a Mac mini in Budgewoi. No cloud dependencies. No platform lock-in. No algorithm chasing. <span style="color:var(--color-orange);">Documented honestly. Sold directly. Shared openly.</span></p></div>';
 
-    let out = '';
-    let count = 0;
-    for (let i = 0; i < parts.length - 1; i++) {
-      out += parts[i] + '</div>';
-      count++;
-      if (count === 3) {
-        out += interruptHTML;
-      }
-    }
-    spreadEl.innerHTML = out;
+    // Interrupt lands after the third card, not mid-markup: joining an array is
+    // sturdier than splitting the rendered HTML on '</div>'.
+    cards.splice(3, 0, interruptHTML);
+    spreadEl.innerHTML = cards.join('');
   }
 
   /* ── AGENT TRACES ── */

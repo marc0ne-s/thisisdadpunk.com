@@ -484,6 +484,35 @@ body::before {
 .project-spread__card--featured {
   grid-column: span 2;
 }
+
+/* Cards that carry a destination are real anchors — same document-on-the-wall
+   look, but the corner tape goes orange and an arrow appears so the difference
+   between "read this" and "open this" is visible without hovering. */
+a.project-spread__card {
+  text-decoration: none;
+  color: inherit;
+}
+.project-spread__card--link {
+  border-color: rgba(232, 93, 4, 0.34);
+}
+.project-spread__card--link::before {
+  border-color: rgba(232, 93, 4, 0.6);
+}
+.project-spread__card--link:hover {
+  border-color: rgba(232, 93, 4, 0.75);
+}
+.project-spread__link {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-orange);
+  margin-top: auto;
+  padding-top: 0.2rem;
+}
+.project-spread__card--link:hover .project-spread__link {
+  color: var(--color-off-white);
+}
 .project-spread__name {
   font-family: var(--font-display);
   font-size: 1.1rem;
