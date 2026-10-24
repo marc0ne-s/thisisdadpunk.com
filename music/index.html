@@ -78,6 +78,8 @@
     .btn:hover,.btn:focus-visible{background:var(--orange);border-color:var(--orange);color:var(--black)}
     .btn--ghost{border-color:rgba(232,228,222,.22);background:transparent;color:var(--grey);font-size:.58rem}
     .btn--ghost:hover{background:transparent;border-color:rgba(232,228,222,.5);color:var(--paper)}
+    .btn--off{cursor:default;color:rgba(138,138,128,.6);border-style:dashed}
+    .btn--off:hover{background:transparent;border-color:rgba(232,138,128,.18);color:rgba(138,138,128,.6)}
 
     /* recently-added album rows */
     .rail-title{
@@ -255,12 +257,18 @@
           play.style.opacity = '.5';
         });
         actions.appendChild(play);
-      } else {
-        const find = el('a', 'btn btn--ghost', 'Find on Apple Music ↗');
-        find.href = a.search_url;
+      } else if (a.artist_url) {
+        // No catalog id for the album, so the artist page is the honest destination:
+        // it exists, it lists the record, and it is not a search results page.
+        const find = el('a', 'btn btn--ghost', 'Artist on Apple Music ↗');
+        find.href = a.artist_url;
         find.target = '_blank';
         find.rel = 'noopener noreferrer';
         actions.appendChild(find);
+      } else {
+        const none = el('span', 'btn btn--ghost btn--off', 'Not on Apple Music yet');
+        none.setAttribute('aria-disabled', 'true');
+        actions.appendChild(none);
       }
       row.appendChild(actions);
       return row;

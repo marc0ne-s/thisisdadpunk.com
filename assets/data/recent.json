@@ -1,7 +1,7 @@
 {
   "source": "Music.app playlist \"Recently Added\"",
   "storefront": "au",
-  "updated": "2026-10-24T03:23:35Z",
+  "updated": "2026-10-24T03:37:31Z",
   "count": 8,
   "embedded": 4,
   "albums": [
@@ -19,7 +19,7 @@
       "store_url": "https://music.apple.com/au/album/digitise/6781656816?uo=4",
       "catalog_id": 6781656816,
       "match": "album",
-      "search_url": "https://music.apple.com/au/search?term=HAAi%20DIGITiSE"
+      "artist_url": null
     },
     {
       "title": "Legacy",
@@ -35,7 +35,7 @@
       "store_url": null,
       "catalog_id": null,
       "match": null,
-      "search_url": "https://music.apple.com/au/search?term=Five%20Finger%20Death%20Punch%20Legacy"
+      "artist_url": "https://music.apple.com/au/artist/five-finger-death-punch/258875116"
     },
     {
       "title": "Measures of Dispersion (Mixed)",
@@ -51,7 +51,7 @@
       "store_url": null,
       "catalog_id": null,
       "match": null,
-      "search_url": "https://music.apple.com/au/search?term=A.Fruit%20DJ%20-%20Kicks%3A%20Djrum%20%28DJ%20Mix%29"
+      "artist_url": "https://music.apple.com/au/artist/a-fruit/969185855"
     },
     {
       "title": "Disgruntled (feat. J Hus & IRAH)",
@@ -67,7 +67,7 @@
       "store_url": null,
       "catalog_id": null,
       "match": null,
-      "search_url": "https://music.apple.com/au/search?term=Chase%20%26%20Status%20Generic%20Everything"
+      "artist_url": "https://music.apple.com/au/artist/chase-status/121546679"
     },
     {
       "title": "Bd-R",
@@ -83,7 +83,7 @@
       "store_url": null,
       "catalog_id": null,
       "match": null,
-      "search_url": "https://music.apple.com/au/search?term=The%20Avalanches%20No%20Bad%20Memories"
+      "artist_url": "https://music.apple.com/au/artist/the-avalanches/27524431"
     },
     {
       "title": "Switch Up",
@@ -99,7 +99,7 @@
       "store_url": "https://music.apple.com/au/album/thank-you/6801308856?uo=4",
       "catalog_id": 6801308856,
       "match": "album",
-      "search_url": "https://music.apple.com/au/search?term=Mike%20D%20Thank%20You"
+      "artist_url": null
     },
     {
       "title": "Silk",
@@ -115,7 +115,7 @@
       "store_url": "https://music.apple.com/au/album/landfall/6805676802?uo=4",
       "catalog_id": 6805676802,
       "match": "album",
-      "search_url": "https://music.apple.com/au/search?term=Wage%20War%20Landfall"
+      "artist_url": null
     },
     {
       "title": "The Drifter Returns",
@@ -131,7 +131,7 @@
       "store_url": "https://music.apple.com/au/album/wasted-lands/6800842734?uo=4",
       "catalog_id": 6800842734,
       "match": "album",
-      "search_url": "https://music.apple.com/au/search?term=Clutch%20Wasted%20Lands"
+      "artist_url": null
     }
   ]
 }
