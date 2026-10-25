@@ -89,6 +89,36 @@
     }
     .rail-title::after{content:'';flex:1;height:1px;background:rgba(232,228,222,.14)}
     .rail-count{color:var(--orange)}
+    .rail-title--spaced{margin-top:clamp(2.25rem,5vh,3.25rem)}
+
+    /* as-heard-on chart */
+    .chart{display:flex;flex-direction:column;border-top:1px solid rgba(232,228,222,.1)}
+    .chart__row{
+      display:grid;
+      grid-template-columns:2.1rem minmax(0,1fr) minmax(56px,150px) 3.2rem 4.2rem;
+      gap:.7rem;align-items:center;
+      padding:.5rem .2rem;
+      border-bottom:1px solid rgba(232,228,222,.07);
+      font-size:.8rem;
+    }
+    .chart__row:hover{background:rgba(232,93,4,.05)}
+    .chart__rank{font-size:.62rem;color:rgba(138,138,128,.75);letter-spacing:.1em}
+    .chart__row:nth-child(-n+3) .chart__rank{color:var(--orange)}
+    .chart__name{min-width:0}
+    .chart__title{color:var(--paper);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .chart__artist{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grey);margin-top:.15rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .chart__bar{height:5px;background:rgba(232,228,222,.08);position:relative;overflow:hidden}
+    .chart__bar i{position:absolute;top:0;bottom:0;left:0;background:linear-gradient(90deg,var(--orange),rgba(232,93,4,.45));display:block}
+    .chart__plays{font-size:.66rem;color:var(--orange);text-align:right;letter-spacing:.06em}
+    .chart__when{font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(138,138,128,.8);text-align:right}
+
+    .records{margin-top:1.6rem;display:flex;flex-wrap:wrap;gap:.5rem}
+    .records__chip{
+      border:1px solid rgba(232,228,222,.14);
+      padding:.5rem .75rem;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grey);
+    }
+    .records__chip b{display:block;color:var(--paper);letter-spacing:.02em;text-transform:none;font-size:.74rem;margin-bottom:.15rem}
+    .records__chip span{color:var(--orange)}
 
     .album{
       display:grid;
@@ -122,6 +152,38 @@
     .player iframe{display:block;width:100%;border:0;border-radius:0}
     .player__note{font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--grey);padding:.55rem .2rem 0}
 
+    /* as-heard-on chart */
+    .chart{display:flex;flex-direction:column;border-top:1px solid rgba(232,228,222,.1)}
+    .chart__row{
+      display:grid;
+      grid-template-columns:2.1rem minmax(0,1fr) minmax(60px,160px) 3.2rem 4.2rem;
+      gap:.7rem;align-items:center;
+      padding:.5rem .2rem;
+      border-bottom:1px solid rgba(232,228,222,.07);
+      font-size:.8rem;
+    }
+    .chart__row:hover{background:rgba(232,93,4,.04)}
+    .chart__rank{font-size:.62rem;color:rgba(138,138,128,.75);letter-spacing:.1em}
+    .chart__row:nth-child(-n+3) .chart__rank{color:var(--orange)}
+    .chart__name{min-width:0}
+    .chart__title{color:var(--paper);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .chart__artist{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grey);margin-top:.15rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .chart__bar{height:5px;background:rgba(232,228,222,.08);position:relative;overflow:hidden}
+    .chart__bar i{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,var(--orange),rgba(232,93,4,.45));display:block}
+    .chart__plays{font-family:var(--mono);font-size:.66rem;color:var(--orange);text-align:right;letter-spacing:.06em}
+    .chart__when{font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(138,138,128,.8);text-align:right}
+
+    .records{
+      margin-top:1.6rem;display:flex;flex-wrap:wrap;gap:.5rem;
+    }
+    .records__chip{
+      border:1px solid rgba(232,228,222,.14);
+      padding:.5rem .75rem;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;
+      color:var(--grey);
+    }
+    .records__chip b{display:block;color:var(--paper);letter-spacing:.04em;text-transform:none;font-size:.72rem;margin-bottom:.15rem}
+    .records__chip span{color:var(--orange)}
+
     .state{
       border:1px dashed rgba(232,228,222,.25);padding:2.25rem;max-width:60ch;
       font-size:.84rem;line-height:1.8;color:#b9b5ad;
@@ -139,6 +201,8 @@
 
     @media (max-width:640px){
           .sleeve__actions{flex-direction:row;align-items:center;justify-content:flex-start;flex-wrap:wrap}
+          .chart__row{grid-template-columns:1.6rem minmax(0,1fr) 3rem;gap:.5rem}
+          .chart__bar,.chart__when{display:none}
     }
     @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
   </style>
@@ -156,9 +220,9 @@
     <div class="kicker">// 05 — Rotation</div>
     <h1>THE <span class="tape">ROTATION</span></h1>
     <p class="sub">
-      Whatever actually landed in my library, read straight off this machine — not a playlist
-      curated to look current. <b>No brand playlist, no algorithm bait, no thirty-second
-      trailer.</b> Apple hosts the audio; nothing gets re-uploaded to this site.
+      What landed in my library and what I actually played, both read straight off this machine —
+      not a playlist curated to look current. <b>No brand playlist, no algorithm bait, no
+      thirty-second trailer.</b> Apple hosts the audio; nothing gets re-uploaded to this site.
     </p>
     <div class="meta-line" id="meta-line"><span>reading the library…</span></div>
   </header>
@@ -167,6 +231,12 @@
     <div class="rail-title"><span>// Just landed</span><span class="rail-count" id="recent-count"></span></div>
     <div class="shelf shelf--recent" id="recent"></div>
     <div class="state" id="recent-state" hidden></div>
+
+    <div class="rail-title rail-title--spaced"><span>// As heard on DadPunk</span><span class="rail-count" id="heard-meta"></span></div>
+    <div class="chart" id="heard"></div>
+    <div class="state" id="heard-state" hidden></div>
+
+    <div class="records" id="records" hidden></div>
 
   </main>
 
@@ -273,6 +343,72 @@
       row.appendChild(actions);
       return row;
     }
+
+    /* ── AS HEARD ON DADPUNK — the month's most-played, straight from Music.app ── */
+    const heardEl = document.getElementById('heard');
+    const heardState = document.getElementById('heard-state');
+    const heardMeta = document.getElementById('heard-meta');
+    const recordsEl = document.getElementById('records');
+
+    const shortStamp = iso => {
+      const d = new Date(iso);
+      if (!iso || isNaN(d)) return '';
+      return d.getUTCDate() + ' ' + MONTHS[d.getUTCMonth()];
+    };
+
+    fetch('../assets/data/heard-on.json', { cache: 'no-cache' })
+      .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then(data => {
+        const tracks = Array.isArray(data.tracks) ? data.tracks : [];
+        if (!tracks.length) {
+          heardState.hidden = false;
+          heardState.innerHTML = '<b>Nothing played</b>' +
+            'The playlist came back empty, so there is nothing to rank.';
+          return;
+        }
+
+        heardMeta.textContent = data.total_tracks + ' tracks · ' +
+          data.total_plays + ' plays · ' + data.artist_count + ' artists · read ' + stamp(data.updated);
+
+        const max = Math.max(...tracks.map(t => t.plays || 0), 1);
+        tracks.slice(0, 20).forEach((t, i) => {
+          const row = el('div', 'chart__row');
+
+          row.appendChild(el('span', 'chart__rank', String(i + 1).padStart(2, '0')));
+
+          const name = el('div', 'chart__name');
+          name.appendChild(el('div', 'chart__title', t.title || 'Untitled'));
+          name.appendChild(el('div', 'chart__artist', (t.artist || '') + (t.album ? ' — ' + t.album : '')));
+          row.appendChild(name);
+
+          const bar = el('div', 'chart__bar');
+          const fill = el('i');
+          fill.style.width = Math.max(4, Math.round((t.plays / max) * 100)) + '%';
+          bar.appendChild(fill);
+          row.appendChild(bar);
+
+          row.appendChild(el('span', 'chart__plays', t.plays + '×'));
+          row.appendChild(el('span', 'chart__when', shortStamp(t.last_played)));
+          heardEl.appendChild(row);
+        });
+
+        if (Array.isArray(data.albums) && data.albums.length) {
+          recordsEl.hidden = false;
+          data.albums.slice(0, 6).forEach(a => {
+            const chip = el('div', 'records__chip');
+            chip.appendChild(el('b', null, a.album));
+            const meta = el('span', null, a.plays + ' plays');
+            chip.appendChild(document.createTextNode(a.artist + ' · '));
+            chip.appendChild(meta);
+            recordsEl.appendChild(chip);
+          });
+        }
+      })
+      .catch(err => {
+        heardState.hidden = false;
+        heardState.innerHTML = '<b>Listening feed unreachable</b>' +
+          'heard-on.json could not be read (' + err.message + ').';
+      });
 
     fetch('../assets/data/recent.json', { cache: 'no-cache' })
       .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
