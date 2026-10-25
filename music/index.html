@@ -371,7 +371,8 @@
           data.total_plays + ' plays · ' + data.artist_count + ' artists · read ' + stamp(data.updated);
 
         const max = Math.max(...tracks.map(t => t.plays || 0), 1);
-        tracks.slice(0, 20).forEach((t, i) => {
+        // The whole month, not a top-20 teaser — the interesting part is the tail.
+        tracks.forEach((t, i) => {
           const row = el('div', 'chart__row');
 
           row.appendChild(el('span', 'chart__rank', String(i + 1).padStart(2, '0')));
