@@ -92,6 +92,10 @@
     .rail-title--spaced{margin-top:clamp(2.25rem,5vh,3.25rem)}
 
     /* as-heard-on chart */
+    .chart__note{
+      font-size:.62rem;line-height:1.7;letter-spacing:.04em;color:rgba(138,138,128,.9);
+      max-width:62ch;margin:0 0 1.1rem;
+    }
     .chart{display:flex;flex-direction:column;border-top:1px solid rgba(232,228,222,.1)}
     .chart__row{
       display:grid;
@@ -152,38 +156,6 @@
     .player iframe{display:block;width:100%;border:0;border-radius:0}
     .player__note{font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--grey);padding:.55rem .2rem 0}
 
-    /* as-heard-on chart */
-    .chart{display:flex;flex-direction:column;border-top:1px solid rgba(232,228,222,.1)}
-    .chart__row{
-      display:grid;
-      grid-template-columns:2.1rem minmax(0,1fr) minmax(60px,160px) 3.2rem 4.2rem;
-      gap:.7rem;align-items:center;
-      padding:.5rem .2rem;
-      border-bottom:1px solid rgba(232,228,222,.07);
-      font-size:.8rem;
-    }
-    .chart__row:hover{background:rgba(232,93,4,.04)}
-    .chart__rank{font-size:.62rem;color:rgba(138,138,128,.75);letter-spacing:.1em}
-    .chart__row:nth-child(-n+3) .chart__rank{color:var(--orange)}
-    .chart__name{min-width:0}
-    .chart__title{color:var(--paper);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .chart__artist{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grey);margin-top:.15rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .chart__bar{height:5px;background:rgba(232,228,222,.08);position:relative;overflow:hidden}
-    .chart__bar i{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,var(--orange),rgba(232,93,4,.45));display:block}
-    .chart__plays{font-family:var(--mono);font-size:.66rem;color:var(--orange);text-align:right;letter-spacing:.06em}
-    .chart__when{font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(138,138,128,.8);text-align:right}
-
-    .records{
-      margin-top:1.6rem;display:flex;flex-wrap:wrap;gap:.5rem;
-    }
-    .records__chip{
-      border:1px solid rgba(232,228,222,.14);
-      padding:.5rem .75rem;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;
-      color:var(--grey);
-    }
-    .records__chip b{display:block;color:var(--paper);letter-spacing:.04em;text-transform:none;font-size:.72rem;margin-bottom:.15rem}
-    .records__chip span{color:var(--orange)}
-
     .state{
       border:1px dashed rgba(232,228,222,.25);padding:2.25rem;max-width:60ch;
       font-size:.84rem;line-height:1.8;color:#b9b5ad;
@@ -233,6 +205,9 @@
     <div class="state" id="recent-state" hidden></div>
 
     <div class="rail-title rail-title--spaced"><span>// As heard on DadPunk</span><span class="rail-count" id="heard-meta"></span></div>
+    <p class="chart__note">The playlist decides which tracks appear; the count beside each one is
+      Apple's lifetime total for that track — Music.app keeps no per-month play history, so this is
+      "played in the last month, ranked by how hard it's been played", not a month-only tally.</p>
     <div class="chart" id="heard"></div>
     <div class="state" id="heard-state" hidden></div>
 
@@ -368,7 +343,7 @@
         }
 
         heardMeta.textContent = data.total_tracks + ' tracks · ' +
-          data.total_plays + ' plays · ' + data.artist_count + ' artists · read ' + stamp(data.updated);
+          data.artist_count + ' artists · ' + data.total_plays + ' all-time plays · read ' + stamp(data.updated);
 
         const max = Math.max(...tracks.map(t => t.plays || 0), 1);
         // The whole month, not a top-20 teaser — the interesting part is the tail.
