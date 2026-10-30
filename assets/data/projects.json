@@ -147,5 +147,36 @@
     ],
     "url": null,
     "visual": "Vault directory tree → scan output → idea card → scoring rubric. Terminal-style with Obsidian purple accents."
+  },
+  {
+    "id": "daily-shot-list",
+    "name": "Daily Shot List",
+    "status": "ACTIVE",
+    "one_line": "One shot, every day. One axis, one constraint you cannot break — the archive builds the portfolio.",
+    "description": "A daily challenge system for the eye, not a content feed. 72 challenges across 6 axes (framing, light, movement, composition, story, technique) and 3 difficulty tiers. Every challenge carries a non-negotiable constraint and a playback question — the review is what compounds. The rotation is deterministic per date, never repeats an axis two days running, and cools each challenge down for 60 days. A 7am cron assigns the day's shot and a nightly cut lists what was shot and what was missed. /shotlist/ renders today's challenge and the whole archive.",
+    "tags": [
+      "practice",
+      "photography",
+      "portfolio"
+    ],
+    "url": "shotlist/",
+    "link_label": "the wall",
+    "visual": "Dark wall, orange constraint blocks, poster frames from the logged shots."
+  },
+  {
+    "id": "gestural-instrument",
+    "name": "Gestural Instrument",
+    "status": "BETA",
+    "one_line": "A bowed string you play in front of a webcam. Your hand position sets the pitch, how you move sets the bow, and it sounds like an instrument rather than a keyboard.",
+    "description": "An experiment that started as a question about mixing music with your hands in VR and turned into something you can play right now. MediaPipe tracks your hands in the browser, a Web Audio voice bows a string in response, and there is an MPE output you can point at Ableton or the SP-404 if you want to record a take. Everything runs on your machine: the camera feed never leaves the device, nothing is uploaded, and there is no server behind this page. The design decision that matters is that it is deliberately not percussive. Camera and network latency make drums unplayable, so it was built as a bowed instrument instead, where a fast draw brightens the string and a still hand goes quiet. Work in progress, published as one.",
+    "tags": [
+      "audio",
+      "webcam",
+      "mediapipe",
+      "experiment"
+    ],
+    "url": "instrument/",
+    "link_label": "play it",
+    "visual": "Dark lane, orange string, glowing hand markers. Needs a webcam for the real thing."
   }
 ]
