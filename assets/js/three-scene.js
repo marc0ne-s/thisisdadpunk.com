@@ -554,8 +554,10 @@ export function initHeroScene() {
         float noise = (random(vUv + fract(uTime * 3.0)) - 0.5) * 0.025;
         color += noise;
 
-        // Flash / strobe from glitch — stronger now
-        color += vec3(1.0, 0.92, 0.85) * uFlash * 0.55;
+        // Flash / strobe from glitch. Kept well under 1.0: at 0.55 the whole
+        // frame washed to near-white for the length of the burst, which read as
+        // "bright page" rather than "glitch".
+        color += vec3(1.0, 0.92, 0.85) * uFlash * 0.28;
 
         gl_FragColor = vec4(color, 1.0);
       }
@@ -577,7 +579,7 @@ export function initHeroScene() {
   function triggerGlitch() {
     glitchTarget = 0.7 + Math.random() * 0.5;
     glitchDuration = 0.15 + Math.random() * 0.3;
-    flashStrength = 0.6 + Math.random() * 0.4;
+    flashStrength = 0.32 + Math.random() * 0.28;
   }
 
   // ═══════════════════════════════════════════════
