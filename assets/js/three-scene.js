@@ -89,22 +89,29 @@ export function initHeroScene() {
         float n2 = domainWarp(uv * 1.6 + vec2(3.3, 7.1));
         float mist = smoothstep(0.2, 0.8, n2);
 
-        // Bright atmospheric base — clearly visible
-        vec3 col = vec3(0.25, 0.12, 0.04);
+        // Ground: near-black with a faint olive cast, matching the page's
+        // #0a0a0a. The old base was rust at 0.25 red and never reached black,
+        // so the hero read as a lit orange field rather than a dark one.
+        vec3 col = vec3(0.045, 0.044, 0.030);
 
-        // Strong amber flow ridges
-        vec3 amber = vec3(1.0, 0.4, 0.06);
-        col += amber * ridges * 1.0;
+        // Only the ridgeline crests carry orange. This is the accent, not the field.
+        float crest = smoothstep(0.45, 0.92, ridges);
 
-        // Olive valleys — lighter
-        vec3 olive = vec3(0.45, 0.42, 0.18);
-        col += olive * (1.0 - ridges) * mist * 0.7;
+        // Olive does the midtone work — it is the material, orange is the light.
+        // Gated to the valleys so crests read orange, valleys read olive, and
+        // everything between falls back toward black instead of going muddy.
+        vec3 olive = vec3(0.55, 0.53, 0.21);
+        col += olive * pow(1.0 - ridges, 1.25) * (0.35 + 0.65 * mist);
 
-        // Bright warm glow where both overlap
-        col += vec3(0.7, 0.25, 0.05) * ridges * mist * 0.6;
+        // Orange, rationed to the crests.
+        vec3 amber = vec3(1.0, 0.42, 0.07);
+        col += amber * crest * (0.35 + 0.55 * mist);
 
-        // Subtle vignette
-        float vignette = 1.0 - length(vUv - 0.5) * 0.9;
+        // Tight hot core, only on the very strongest crests.
+        col += vec3(1.0, 0.58, 0.20) * pow(crest, 4.0) * 0.25;
+
+        // Vignette now pulls the edges to true black so type has ground to sit on.
+        float vignette = 1.0 - length(vUv - 0.5) * 1.15;
         col *= clamp(vignette, 0.0, 1.0);
 
         gl_FragColor = vec4(col, 1.0);

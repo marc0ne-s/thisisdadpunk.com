@@ -193,6 +193,21 @@ body::before {
   z-index: 2;
   max-width: 55vw;
   margin-left: 4vw;
+  /* Scrim. The field behind this column is animated, so text contrast used to
+     be luck — the headline could land on a bright crest. The gradient fades to
+     nothing well inside the box, so there is no visible panel edge. Padding is
+     cancelled by negative margins to leave the layout untouched. */
+  padding: 2rem 2.5rem 2rem 2rem;
+  margin-left: calc(4vw - 2rem);
+  margin-top: -2rem;
+  margin-bottom: -2rem;
+  background: radial-gradient(
+    115% 88% at 12% 50%,
+    rgba(10, 10, 10, 0.82) 0%,
+    rgba(10, 10, 10, 0.60) 38%,
+    rgba(10, 10, 10, 0.20) 62%,
+    rgba(10, 10, 10, 0) 78%
+  );
 }
 .artifact-hero__content h1 {
   font-family: var(--font-display);
@@ -200,11 +215,18 @@ body::before {
   line-height: 0.85;
   letter-spacing: -0.02em;
   color: var(--color-off-white);
-  text-shadow: 3px 3px 0px rgba(232,93,4,0.12), 6px 6px 0px rgba(92,91,58,0.05);
+  text-shadow:
+    2px 2px 0 rgba(0, 0, 0, 0.65),
+    4px 4px 0 rgba(92, 91, 58, 0.18);
 }
 .artifact-hero__content .dad-accent {
   color: var(--color-orange);
   position: relative;
+  /* Orange type on a field that can itself go orange needs its own separation.
+     The halo is nearly black so the letterform edge survives a bright crest. */
+  text-shadow:
+    0 0 28px rgba(10, 10, 10, 0.95),
+    2px 2px 0 rgba(0, 0, 0, 0.55);
 }
 .artifact-hero__content .dad-accent::before {
   content: 'DAD';
@@ -217,7 +239,7 @@ body::before {
 .artifact-hero__tagline {
   font-family: var(--font-mono);
   font-size: clamp(0.8rem, 1.5vw, 1rem);
-  color: var(--color-olive);
+  color: var(--color-olive-light);
   text-transform: uppercase;
   letter-spacing: 0.2em;
   margin-top: 1rem;
