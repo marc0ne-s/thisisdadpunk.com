@@ -92,26 +92,26 @@ export function initHeroScene() {
         // Ground: near-black with a faint olive cast, matching the page's
         // #0a0a0a. The old base was rust at 0.25 red and never reached black,
         // so the hero read as a lit orange field rather than a dark one.
-        vec3 col = vec3(0.045, 0.044, 0.030);
+        vec3 col = vec3(0.024, 0.021, 0.016);
 
         // Only the ridgeline crests carry orange. This is the accent, not the field.
-        float crest = smoothstep(0.45, 0.92, ridges);
+        float crest = smoothstep(0.50, 0.94, ridges);
 
-        // Olive does the midtone work — it is the material, orange is the light.
-        // Gated to the valleys so crests read orange, valleys read olive, and
-        // everything between falls back toward black instead of going muddy.
-        vec3 olive = vec3(0.55, 0.53, 0.21);
-        col += olive * pow(1.0 - ridges, 1.25) * (0.35 + 0.65 * mist);
+        // Warm umber, not olive. Red stays clearly above green so this reads as
+        // shadowed stone rather than moss, and it sits low enough that most of
+        // the field falls away to black instead of holding a midtone.
+        vec3 umber = vec3(0.34, 0.24, 0.15);
+        col += umber * pow(1.0 - ridges, 1.8) * (0.22 + 0.50 * mist);
 
         // Orange, rationed to the crests.
-        vec3 amber = vec3(1.0, 0.42, 0.07);
-        col += amber * crest * (0.35 + 0.55 * mist);
+        vec3 amber = vec3(1.0, 0.40, 0.06);
+        col += amber * crest * (0.30 + 0.55 * mist);
 
         // Tight hot core, only on the very strongest crests.
-        col += vec3(1.0, 0.58, 0.20) * pow(crest, 4.0) * 0.25;
+        col += vec3(1.0, 0.55, 0.18) * pow(crest, 4.0) * 0.18;
 
-        // Vignette now pulls the edges to true black so type has ground to sit on.
-        float vignette = 1.0 - length(vUv - 0.5) * 1.15;
+        // Vignette pulls the edges to true black so type has ground to sit on.
+        float vignette = 1.0 - length(vUv - 0.5) * 1.40;
         col *= clamp(vignette, 0.0, 1.0);
 
         gl_FragColor = vec4(col, 1.0);
