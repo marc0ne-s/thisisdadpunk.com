@@ -92,26 +92,24 @@ export function initHeroScene() {
         // Ground: near-black with a faint olive cast, matching the page's
         // #0a0a0a. The old base was rust at 0.25 red and never reached black,
         // so the hero read as a lit orange field rather than a dark one.
-        vec3 col = vec3(0.024, 0.021, 0.016);
+        // Black ground. No second colour: an umber/olive midtone, however warm
+        // or cool, still fills the frame with a tinted mass and reads as khaki.
+        // The field is black; orange is the only thing that is not black.
+        vec3 col = vec3(0.016, 0.014, 0.011);
 
         // Only the ridgeline crests carry orange. This is the accent, not the field.
-        float crest = smoothstep(0.50, 0.94, ridges);
+        float crest = smoothstep(0.52, 0.95, ridges);
 
-        // Warm umber, not olive. Red stays clearly above green so this reads as
-        // shadowed stone rather than moss, and it sits low enough that most of
-        // the field falls away to black instead of holding a midtone.
-        vec3 umber = vec3(0.34, 0.24, 0.15);
-        col += umber * pow(1.0 - ridges, 1.8) * (0.22 + 0.50 * mist);
-
-        // Orange, rationed to the crests.
+        // Orange on the veins. Higher floor than before, because it is now the
+        // only light in the frame and the veins must hold their shape.
         vec3 amber = vec3(1.0, 0.40, 0.06);
-        col += amber * crest * (0.30 + 0.55 * mist);
+        col += amber * crest * (0.38 + 0.62 * mist);
 
         // Tight hot core, only on the very strongest crests.
-        col += vec3(1.0, 0.55, 0.18) * pow(crest, 4.0) * 0.18;
+        col += vec3(1.0, 0.55, 0.18) * pow(crest, 4.0) * 0.22;
 
         // Vignette pulls the edges to true black so type has ground to sit on.
-        float vignette = 1.0 - length(vUv - 0.5) * 1.40;
+        float vignette = 1.0 - length(vUv - 0.5) * 1.45;
         col *= clamp(vignette, 0.0, 1.0);
 
         gl_FragColor = vec4(col, 1.0);
@@ -144,14 +142,19 @@ export function initHeroScene() {
   //  COLORS
   // ═══════════════════════════════════════════════
   const ORANGE = 0xe85d04;
-  const OLIVE = 0x5c5b3a;
-  const OLIVE_DARK = 0x3a3925;
+  // The brand olive (#5c5b3a) is olive drab — army green. As an AmbientLight it
+  // tinted every object in the scene, and it also coloured the wireframes, the
+  // debris and the particle field, which is why the page kept reading green no
+  // matter what the backdrop shader did. The secondary colour here is ember:
+  // warm brown falling to black.
+  const EMBER = 0x5a3418;
+  const EMBER_DARK = 0x2b1a0e;
   const OFF_WHITE = 0xe8e4de;
 
   // ═══════════════════════════════════════════════
   //  LIGHTING
   // ═══════════════════════════════════════════════
-  const ambientLight = new THREE.AmbientLight(OLIVE_DARK, 0.08);
+  const ambientLight = new THREE.AmbientLight(EMBER_DARK, 0.10);
   scene.add(ambientLight);
 
   const mainLight = new THREE.PointLight(ORANGE, 2.5, 30);
@@ -174,15 +177,15 @@ export function initHeroScene() {
   const wireOrange = new THREE.MeshBasicMaterial({
     color: ORANGE, wireframe: true, transparent: true, opacity: 0.55,
   });
-  const wireOlive = new THREE.MeshBasicMaterial({
-    color: OLIVE, wireframe: true, transparent: true, opacity: 0.3,
+  const wireEmber = new THREE.MeshBasicMaterial({
+    color: EMBER, wireframe: true, transparent: true, opacity: 0.3,
   });
   const solidOrange = new THREE.MeshStandardMaterial({
     color: ORANGE, emissive: ORANGE, emissiveIntensity: 0.8,
     metalness: 0.9, roughness: 0.3,
   });
-  const ghostOlive = new THREE.MeshStandardMaterial({
-    color: OLIVE_DARK, emissive: OLIVE_DARK, emissiveIntensity: 0.3,
+  const ghostEmber = new THREE.MeshStandardMaterial({
+    color: EMBER_DARK, emissive: EMBER_DARK, emissiveIntensity: 0.3,
     metalness: 0.6, roughness: 0.5, transparent: true, opacity: 0.65,
   });
 
@@ -214,7 +217,7 @@ export function initHeroScene() {
   }
 
   // 1. Wireframe cube — fast tumble, small orbit
-  const cube = new THREE.Mesh(new THREE.BoxGeometry(1.4, 1.4, 1.4), wireOlive);
+  const cube = new THREE.Mesh(new THREE.BoxGeometry(1.4, 1.4, 1.4), wireEmber);
   cube.position.set(4, 1.8, -2.5);
   spawnDebris(cube, {
     rx: 0.022, ry: 0.032, rz: 0.018,
@@ -235,7 +238,7 @@ export function initHeroScene() {
   });
 
   // 3. Torus — wide orbit, dramatic tilt
-  const torus = new THREE.Mesh(new THREE.TorusGeometry(1, 0.1, 16, 48), wireOlive.clone());
+  const torus = new THREE.Mesh(new THREE.TorusGeometry(1, 0.1, 16, 48), wireEmber.clone());
   torus.material.opacity = 0.25;
   torus.position.set(-2.5, 2.5, -4);
   spawnDebris(torus, {
@@ -246,7 +249,7 @@ export function initHeroScene() {
   });
 
   // 4. Tetrahedron — tight spiral, erratic
-  const tetra = new THREE.Mesh(new THREE.TetrahedronGeometry(0.9), ghostOlive.clone());
+  const tetra = new THREE.Mesh(new THREE.TetrahedronGeometry(0.9), ghostEmber.clone());
   tetra.material.transparent = true; tetra.material.opacity = 0.35;
   tetra.position.set(3, -2, -2);
   spawnDebris(tetra, {
@@ -315,7 +318,7 @@ export function initHeroScene() {
   });
 
   // 10. Thin ring — slow drift, fills background
-  const ringTorus = new THREE.Mesh(new THREE.TorusGeometry(1.8, 0.03, 8, 64), wireOlive.clone());
+  const ringTorus = new THREE.Mesh(new THREE.TorusGeometry(1.8, 0.03, 8, 64), wireEmber.clone());
   ringTorus.material.opacity = 0.2;
   ringTorus.position.set(6, 2, -6);
   spawnDebris(ringTorus, {
@@ -347,7 +350,7 @@ export function initHeroScene() {
   function buildConnectionLines() {
     const posA = new THREE.Vector3();
     const posB = new THREE.Vector3();
-    const oliveColor = new THREE.Color(OLIVE);
+    const emberColor = new THREE.Color(EMBER);
     const orangeColor = new THREE.Color(ORANGE);
 
     linePositions.length = 0;
@@ -362,7 +365,7 @@ export function initHeroScene() {
           const alpha = 1 - dist / CONNECTION_MAX_DIST;
           linePositions.push(posA.x, posA.y, posA.z, posB.x, posB.y, posB.z);
           const pulseBoost = linePulse * alpha;
-          const c = oliveColor.clone().lerp(orangeColor, Math.min(1, alpha * 0.5 + pulseBoost));
+          const c = emberColor.clone().lerp(orangeColor, Math.min(1, alpha * 0.5 + pulseBoost));
           lineColors.push(c.r, c.g, c.b, c.r, c.g, c.b);
         }
       }
@@ -439,7 +442,7 @@ export function initHeroScene() {
 
   const particleFragShader = `
     varying float vColorMix;
-    uniform vec3 uColorOlive;
+    uniform vec3 uColorEmber;
     uniform vec3 uColorOrange;
 
     void main() {
@@ -465,7 +468,7 @@ export function initHeroScene() {
     fragmentShader: particleFragShader,
     uniforms: {
       uPixelRatio: { value: Math.min(window.devicePixelRatio, 2) },
-      uColorOlive: { value: new THREE.Color(OLIVE) },
+      uColorEmber: { value: new THREE.Color(EMBER) },
       uColorOrange: { value: new THREE.Color(ORANGE) },
     },
     transparent: true,
