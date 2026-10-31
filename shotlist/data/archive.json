@@ -1,0 +1,160 @@
+{
+  "generated": "2026-11-01T07:00:01",
+  "epoch": "2026-10-26",
+  "total": 8,
+  "shot": 0,
+  "shots": [
+    {
+      "date": "2026-10-26",
+      "id": "W-LI-03",
+      "title": "One Hard Source",
+      "axis": "LIGHT",
+      "tier": "warmup",
+      "brief": "A single bare, small, hard light close to the subject. Let the shadow be ugly and sharp.",
+      "constraint": "One source, and it must be hard enough to throw a defined shadow.",
+      "review": "How far did the shadow travel, and did you fight it or use it?",
+      "time": "15 min",
+      "format": "any",
+      "kit": [
+        "any camera"
+      ],
+      "clips": [],
+      "poster": null,
+      "note": "",
+      "shot": false
+    },
+    {
+      "date": "2026-10-27",
+      "id": "W-CO-03",
+      "title": "Leading Lines",
+      "axis": "COMPOSITION",
+      "tier": "warmup",
+      "brief": "Find lines in the space that point at your subject. Use all of them.",
+      "constraint": "At least two lines must converge on the subject.",
+      "review": "Do the lines actually point anywhere, or were you forcing it?",
+      "time": "12 min",
+      "format": "any",
+      "kit": [
+        "any camera"
+      ],
+      "clips": [],
+      "poster": null,
+      "note": "",
+      "shot": false
+    },
+    {
+      "date": "2026-10-28",
+      "id": "W-FR-03",
+      "title": "Headroom",
+      "axis": "FRAMING",
+      "tier": "warmup",
+      "brief": "Same subject, five takes. Vary the space above their head from cramped to generous.",
+      "constraint": "Keep the head in frame in every take.",
+      "review": "At what point did extra headroom stop feeling like empty space and start feeling like intent?",
+      "time": "8 min",
+      "format": "any",
+      "kit": [
+        "iPhone 14 Pro"
+      ],
+      "clips": [],
+      "poster": null,
+      "note": "",
+      "shot": false
+    },
+    {
+      "date": "2026-10-29",
+      "id": "W-CO-01",
+      "title": "Thirds",
+      "axis": "COMPOSITION",
+      "tier": "warmup",
+      "brief": "Place your subject on a third line, horizontally and vertically. Both at once.",
+      "constraint": "Subject sits on an intersection of thirds lines.",
+      "review": "Did the rule help, or did you want to break it immediately?",
+      "time": "8 min",
+      "format": "any",
+      "kit": [
+        "iPhone 14 Pro"
+      ],
+      "clips": [],
+      "poster": null,
+      "note": "",
+      "shot": false
+    },
+    {
+      "date": "2026-10-30",
+      "id": "W-TE-01",
+      "title": "Full Manual",
+      "axis": "TECHNIQUE",
+      "tier": "warmup",
+      "brief": "Shoot one shot with focus, exposure, and white balance all locked manually. Nothing auto.",
+      "constraint": "No auto anything, for one take.",
+      "review": "Which manual setting did you have to think hardest about?",
+      "time": "12 min",
+      "format": "any",
+      "kit": [
+        "any camera"
+      ],
+      "clips": [],
+      "poster": null,
+      "note": "",
+      "shot": false
+    },
+    {
+      "date": "2026-10-31",
+      "id": "W-MO-04",
+      "title": "Pan Reveal",
+      "axis": "MOVEMENT",
+      "tier": "warmup",
+      "brief": "Start on something empty, pan across to the subject. The subject is not visible at the start.",
+      "constraint": "The reveal happens inside the take, not across a cut.",
+      "review": "Did the pan lead the eye, or did it feel like searching?",
+      "time": "10 min",
+      "format": "any",
+      "kit": [
+        "Osmo Pocket 3"
+      ],
+      "clips": [],
+      "poster": null,
+      "note": "",
+      "shot": false
+    },
+    {
+      "date": "2026-11-01",
+      "id": "S-CO-01",
+      "title": "Repetition With A Break",
+      "axis": "COMPOSITION",
+      "tier": "standard",
+      "brief": "Frame a row of similar things. One of them is different. Compose so the break is the subject.",
+      "constraint": "The odd one out is the compositional anchor.",
+      "review": "Did the eye land on the break straight away, or did the pattern swallow it?",
+      "time": "15 min",
+      "format": "any",
+      "kit": [
+        "any camera"
+      ],
+      "clips": [],
+      "poster": null,
+      "note": "",
+      "shot": false
+    },
+    {
+      "date": "2026-11-02",
+      "id": "W-FR-04",
+      "title": "Negative Space",
+      "axis": "FRAMING",
+      "tier": "warmup",
+      "brief": "Put a small subject in a big space. Let the frame breathe. The subject is under 20% of the image.",
+      "constraint": "The subject must occupy under a fifth of the frame.",
+      "review": "Is there a direction the subject is looking, and did the space agree with it?",
+      "time": "10 min",
+      "format": "any",
+      "kit": [
+        "iPhone 14 Pro"
+      ],
+      "clips": [],
+      "poster": null,
+      "note": "",
+      "shot": false
+    }
+  ]
+}

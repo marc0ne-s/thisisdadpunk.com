@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" fill="#0a0a0a"/>
+  <rect x="6" y="6" width="52" height="52" fill="none" stroke="#5c5b3a" stroke-width="2"/>
+  <!-- aperture / camera iris blades, safety-orange with misregistration -->
+  <g fill="none" stroke="#e85d04" stroke-width="3" stroke-linejoin="round">
+    <path d="M32 14 L47 23 L47 41 L32 50 L17 41 L17 23 Z"/>
+  </g>
+  <g fill="none" stroke="#c44d03" stroke-width="3" stroke-linejoin="round" opacity=".55" transform="translate(2.5,-2)">
+    <path d="M32 14 L47 23 L47 41 L32 50 L17 41 L17 23 Z"/>
+  </g>
+  <circle cx="32" cy="32" r="5" fill="#e8e4de"/>
+</svg>

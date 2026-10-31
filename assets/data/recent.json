@@ -1,9 +1,9 @@
 {
   "source": "Music.app playlist \"Recently Added\"",
   "storefront": "au",
-  "updated": "2026-10-25T07:43:51Z",
+  "updated": "2026-10-26T01:46:33Z",
   "count": 8,
-  "embedded": 4,
+  "embedded": 3,
   "albums": [
     {
       "title": "Bd-R",
@@ -11,7 +11,7 @@
       "album": "No Bad Memories",
       "added": "2026-10-16T15:12:42",
       "added_raw": "Friday, 16 October 2026 at 3:12:42 pm",
-      "tracks_in_slice": 7,
+      "tracks_in_slice": 8,
       "tracks_in_library": 31,
       "partial": true,
       "artwork": "assets/img/albums/the-avalanches-no-bad-memories.jpg",
@@ -118,20 +118,20 @@
       "artist_url": "https://music.apple.com/au/artist/tom-morello/466357"
     },
     {
-      "title": "Say",
-      "artist": "Method Man",
-      "album": "4:21... The Day After",
-      "added": "2026-09-24T20:27:17",
-      "added_raw": "Thursday, 24 September 2026 at 8:27:17 pm",
+      "title": "Where The Goth Girls At?",
+      "artist": "Queens of the Stone Age",
+      "album": "Perfecth",
+      "added": "2026-09-14T13:42:31",
+      "added_raw": "Wednesday, 30 September 2026 at 2:40:55 pm",
       "tracks_in_slice": 1,
-      "tracks_in_library": 1,
-      "partial": false,
-      "artwork": "assets/img/albums/method-man-4-21-the-day-after.jpg",
-      "embed": "https://embed.music.apple.com/au/album/1443182758?theme=dark",
-      "store_url": "https://music.apple.com/au/album/4-21-the-day-after/1443182758?uo=4",
-      "catalog_id": 1443182758,
-      "match": "album",
-      "artist_url": null
+      "tracks_in_library": 9,
+      "partial": true,
+      "artwork": "assets/img/albums/queens-of-the-stone-age-perfecth.jpg",
+      "embed": null,
+      "store_url": null,
+      "catalog_id": null,
+      "match": null,
+      "artist_url": "https://music.apple.com/au/artist/queens-of-the-stone-age/857919"
     }
   ]
 }

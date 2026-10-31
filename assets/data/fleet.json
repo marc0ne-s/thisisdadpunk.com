@@ -1,11 +1,11 @@
 {
-  "updated": "2026-10-25T18:43:30+11:00",
+  "updated": "2026-11-01T08:04:00+11:00",
   "updated_by": "DadPunk gen_fleet_json",
   "router_healthy": true,
-  "machines_online": 2,
+  "machines_online": 4,
   "active_agents": 12,
   "agents_basis": "installed hermes profiles",
-  "last_build": "2026-10-24T14:42:00+11:00",
-  "last_build_repo": "thisisdadpunk.com",
-  "disk_status": "PunkPlanet 98% · Second-Brain-1 84%"
+  "last_build": "2026-10-31T17:24:16+11:00",
+  "last_build_repo": "Synth",
+  "disk_status": "PunkPlanet 95% · Second-Brain-1 88% · SlagHeap 27%"
 }

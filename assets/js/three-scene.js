@@ -571,6 +571,59 @@ export function initHeroScene() {
   composer.addPass(dadpunkPass);
 
   // ═══════════════════════════════════════════════
+  //  LIQUID INK WARP — opt-in, ?ink=<strength> (e.g. ?ink=0.35)
+  //  Flow field lifted from the @dadpunk OpenShaders "Liquid" pass: a sum of
+  //  three cosine waves with a bend term, used to displace the rendered frame.
+  //  Runs straight after RenderPass so bloom sees the warped light, and is
+  //  off unless asked for, so the shipped page is unchanged.
+  // ═══════════════════════════════════════════════
+  const inkParam = new URLSearchParams(location.search).get('ink');
+  const inkStrength = inkParam === null ? 0 : Math.max(0, Math.min(1, parseFloat(inkParam) || 0));
+  const inkPass = inkStrength > 0 ? new ShaderPass({
+    uniforms: {
+      tDiffuse: { value: null },
+      uTime: { value: 0.0 },
+      uStrength: { value: inkStrength },
+      uResolution: { value: new THREE.Vector2(container.clientWidth, container.clientHeight) },
+    },
+    vertexShader: `
+      varying vec2 vUv;
+      void main() {
+        vUv = uv;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      }
+    `,
+    fragmentShader: `
+      uniform sampler2D tDiffuse;
+      uniform float uTime;
+      uniform float uStrength;
+      uniform vec2 uResolution;
+      varying vec2 vUv;
+
+      vec2 liquidFlow(vec2 p, float t) {
+        vec2 drift = vec2(p.y * 3.1 + t * 0.21, p.x * 2.7 - t * 0.17);
+        vec2 q = p + 0.22 * sin(drift);
+        vec2 bend = 0.22 * vec2(3.1, 2.7) * cos(drift);
+        vec2 d0 = vec2(0.94, 0.342);
+        vec2 d1 = vec2(-0.6, 0.8);
+        vec2 d2 = vec2(0.28, 0.96);
+        vec2 g = 0.38 * cos(dot(q, d0) * 10.0 - t * 0.65) * d0;
+        g += 0.24 * cos(dot(q, d1) * 16.0 - t * 0.83 + 2.1) * d1;
+        g += 0.12 * cos(dot(q, d2) * 23.0 - t * 1.1 + 4.3) * d2;
+        return vec2(g.x + g.y * bend.y, g.y + g.x * bend.x);
+      }
+
+      void main() {
+        float aspect = uResolution.x / uResolution.y;
+        vec2 p = (vUv - 0.5) * vec2(aspect, 1.0);
+        vec2 shift = liquidFlow(p, uTime) * 0.22 * uStrength * vec2(1.0 / aspect, 1.0);
+        gl_FragColor = texture2D(tDiffuse, clamp(vUv + shift, 0.0, 1.0));
+      }
+    `,
+  }) : null;
+  if (inkPass) composer.insertPass(inkPass, 1); // after RenderPass, before bloom
+
+  // ═══════════════════════════════════════════════
   //  GLITCH SYSTEM — periodic bursts with flash
   // ═══════════════════════════════════════════════
   let glitchStrength = 0;
@@ -807,6 +860,7 @@ export function initHeroScene() {
     dadpunkPass.uniforms.uFlash.value = flashStrength;
     // ── Backdrop shader time ──
     backdropMat.uniforms.uTime.value = t;
+    if (inkPass) inkPass.uniforms.uTime.value = t;
 
     // ── Render via composer ──
     composer.render();
@@ -826,6 +880,7 @@ export function initHeroScene() {
     composer.setSize(w, h);
     bloomPass.resolution.set(w, h);
     dadpunkPass.uniforms.uResolution.value.set(w, h);
+    if (inkPass) inkPass.uniforms.uResolution.value.set(w, h);
     particleMat.uniforms.uPixelRatio.value = Math.min(window.devicePixelRatio, 2);
   });
 
