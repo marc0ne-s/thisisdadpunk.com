@@ -123,6 +123,101 @@
     feedEl.innerHTML = html;
   }
 
+  /* ── CONTAINED PLATES ──
+     Opt-in and lazy. Cards render as documents first; when one scrolls near the
+     viewport we import ./plate.js once and hand that card a canvas. If WebGL2 is
+     missing or anything throws, the card stays exactly as it shipped — no
+     class, no canvas, no dead space. The canvas is pointer-events:none so the
+     card's own click target (often an <a>) keeps working. */
+  const plateMounted = new Set();   // cards that have been handed to the observer
+  let plateModule  = null;          // { createPlate } — imported at most once
+  let plateImport  = null;          // in-flight import promise
+  let plateObserver = null;         // one observer for the whole spread
+  let plateIdle = null;
+
+  const plateSupported = (() => {
+    try {
+      return !!(window.WebGL2RenderingContext &&
+        document.createElement('canvas').getContext('webgl2'));
+    } catch (e) { return false; }
+  })();
+
+  function mountPlate(card) {
+    if (!plateModule || card._plate) return;
+    const canvas = document.createElement('canvas');
+    canvas.className = 'plate';
+    canvas.setAttribute('aria-hidden', 'true');
+    canvas.style.visibility = 'hidden';   // laid out (so it has size) but unseen
+    card.prepend(canvas);
+    try {
+      const plate = plateModule.createPlate(canvas);
+      card.classList.add('project-spread__card--plate');
+      canvas.style.visibility = '';
+      card._plate = plate;                // kept for teardown / debugging
+    } catch (err) {
+      canvas.remove();
+      card.classList.remove('project-spread__card--plate');
+      console.warn('[artifact] plate unavailable on this card', err);
+    }
+  }
+
+  function hydratePlates() {
+    if (!plateSupported || !spreadEl) return;
+    if (plateObserver) { plateObserver.disconnect(); plateObserver = null; }
+
+    // The first few cards are the ones above the fold and the ones a reader
+    // actually looks at. Everything below stays a document — that's the budget.
+    const targets = Array.from(spreadEl.querySelectorAll('.project-spread__card')).slice(0, 4);
+    if (!targets.length) return;
+
+    plateObserver = new IntersectionObserver((entries) => {
+      let fresh = false;
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const card = entry.target;
+        plateObserver.unobserve(card);
+        plateMounted.add(card);
+        if (plateModule) mountPlate(card); else fresh = true;
+      });
+      if (!fresh) return;
+
+      // Import once; mount every card that came into view while it loaded.
+      if (!plateImport) {
+        plateImport = import('./plate.js').then(mod => {
+          plateModule = mod;
+          plateMounted.forEach(card => mountPlate(card));
+          return mod;
+        }).catch(err => {
+          console.warn('[artifact] plate module unavailable', err);
+          plateMounted.clear();
+          if (plateObserver) plateObserver.disconnect();
+          plateImport = null;
+          return null;
+        });
+      }
+    }, { rootMargin: '240px 0px', threshold: 0.01 });
+
+    targets.forEach(card => plateObserver.observe(card));
+  }
+
+  function teardownPlates() {
+    if (plateObserver) { plateObserver.disconnect(); plateObserver = null; }
+    if (plateIdle) { cancelIdleCallback(plateIdle); plateIdle = null; }
+    plateMounted.forEach(card => {
+      if (card._plate && typeof card._plate.destroy === 'function') {
+        try { card._plate.destroy(); } catch (e) {}
+      }
+      card._plate = null;
+      card.classList.remove('project-spread__card--plate');
+      const canvas = card.querySelector('canvas.plate');
+      if (canvas) canvas.remove();
+    });
+    plateMounted.clear();
+  }
+
+  // GL contexts are a limited resource; give them back when the page is left.
+  window.addEventListener('pagehide', teardownPlates);
+
   /* ── PROJECT SPREAD ── */
   function renderProjectSpread(projects) {
     if (!spreadEl) return;
@@ -156,6 +251,14 @@
     // sturdier than splitting the rendered HTML on '</div>'.
     cards.splice(3, 0, interruptHTML);
     spreadEl.innerHTML = cards.join('');
+
+    // Cards are in the DOM with real sizes now; the observer only fires for the
+    // first few that actually approach the viewport. The interrupt div is not a
+    // .project-spread__card, so it is never a target.
+    if (plateIdle) cancelIdleCallback(plateIdle);
+    plateIdle = requestIdleCallback
+      ? requestIdleCallback(hydratePlates, { timeout: 1200 })
+      : setTimeout(hydratePlates, 300);
   }
 
   /* ── AGENT TRACES ── */

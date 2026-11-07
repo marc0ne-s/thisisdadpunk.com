@@ -549,6 +549,51 @@ body::before {
   grid-column: span 2;
 }
 
+/* ── Contained plates ──
+   A card that got a working WebGL2 plate carries .project-spread__card--plate.
+   The canvas sits inside the card as its ground, a gradient scrim keeps the
+   text legible, and every real child is lifted above both. Cards WITHOUT the
+   class keep the original solid document look, so a browser without WebGL2
+   degrades to exactly what shipped before. */
+.project-spread__card--plate {
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  isolation: isolate;
+  overflow: hidden;
+}
+.project-spread__card > canvas.plate {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 0;
+  pointer-events: none; /* the card may be an <a> — clicks belong to it */
+}
+.project-spread__card--plate::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(158deg,
+    rgba(10,10,10,.985) 0%,
+    rgba(10,10,10,.965) 40%,
+    rgba(10,10,10,.86) 70%,
+    rgba(10,10,10,.62) 100%);
+  transition: opacity 0.35s ease;
+}
+.project-spread__card--plate:hover::after { opacity: 0.86; }
+.project-spread__card--plate > *:not(canvas) {
+  position: relative;
+  z-index: 2;
+}
+.project-spread__card--plate::before { z-index: 3; }
+.project-spread__card--plate:hover {
+  background: transparent; /* the plate brightens, the document doesn't darken */
+}
+
 /* Cards that carry a destination are real anchors — same document-on-the-wall
    look, but the corner tape goes orange and an arrow appears so the difference
    between "read this" and "open this" is visible without hovering. */
