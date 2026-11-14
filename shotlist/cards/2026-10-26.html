@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SHOT W-LI-03 — One Hard Source</title>
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<style>
+:root{
+  --black:#0a0a0a; --paper:#e8e4de; --orange:#e85d04; --olive:#5c5b3a;
+  --orange-dim:#c44d03; --olive-dark:#3a3925;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--black);color:var(--paper)}
+body{
+  font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  min-height:100vh;padding:22px 16px 48px;
+  display:flex;justify-content:center;align-items:flex-start;
+}
+.grain{
+  position:fixed;inset:0;pointer-events:none;z-index:9;opacity:.16;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/></filter><rect width='120' height='120' filter='url(%23n)' opacity='.5'/></svg>");
+  mix-blend-mode:overlay;
+}
+.card{
+  width:100%;max-width:760px;position:relative;
+  border:1px solid var(--olive-dark);
+  background:
+    linear-gradient(180deg,#111 0%,#0a0a0a 60%);
+  padding:0;
+}
+.rule{height:3px;background:var(--orange);}
+.rule.olive{height:1px;background:var(--olive-dark);}
+
+.hd{
+  display:flex;justify-content:space-between;align-items:baseline;
+  gap:12px;padding:10px 18px;border-bottom:1px solid var(--olive-dark);
+  font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--olive);
+}
+.hd b{color:var(--orange);font-weight:700}
+.hd .r{color:#7d7b62;letter-spacing:.14em}
+
+.kick{
+  padding:16px 18px 0;font-size:10px;letter-spacing:.3em;
+  text-transform:uppercase;color:var(--orange);font-weight:700;
+}
+.kick span{color:#6f6d55}
+
+h1{
+  font-family:"Archivo Black","Arial Black",Impact,sans-serif;
+  font-size:clamp(30px,7.4vw,54px);line-height:.96;letter-spacing:-.02em;
+  text-transform:uppercase;padding:8px 18px 14px;color:var(--paper);
+  transform:rotate(-.35deg);transform-origin:left center;
+}
+.brief{
+  padding:0 18px 16px;font-size:14px;line-height:1.62;color:#cdc9c0;
+  max-width:64ch;
+}
+.brief b{color:var(--paper)}
+
+.sec{padding:0 18px 16px}
+.sec h2{
+  font-size:9px;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--olive);font-weight:700;margin-bottom:7px;
+  display:flex;align-items:center;gap:9px;
+}
+.sec h2::after{content:"";flex:1;height:1px;background:var(--olive-dark)}
+
+.constraint{
+  background:var(--orange);color:#0a0a0a;padding:12px 14px;
+  font-size:13px;line-height:1.5;font-weight:700;
+}
+.constraint .k{
+  display:block;font-size:8.5px;letter-spacing:.26em;text-transform:uppercase;
+  margin-bottom:4px;font-weight:800;
+}
+.review{
+  border-left:3px solid var(--olive);padding:2px 0 2px 12px;
+  font-size:13px;line-height:1.6;color:#c8c4ba;font-style:italic;
+}
+
+.grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:0;border-top:1px solid var(--olive-dark);
+}
+.cell{padding:12px 18px;border-right:1px solid var(--olive-dark);border-bottom:1px solid var(--olive-dark)}
+.cell .k{font-size:8.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--olive);margin-bottom:5px}
+.cell .v{font-size:13px;line-height:1.45;color:var(--paper)}
+
+.chip{
+  display:inline-block;font-size:9px;letter-spacing:.2em;text-transform:uppercase;
+  padding:3px 8px;border:1px solid var(--olive);color:var(--olive);font-weight:700;
+}
+.chip.hard{border-color:var(--orange);color:var(--orange)}
+
+.log{
+  padding:14px 18px;border-top:1px solid var(--olive-dark);
+  font-size:11px;color:#6f6d55;line-height:1.7;
+}
+.log b{color:#8f8d70}
+.log ol{margin:6px 0 0;padding-left:18px}
+.log li{margin:2px 0}
+
+.ft{
+  padding:10px 18px;border-top:1px solid var(--olive-dark);
+  display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+  font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#5f5d4a;
+}
+.ft a{color:var(--orange);text-decoration:none}
+
+.notelines{display:none}
+
+@media print{
+  @page{size:A4;margin:14mm 12mm}
+  html,body{background:#fff}
+  body{padding:0;display:block}
+  .grain{display:none}
+  .card{border:1px solid #000;max-width:none;background:#fff;min-height:auto}
+  .rule{height:3px;background:#000}
+  .rule.olive{background:#999}
+  h1{color:#000}.brief{color:#333}.cell .v{color:#111}
+  .cell .k,.sec h2{color:#555}.review{color:#333}
+  .constraint{background:#000;color:#fff;padding:9px 12px}
+  .kick{color:#000}
+  .hd{color:#555;border-color:#000}.hd b{color:#000}
+  .log,.ft{color:#555;border-color:#999}
+  .ft a{color:#000}
+  .ft .webonly{display:none}
+  /* Use the empty lower half for handwritten notes. */
+  .notelines{display:block}
+  .notelines span{
+    display:block;height:9mm;border-bottom:.4pt solid #bbb;margin-top:0;
+  }
+}
+</style>
+</head><body>
+<div class="grain"></div>
+<main class="card">
+  <div class="rule"></div>
+  <div class="hd">
+    <span>DAILY SHOT LIST <b>W-LI-03</b></span>
+    <span class="r">MON 26 OCT 2026 · DAY 1</span>
+  </div>
+  <div class="rule olive"></div>
+
+  <div class="kick">AXIS 2/6 — LIGHT <span>· WARMUP</span></div>
+  <h1>One Hard Source</h1>
+  <div class="brief">A single bare, small, hard light close to the subject. Let the shadow be ugly and sharp.</div>
+
+  <div class="sec">
+    <h2>The Constraint</h2>
+    <div class="constraint"><span class="k">Non-negotiable</span>One source, and it must be hard enough to throw a defined shadow.</div>
+  </div>
+
+  <div class="sec">
+    <h2>On Playback, Ask</h2>
+    <div class="review">How far did the shadow travel, and did you fight it or use it?</div>
+  </div>
+
+  <div class="grid">
+    <div class="cell"><div class="k">Kit</div><div class="v">any camera</div></div>
+    <div class="cell"><div class="k">Time</div><div class="v">15 min</div></div>
+    <div class="cell"><div class="k">Format</div><div class="v">any</div></div>
+    <div class="cell"><div class="k">Difficulty</div><div class="v"><span class="chip warmup">warmup</span></div></div>
+  </div>
+
+  <div class="log">
+    <b>RULES OF THE RUN</b>
+    <ol>
+      <li>One challenge. Shoot it before you scroll anywhere else.</li>
+      <li>Log the clip. It becomes the archive.</li>
+      <li>Watch it back once, and answer the review question out loud.</li>
+      <li>Miss a day, no drama. The rotation absorbs it.</li>
+    </ol>
+  </div>
+
+  <div class="notelines">
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <div class="ft">
+    <span>PunkPlanet · Budgewoi</span>
+    <a class="webonly" href="../">← the wall</a>
+  </div>
+</main>
+</body></html>

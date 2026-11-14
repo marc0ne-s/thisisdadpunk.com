@@ -1,0 +1,407 @@
+{
+  "generated": "2026-11-15T07:00:08",
+  "epoch": "2026-10-26",
+  "total": 21,
+  "shot": 0,
+  "shots": [
+    {
+      "date": "2026-10-26",
+      "id": "W-LI-03",
+      "title": "One Hard Source",
+      "axis": "LIGHT",
+      "tier": "warmup",
+      "brief": "A single bare, small, hard light close to the subject. Let the shadow be ugly and sharp.",
+      "constraint": "One source, and it must be hard enough to throw a defined shadow.",
+      "review": "How far did the shadow travel, and did you fight it or use it?",
+      "time": "15 min",
+      "format": "any",
+      "kit": [
+        "any camera"
+      ],
+      "clips": [],
+      "poster": null,
+      "note": "",
+      "shot": false
+    },
+    {
+      "date": "2026-10-27",
+      "id": "W-CO-03",
+      "title": "Leading Lines",
+      "axis": "COMPOSITION",
+      "tier": "warmup",
+      "brief": "Find lines in the space that point at your subject. Use all of them.",
+      "constraint": "At least two lines must converge on the subject.",
+      "review": "Do the lines actually point anywhere, or were you forcing it?",
+      "time": "12 min",
+      "format": "any",
+      "kit": [
+        "any camera"
+      ],
+      "clips": [],
+      "poster": null,
+      "note": "",
+      "shot": false
+    },
+    {
+      "date": "2026-10-28",
+      "id": "W-FR-03",
+      "title": "Headroom",
+      "axis": "FRAMING",
+      "tier": "warmup",
+      "brief": "Same subject, five takes. Vary the space above their head from cramped to generous.",
+      "constraint": "Keep the head in frame in every take.",
+      "review": "At what point did extra headroom stop feeling like empty space and start feeling like intent?",
+      "time": "8 min",
+      "format": "any",
+      "kit": [
+        "iPhone 14 Pro"
+      ],
+      "clips": [],
+      "poster": null,
+      "note": "",
+      "shot": false
+    },
+    {
+      "date": "2026-10-29",
+      "id": "W-CO-01",
+      "title": "Thirds",
+      "axis": "COMPOSITION",
+      "tier": "warmup",
+      "brief": "Place your subject on a third line, horizontally and vertically. Both at once.",
+      "constraint": "Subject sits on an intersection of thirds lines.",
+      "review": "Did the rule help, or did you want to break it immediately?",
+      "time": "8 min",
+      "format": "any",
+      "kit": [
+        "iPhone 14 Pro"
+      ],
+      "clips": [],
+      "poster": null,
+      "note": "",
+      "shot": false
+    },
+    {
+      "date": "2026-10-30",
+      "id": "W-TE-01",
+      "title": "Full Manual",
+      "axis": "TECHNIQUE",
+      "tier": "warmup",
+      "brief": "Shoot one shot with focus, exposure, and white balance all locked manually. Nothing auto.",
+      "constraint": "No auto anything, for one take.",
+      "review": "Which manual setting did you have to think hardest about?",
+      "time": "12 min",
+      "format": "any",
+      "kit": [
+        "any camera"
+      ],
+      "clips": [],
+      "poster": null,
+      "note": "",
+      "shot": false
+    },
+    {
+      "date": "2026-10-31",
+      "id": "W-MO-04",
+      "title": "Pan Reveal",
+      "axis": "MOVEMENT",
+      "tier": "warmup",
+      "brief": "Start on something empty, pan across to the subject. The subject is not visible at the start.",
+      "constraint": "The reveal happens inside the take, not across a cut.",
+      "review": "Did the pan lead the eye, or did it feel like searching?",
+      "time": "10 min",
+      "format": "any",
+      "kit": [
+        "Osmo Pocket 3"
+      ],
+      "clips": [],
+      "poster": null,
+      "note": "",
+      "shot": false
+    },
+    {
+      "date": "2026-11-01",
+      "id": "S-CO-01",
+      "title": "Repetition With A Break",
+      "axis": "COMPOSITION",
+      "tier": "standard",
+      "brief": "Frame a row of similar things. One of them is different. Compose so the break is the subject.",
+      "constraint": "The odd one out is the compositional anchor.",
+      "review": "Did the eye land on the break straight away, or did the pattern swallow it?",
+      "time": "15 min",
+      "format": "any",
+      "kit": [
+        "any camera"
+      ],
+      "clips": [],
+      "poster": null,
+      "note": "",
+      "shot": false
+    },
+    {
+      "date": "2026-11-02",
+      "id": "W-FR-04",
+      "title": "Negative Space",
+      "axis": "FRAMING",
+      "tier": "warmup",
+      "brief": "Put a small subject in a big space. Let the frame breathe. The subject is under 20% of the image.",
+      "constraint": "The subject must occupy under a fifth of the frame.",
+      "review": "Is there a direction the subject is looking, and did the space agree with it?",
+      "time": "10 min",
+      "format": "any",
+      "kit": [
+        "iPhone 14 Pro"
+      ],
+      "clips": [],
+      "poster": null,
+      "note": "",
+      "shot": false
+    },
+    {
+      "date": "2026-11-03",
+      "id": "W-MO-03",
+      "title": "Tilt Up",
+      "axis": "MOVEMENT",
+      "tier": "warmup",
+      "brief": "Start framed on the ground. Tilt up to reveal what's above. One take, one movement.",
+      "constraint": "Start below the subject. Finish on it.",
+      "review": "What did the tilt reveal that justified the movement?",
+      "time": "10 min",
+      "format": "9:16",
+      "kit": [
+        "Osmo Pocket 3"
+      ],
+      "clips": [],
+      "poster": null,
+      "note": "",
+      "shot": false
+    },
+    {
+      "date": "2026-11-04",
+      "id": "W-FR-01",
+      "title": "One Subject, Three Sizes",
+      "axis": "FRAMING",
+      "tier": "warmup",
+      "brief": "Pick one subject and shoot it wide, medium, and tight from the same spot. Feet planted. Three separate shots, no moving.",
+      "constraint": "Do not move your feet between the three shots.",
+      "review": "Which of the three actually held attention? Was the tight one tighter than the subject deserves?",
+      "time": "10 min",
+      "format": "any",
+      "kit": [
+        "iPhone 14 Pro"
+      ],
+      "clips": [],
+      "poster": null,
+      "note": "",
+      "shot": false
+    },
+    {
+      "date": "2026-11-05",
+      "id": "W-MO-01",
+      "title": "Locked Off",
+      "axis": "MOVEMENT",
+      "tier": "warmup",
+      "brief": "Set the camera down and don't touch it. The subject moves through a 30 second static frame.",
+      "constraint": "Zero camera movement. If you touch it, start over.",
+      "review": "Did the static frame make the subject's movement more legible, or more boring?",
+      "time": "10 min",
+      "format": "any",
+      "kit": [
+        "iPhone 14 Pro"
+      ],
+      "clips": [],
+      "poster": null,
+      "note": "",
+      "shot": false
+    },
+    {
+      "date": "2026-11-06",
+      "id": "W-LI-02",
+      "title": "Practical Only",
+      "axis": "LIGHT",
+      "tier": "warmup",
+      "brief": "Light with whatever is already switched on in the room. A screen, a lamp, an indicator light. Nothing else.",
+      "constraint": "Only lights that are already on. You may not switch anything on.",
+      "review": "What was the source, and did you hide it or let it in frame?",
+      "time": "10 min",
+      "format": "any",
+      "kit": [
+        "iPhone 14 Pro"
+      ],
+      "clips": [],
+      "poster": null,
+      "note": "",
+      "shot": false
+    },
+    {
+      "date": "2026-11-07",
+      "id": "W-CO-04",
+      "title": "Texture Wall",
+      "axis": "COMPOSITION",
+      "tier": "warmup",
+      "brief": "Fill the entire frame with a single surface so you cannot tell what the object is. Get close.",
+      "constraint": "No horizon, no edges, no context. Surface only.",
+      "review": "Does it hold as an abstract image, or does it just look like an accident?",
+      "time": "8 min",
+      "format": "any",
+      "kit": [
+        "iPhone 14 Pro"
+      ],
+      "clips": [],
+      "poster": null,
+      "note": "",
+      "shot": false
+    },
+    {
+      "date": "2026-11-08",
+      "id": "S-LI-04",
+      "title": "Same Subject, Two Skies",
+      "axis": "LIGHT",
+      "tier": "standard",
+      "brief": "Shoot the same subject in two lighting conditions. One with hard sun, one with flat cloud. Keep camera settings locked.",
+      "constraint": "Camera settings identical between the two shots.",
+      "review": "Which one needed less correction in post, and which one is the better shot?",
+      "time": "25 min",
+      "format": "any",
+      "kit": [
+        "any camera"
+      ],
+      "clips": [],
+      "poster": null,
+      "note": "",
+      "shot": false
+    },
+    {
+      "date": "2026-11-09",
+      "id": "W-FR-02",
+      "title": "Four Corners",
+      "axis": "FRAMING",
+      "tier": "warmup",
+      "brief": "Same subject, same shot, four takes. Put the subject in each corner of the frame. No cropping to fix it.",
+      "constraint": "One take per corner, and you may not crop any of them.",
+      "review": "Which corner felt least awkward, and what was the frame doing on the other side?",
+      "time": "10 min",
+      "format": "any",
+      "kit": [
+        "iPhone 14 Pro"
+      ],
+      "clips": [],
+      "poster": null,
+      "note": "",
+      "shot": false
+    },
+    {
+      "date": "2026-11-10",
+      "id": "W-CO-02",
+      "title": "Symmetry",
+      "axis": "COMPOSITION",
+      "tier": "warmup",
+      "brief": "Find an axis of symmetry and shoot dead centre on it. Then shoot off that axis by a small amount.",
+      "constraint": "Both shots, same position in the space, only the alignment changes.",
+      "review": "Which one felt more deliberate, and why?",
+      "time": "12 min",
+      "format": "any",
+      "kit": [
+        "any camera"
+      ],
+      "clips": [],
+      "poster": null,
+      "note": "",
+      "shot": false
+    },
+    {
+      "date": "2026-11-11",
+      "id": "W-TE-03",
+      "title": "Watch White Balance Drift",
+      "axis": "TECHNIQUE",
+      "tier": "warmup",
+      "brief": "Lock white balance and shoot the same scene as the light changes. Watch it move.",
+      "constraint": "Manual white balance. No auto.",
+      "review": "What did the locked WB do to the colour as the light changed?",
+      "time": "15 min",
+      "format": "any",
+      "kit": [
+        "any camera"
+      ],
+      "clips": [],
+      "poster": null,
+      "note": "",
+      "shot": false
+    },
+    {
+      "date": "2026-11-12",
+      "id": "W-ST-01",
+      "title": "Before And After",
+      "axis": "STORY",
+      "tier": "warmup",
+      "brief": "One object. Shoot it as it is, then change one thing, then shoot it again. Same frame, same light.",
+      "constraint": "Identical framing in both shots.",
+      "review": "Which single change carried the whole story?",
+      "time": "10 min",
+      "format": "any",
+      "kit": [
+        "iPhone 14 Pro"
+      ],
+      "clips": [],
+      "poster": null,
+      "note": "",
+      "shot": false
+    },
+    {
+      "date": "2026-11-13",
+      "id": "W-TE-02",
+      "title": "Pick A Shutter",
+      "axis": "TECHNIQUE",
+      "tier": "warmup",
+      "brief": "Choose one shutter speed and ride it for five shots in different light. Change nothing else.",
+      "constraint": "Identical shutter speed across all five shots.",
+      "review": "At what point did the shutter become the problem instead of the tool?",
+      "time": "15 min",
+      "format": "any",
+      "kit": [
+        "any camera"
+      ],
+      "clips": [],
+      "poster": null,
+      "note": "",
+      "shot": false
+    },
+    {
+      "date": "2026-11-14",
+      "id": "W-LI-01",
+      "title": "One Window",
+      "axis": "LIGHT",
+      "tier": "warmup",
+      "brief": "Light a subject with nothing but a single window. Turn off every other light in the room.",
+      "constraint": "One window. No artificial light at all.",
+      "review": "Which side of the face did you light, and did you notice the colour of the fill?",
+      "time": "15 min",
+      "format": "any",
+      "kit": [
+        "iPhone 14 Pro"
+      ],
+      "clips": [],
+      "poster": null,
+      "note": "",
+      "shot": false
+    },
+    {
+      "date": "2026-11-15",
+      "id": "S-MO-02",
+      "title": "Orbit",
+      "axis": "MOVEMENT",
+      "tier": "standard",
+      "brief": "Arc around a still subject, roughly 45 degrees, in one take. The subject does not move.",
+      "constraint": "The subject stays completely still. Only you move.",
+      "review": "What did the new angle reveal that the start angle hid?",
+      "time": "15 min",
+      "format": "any",
+      "kit": [
+        "Osmo Pocket 3"
+      ],
+      "clips": [],
+      "poster": null,
+      "note": "",
+      "shot": false
+    }
+  ]
+}
