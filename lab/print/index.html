@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Print Lab — DADPUNK</title>
+<meta name="description" content="The DadPunk print pass, running in WebGL. Drop any image in and watch it become a two-plate halftone. No model, no install.">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0a0a0a; --ink:#e8e4de; --ink-dim:#cfcabf; --orange:#e85d04;
+  --olive:#8a8960; --olive-dark:#3a3925; --olive-light:#a5a478;
+  --display:'Archivo Black','Impact',sans-serif; --mono:'IBM Plex Mono','Courier New',monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--black);color:var(--ink);font-family:var(--mono);font-size:14px;line-height:1.6}
+a{color:var(--orange);text-decoration:none}
+a:hover{color:var(--ink)}
+.bar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:1.1rem;padding:.65rem clamp(.9rem,4vw,2rem);
+  border-bottom:1px solid var(--olive-dark);background:rgba(10,10,10,.92);backdrop-filter:blur(6px);
+  font-size:.7rem;letter-spacing:.14em}
+.bar__brand{font-family:var(--display);font-size:.9rem;letter-spacing:.02em}
+.bar__brand i{color:var(--orange);font-style:normal}
+.bar__tag{color:var(--olive-light)}
+.bar__spacer{flex:1}
+.bar a{color:var(--olive-light)}
+.bar a:hover{color:var(--orange)}
+main{display:grid;grid-template-columns:minmax(320px,1fr) 320px;gap:clamp(1rem,2.5vw,2rem);
+  padding:clamp(1rem,3vw,2rem);align-items:start}
+@media (max-width:900px){main{grid-template-columns:1fr}}
+
+.stage{position:relative;border:1px solid var(--olive-dark);background:#070707;aspect-ratio:1/1;
+  display:flex;align-items:center;justify-content:center;overflow:hidden;
+  width:100%;max-width:min(100%, calc(100vh - 9rem));margin-inline:auto}
+.stage canvas{width:100%;height:100%;display:block}
+.stage__drop{position:absolute;inset:0;display:none;align-items:center;justify-content:center;
+  background:rgba(10,10,10,.86);border:2px dashed var(--orange);font-size:.78rem;letter-spacing:.16em;
+  color:var(--orange);text-align:center;padding:2rem;line-height:1.9}
+.stage.is-drag .stage__drop{display:flex}
+.stage__meta{position:absolute;left:0;bottom:0;right:0;display:flex;gap:1rem;padding:.5rem .7rem;
+  font-size:.62rem;letter-spacing:.16em;color:var(--olive-light);background:linear-gradient(transparent,rgba(0,0,0,.8))}
+.stage__err{position:absolute;inset:auto 0 0 0;padding:.7rem;background:#2a0a0a;color:#ff9b7a;
+  font-size:.72rem;display:none;white-space:pre-wrap}
+
+.panel{border:1px solid var(--olive-dark);padding:1.1rem 1.1rem 1.3rem;background:rgba(138,137,96,.045)}
+.panel h1{font-family:var(--display);font-size:1.35rem;line-height:1.05;text-transform:uppercase;
+  margin:0 0 .5rem;letter-spacing:-.01em}
+.panel p{margin:0 0 1.1rem;color:var(--olive-light);font-size:.8rem;line-height:1.75}
+.ctl{margin:0 0 1rem}
+.ctl__row{display:flex;justify-content:space-between;align-items:baseline;font-size:.66rem;
+  letter-spacing:.16em;color:var(--olive);margin-bottom:.3rem}
+.ctl__row b{color:var(--ink);font-weight:500;letter-spacing:.06em}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:18px;background:transparent;margin:0}
+input[type=range]::-webkit-slider-runnable-track{height:3px;background:var(--olive-dark)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;margin-top:-4.5px;
+  background:var(--orange);border:0;cursor:pointer}
+input[type=range]::-moz-range-track{height:3px;background:var(--olive-dark)}
+input[type=range]::-moz-range-thumb{width:12px;height:12px;background:var(--orange);border:0;cursor:pointer}
+.btns{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.4rem}
+button,.filebtn{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+  padding:.55rem .8rem;background:transparent;color:var(--ink);border:1px solid var(--olive);cursor:pointer}
+button:hover,.filebtn:hover{border-color:var(--orange);color:var(--orange)}
+button.is-on{background:var(--orange);color:#0a0a0a;border-color:var(--orange)}
+.hint{font-size:.66rem;color:var(--olive);letter-spacing:.08em;margin-top:.9rem;line-height:1.8}
+.hint b{color:var(--olive-light);font-weight:500}
+input[type=file]{display:none}
+.foot{grid-column:1/-1;border-top:1px solid var(--olive-dark);margin-top:.5rem;padding-top:.9rem;
+  font-size:.66rem;letter-spacing:.13em;color:var(--olive);display:flex;flex-wrap:wrap;gap:.6rem 1.2rem}
+.foot a{color:var(--olive-light)}
+.foot a:hover{color:var(--orange)}
+</style>
+</head>
+<body>
+<div class="bar">
+  <span class="bar__brand">THIS IS <i>DAD</i>PUNK</span>
+  <span class="bar__tag">// PRINT LAB</span>
+  <span class="bar__spacer"></span>
+  <a href="../../index.html">&larr; index</a>
+</div>
+
+<main>
+  <div class="stage" id="stage">
+    <canvas id="gl" width="1024" height="1024"></canvas>
+    <div class="stage__drop" id="drop">DROP AN IMAGE<br><span style="color:var(--olive-light)">png / jpg / webp — it never leaves your machine</span></div>
+    <div class="stage__meta"><span id="metaSrc">SOURCE // PROCEDURAL DEMO SLEEVE</span><span id="metaFps"></span></div>
+    <div class="stage__err" id="err"></div>
+  </div>
+
+  <div class="panel">
+    <h1>Print Lab</h1>
+    <p>The print pass from the now-playing rig, with the model taken out. Same shader maths — a rotated halftone screen, two ink plates slightly out of register, flat quantised ink — running in WebGL on whatever you drop in.</p>
+
+    <div class="ctl">
+      <div class="ctl__row"><span>INK PUNCH</span><b id="vPunch">0.75</b></div>
+      <input type="range" id="punch" min="0" max="1" step="0.01" value="0.75">
+    </div>
+    <div class="ctl">
+      <div class="ctl__row"><span>PREP / LANE SIM</span><b id="vPrep">0.85</b></div>
+      <input type="range" id="prep" min="0" max="1" step="0.01" value="0.85">
+    </div>
+    <div class="ctl">
+      <div class="ctl__row"><span>SCREEN ANGLE</span><b id="vAngle">45°</b></div>
+      <input type="range" id="angle" min="0" max="90" step="1" value="45">
+    </div>
+    <div class="ctl">
+      <div class="ctl__row"><span>REGISTRATION DRIFT</span><b id="vReg">1.00</b></div>
+      <input type="range" id="reg" min="0" max="2.5" step="0.01" value="1">
+    </div>
+
+    <div class="btns">
+      <label class="filebtn" for="file">Load image</label>
+      <input type="file" id="file" accept="image/*">
+      <button id="beat" class="is-on">Beat sim</button>
+      <button id="save">Save PNG</button>
+    </div>
+
+    <p class="hint">
+      <b>Punch</b> drives the screen: dot presence, coarseness (3.2 → 4.6 px cell at 512), and how flat the ink goes. It barely touches colour fringing — scaling that with the same knob is what turns a print into digital glitch.<br><br>
+      <b>Prep / lane sim</b> is doing the job the diffusion model did in the rig. That shader was tuned on the model's output — 512 px, soft, five or six flat colours, measured at 5.6 local contrast. Feed the same screen a sharp photograph (40.9) and it has to fight detail instead of building tone, so it reads as a filter. Prep flattens the input the same way: downsample, blur, reduce to a palette. It is not a model and does not claim to be.<br><br>
+      <b>Angle</b> is the screen angle. 45° is classic black; two plates at 30° to each other is what makes a rosette.<br><br>
+      Drag and drop works anywhere on the frame.
+    </p>
+  </div>
+
+  <div class="foot">
+    <span>© 2026 // BUDGEWOI, NSW</span>
+    <a href="../../index.html">/index</a>
+    <a href="../notes/the-print-is-in-the-shader/">/the writeup</a>
+    <a href="https://github.com/marc0ne-s">GITHUB</a>
+  </div>
+</main>
+
+<script>
+(function(){
+"use strict";
+const stage=document.getElementById('stage'), cv=document.getElementById('gl'), errBox=document.getElementById('err');
+
+// ---------------------------------------------------------------- shader
+// Ported 1:1 from style_music.frag. sTD2DInputs[0] -> uTex, vUV -> vUv,
+// TDOutputSwizzle -> plain output. Screen angle is exposed as a uniform here
+// because a browser demo can afford the rotation; the TD version baked 45 deg.
+const VERT=`#version 300 es
+void main(){
+  // attribute-less full-screen triangle
+  vec2 p = vec2((gl_VertexID<<1)&2, gl_VertexID&2);
+  gl_Position = vec4(p*2.0-1.0, 0.0, 1.0);
+}`;
+
+const FRAG=`#version 300 es
+precision highp float;
+uniform sampler2D uTex;
+uniform vec4 uAmt;    // punch, width, height, angle(rad)
+uniform vec4 uAudio;  // kick, high, energy, mid
+out vec4 outColor;
+
+float luma(vec3 c){ return dot(c, vec3(0.299,0.587,0.114)); }
+
+void main(){
+  vec2 uv = gl_FragCoord.xy / vec2(uAmt.y, uAmt.z);
+  // no uv.y flip here: the texture is uploaded with UNPACK_FLIP_Y_WEBGL, which
+  // already puts source row 0 at v=1. Flipping in both places inverted the frame.
+  vec2 px = vec2(1.0/max(uAmt.y,1.0), 1.0/max(uAmt.z,1.0));
+  vec2 g  = uv / px;
+  float P = clamp(uAmt.x, 0.0, 1.0);
+
+  // ---- misregistration: plates miss by a hair; punch barely touches it
+  float reg = (0.0016 + 0.0030*uAudio.z + 0.0008*P) * (0.7+0.6*uAudio.x) * (0.80+0.40*P);
+  vec2 roff = vec2(reg, reg*0.35);
+  float rch = texture(uTex, clamp(uv+roff, 0.0, 1.0)).r;
+  float gch = texture(uTex, uv).g;
+  float bch = texture(uTex, clamp(uv-roff, 0.0, 1.0)).b;
+  vec3 col = vec3(rch, gch, bch);
+
+  // ---- halftone screen, rotated by the angle uniform
+  float a = uAmt.w;
+  vec2 dg = mat2(cos(a), -sin(a), sin(a), cos(a)) * g;
+  float cs = mix(3.2, 4.6, P);
+  float cell = fract(dg.x/cs) * fract(dg.y/cs);
+  float tone = luma(col);
+  float mid = smoothstep(0.08,0.45,tone) * (1.0 - smoothstep(0.55,0.95,tone));
+  float dots = smoothstep(tone*0.85, tone*1.15+0.001, cell);
+  col *= mix(1.0, mix(0.80-0.30*P, 1.12+0.06*P, dots), (0.55+0.42*P)*mid);
+
+  // ---- second coarser screen in the shadows
+  float cell2 = fract(dg.x/(cs*2.0)) * fract(dg.y/(cs*2.0));
+  float dots2 = smoothstep(tone*0.70, tone*1.30+0.001, cell2);
+  col *= mix(1.0, mix(0.86,1.06,dots2), 0.28*P*smoothstep(0.35,0.0,tone));
+
+  // ---- flat ink planes
+  float lv = mix(6.0,4.6,P) - 1.5*clamp(uAudio.x,0.0,1.0);
+  vec3 flatc = floor(col*lv+0.5)/lv;
+  col = mix(col, flatc, 0.72+0.14*P);
+
+  // ---- toner grain
+  float gr = fract(sin(dot(g, vec2(12.9898,78.233)))*43758.5453);
+  col += (gr-0.5)*(0.034+0.022*P)*(1.0-0.5*smoothstep(0.5,1.0,luma(col)));
+
+  // ---- vignette
+  vec2 d = uv-0.5;
+  col *= 1.0 - (0.18+0.05*P)*smoothstep(0.25,0.75,dot(d,d)*2.2);
+
+  // ---- saturation, then the kick flash
+  float L = luma(col);
+  col = mix(vec3(L), col, 1.20+0.06*P);
+  col = clamp((col-0.5)*(1.05+0.06*P+(0.15+0.03*P)*uAudio.z)+0.5, 0.0, 1.0);
+  col *= 1.0+0.14*uAudio.x;
+
+  // ---- out_grade + disp_auto, as the rig did after the shader
+  col = clamp((col-0.5)*1.06+0.5, 0.0, 1.0) * uAudio.w;
+  outColor = vec4(min(col, 1.0), 1.0);
+}`;
+
+function fail(msg){
+  errBox.style.display='block';
+  errBox.textContent = msg;
+  console.error(msg);
+}
+
+const gl = cv.getContext('webgl2', {preserveDrawingBuffer:true, antialias:false});
+if(!gl){ fail('WebGL2 is not available in this browser, so the print pass cannot run.'); return; }
+
+function compile(type, src){
+  const s = gl.createShader(type);
+  gl.shaderSource(s, src); gl.compileShader(s);
+  if(!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s) || 'shader compile failed');
+  return s;
+}
+let prog;
+try{
+  prog = gl.createProgram();
+  gl.attachShader(prog, compile(gl.VERTEX_SHADER, VERT));
+  gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, FRAG));
+  gl.linkProgram(prog);
+  if(!gl.getProgramParameter(prog, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(prog));
+}catch(e){ fail('Shader error: '+e.message); return; }
+gl.useProgram(prog);
+
+const U = {
+  tex: gl.getUniformLocation(prog,'uTex'),
+  amt: gl.getUniformLocation(prog,'uAmt'),
+  aud: gl.getUniformLocation(prog,'uAudio'),
+};
+gl.bindVertexArray(gl.createVertexArray());
+
+// ---------------------------------------------------------------- source texture
+const SRC = 1024;          // what the shader samples
+const WORK = 512;          // what the lane actually returned, so prep works there
+const srcCanvas = document.createElement('canvas');   // final, uploaded
+srcCanvas.width = srcCanvas.height = SRC;
+const sctx = srcCanvas.getContext('2d');
+const baseCanvas = document.createElement('canvas');  // cover-fitted raw input
+baseCanvas.width = baseCanvas.height = SRC;
+const bctx = baseCanvas.getContext('2d');
+const workCanvas = document.createElement('canvas');  // 512 scratch for prep
+workCanvas.width = workCanvas.height = WORK;
+const wctx = workCanvas.getContext('2d', {willReadFrequently:true});
+let srcLabel = 'PROCEDURAL DEMO SLEEVE';
+
+// ---------------------------------------------------------------- prep (lane sim)
+// The rig's shader ran on the diffusion model's reply, not on artwork: 512 px,
+// soft, five or six flat colours (measured 5.6 local contrast). A sharp photo is
+// 40.9, so the same screen has to fight detail instead of building tone. This does
+// the flattening without a model: downsample, blur, reduce to a palette.
+function boxBlur(data, w, h, r){
+  if(r < 1) return data;
+  const tmp = new Uint8ClampedArray(data.length);
+  const norm = 1/(2*r+1);
+  // horizontal
+  for(let y=0;y<h;y++){
+    for(let c=0;c<4;c++){
+      let sum = 0;
+      for(let x=-r;x<=r;x++) sum += data[(y*w + Math.min(w-1, Math.max(0,x)))*4 + c];
+      for(let x=0;x<w;x++){
+        tmp[(y*w+x)*4+c] = sum*norm;
+        const add = data[(y*w + Math.min(w-1, x+r+1))*4 + c];
+        const sub = data[(y*w + Math.max(0, x-r))*4 + c];
+        sum += add - sub;
+      }
+    }
+  }
+  // vertical
+  for(let x=0;x<w;x++){
+    for(let c=0;c<4;c++){
+      let sum = 0;
+      for(let y=-r;y<=r;y++) sum += tmp[(Math.min(h-1, Math.max(0,y))*w + x)*4 + c];
+      for(let y=0;y<h;y++){
+        data[(y*w+x)*4+c] = sum*norm;
+        const add = tmp[(Math.min(h-1, y+r+1)*w + x)*4 + c];
+        const sub = tmp[(Math.max(0, y-r)*w + x)*4 + c];
+        sum += add - sub;
+      }
+    }
+  }
+  return data;
+}
+
+function kmeans(data, sampleCount, k, iters){
+  // seed by sampling the image, then Lloyd iterations. Returns [[r,g,b], ...]
+  const pts = [];
+  const stride = Math.max(4, Math.floor((sampleCount*4)/2400)*4);
+  for(let i=0;i<data.length;i+=stride) pts.push([data[i],data[i+1],data[i+2]]);
+  const cents = [];
+  for(let i=0;i<k;i++) cents.push(pts[Math.floor((i+0.5)*pts.length/k)].slice());
+  for(let it=0; it<iters; it++){
+    const sum = Array.from({length:k}, ()=>[0,0,0,0]);
+    for(const p of pts){
+      let best=0, bd=1e9;
+      for(let c=0;c<k;c++){
+        const dr=p[0]-cents[c][0], dg=p[1]-cents[c][1], db=p[2]-cents[c][2];
+        const d = dr*dr*0.299 + dg*dg*0.587 + db*db*0.114;
+        if(d<bd){ bd=d; best=c; }
+      }
+      const s2 = sum[best]; s2[0]+=p[0]; s2[1]+=p[1]; s2[2]+=p[2]; s2[3]++;
+    }
+    for(let c=0;c<k;c++) if(sum[c][3]) cents[c] = [sum[c][0]/sum[c][3], sum[c][1]/sum[c][3], sum[c][2]/sum[c][3]];
+  }
+  return cents;
+}
+
+// ---- grade + plate blur + upscale, shared by both prep paths
+function finishWork(){
+  const id = wctx.getImageData(0,0,WORK,WORK);
+  const d = id.data;
+
+  // plate_grade + print exposure. The rig did contrast 1.10 then a gamma lift toward a
+  // mean of 0.20 on dark sources; a fixed contrast around 0.5 blows a white sleeve past
+  // 1.0 and the screen has no tone left to build with (every cell on -> solid ink). So:
+  // auto-level on the 95th percentile, plus a lift only when the source is dark.
+  const hist = new Uint32Array(256);
+  let sum = 0;
+  for(let i=0;i<d.length;i+=4){
+    const L = Math.round(d[i]*0.299 + d[i+1]*0.587 + d[i+2]*0.114);
+    hist[L]++; sum += L;
+  }
+  const npx = d.length/4;
+  const mean = sum/255/npx;
+  let p95 = 255;
+  for(let i=0, acc=0; i<256; i++){ acc += hist[i]; if(acc >= npx*0.95){ p95 = i; break; } }
+  const scale = Math.min(6, Math.max(0.35, 0.90/Math.max(p95/255, 0.02)));
+  let expo = 1.0;
+  if(mean > 0.001 && mean < 0.20){
+    expo = Math.max(0.40, Math.min(1.0, Math.log(0.20)/Math.log(Math.max(mean, 0.02))));
+  }
+  const lut = new Uint8ClampedArray(256);
+  for(let i=0;i<256;i++){
+    const v = i/255;
+    lut[i] = 255 * Math.min(1, Math.max(0, Math.pow(v, expo) * scale));
+  }
+  for(let i=0;i<d.length;i+=4){ d[i]=lut[d[i]]; d[i+1]=lut[d[i+1]]; d[i+2]=lut[d[i+2]]; }
+
+  // plate_blur: 12 px at the rig's 1024, so 6 px here. The shader was tuned on it.
+  boxBlur(d, WORK, WORK, 6);
+  for(let i=3;i<d.length;i+=4) d[i]=255;
+  wctx.putImageData(id, 0, 0);
+
+  sctx.imageSmoothingEnabled = true;
+  sctx.clearRect(0,0,SRC,SRC);
+  sctx.drawImage(workCanvas, 0, 0, SRC, SRC);   // back up to the shader's size
+  upload();
+  measurePeak();
+}
+
+function prepFromBase(amount){
+  const a = Math.max(0, Math.min(1, amount));
+  if(a <= 0.001){                       // off: the raw image, no flattening, no grade
+    sctx.drawImage(baseCanvas, 0, 0);
+    upload();
+    measurePeak();
+    return;
+  }
+  wctx.clearRect(0,0,WORK,WORK);
+  wctx.drawImage(baseCanvas, 0, 0, WORK, WORK);   // 1. down to the lane's size
+  const id = wctx.getImageData(0,0,WORK,WORK);
+  const d = id.data;
+
+  boxBlur(d, WORK, WORK, Math.round(1 + 6*a));     // 2. soften: kill the detail
+  boxBlur(d, WORK, WORK, Math.round(1 + 3*a));     //    two passes approximate a gaussian
+
+  const k = Math.max(4, Math.round(10 - 6*a));     // 3. fewer ink planes as prep rises
+  const cents = kmeans(d, WORK*WORK, k, 7);
+  for(let i=0;i<d.length;i+=4){
+    let best=0, bd=1e9;
+    for(let c=0;c<k;c++){
+      const dr=d[i]-cents[c][0], dg=d[i+1]-cents[c][1], db=d[i+2]-cents[c][2];
+      const dist = dr*dr*0.299 + dg*dg*0.587 + db*db*0.114;
+      if(dist<bd){ bd=dist; best=c; }
+    }
+    d[i]=cents[best][0]; d[i+1]=cents[best][1]; d[i+2]=cents[best][2];
+  }
+  boxBlur(d, WORK, WORK, Math.round(1 + 4*a));     // 4. soften the palette boundaries
+  wctx.putImageData(id, 0, 0);
+  finishWork();
+}
+
+// ---------------------------------------------------------------- the real lane
+// StreamDiffusion on localhost:7866 — the same model the rig uses. Flatten is an
+// approximation of what the model does; this is the actual thing, and it is only
+// available when the lane is running on this machine.
+const LANE = {url:'http://127.0.0.1:7866', prompt:'silk screen four colour split, flat saturated ink, misregistration, glue stains, torn paper collage, no text, dry plate registration', state:'idle', ms:0};
+async function runLane(){
+  if(LANE.state === 'running') return;
+  LANE.state = 'running'; paintLane();
+  try{
+    const blob = await new Promise(res => baseCanvas.toBlob(res, 'image/png'));
+    const t0 = performance.now();
+    const url = LANE.url + '/img2img?prompt=' + encodeURIComponent(LANE.prompt);
+    const res = await fetch(url, {method:'POST', body:blob});
+    if(!res.ok) throw new Error('lane ' + res.status);
+    const bmp = await createImageBitmap(await res.blob());
+    LANE.ms = Math.round(performance.now() - t0);
+    wctx.clearRect(0,0,WORK,WORK);
+    wctx.drawImage(bmp, 0, 0, WORK, WORK);
+    finishWork();
+    LANE.state = 'ok';
+  }catch(e){
+    LANE.state = 'off'; LANE.err = String(e && e.message || e);
+    prepFromBase(PREP);                 // fall back rather than leave a dead frame
+  }
+  paintLane();
+}
+function paintLane(){
+  const el2 = el('lanestat');
+  if(!el2) return;
+  el2.textContent = LANE.state === 'ok' ? ('lane · ' + LANE.ms + ' ms')
+                  : LANE.state === 'running' ? 'lane · working…'
+                  : LANE.state === 'off' ? ('lane offline · ' + (LANE.err||'')) : 'lane · idle';
+  el2.className = 'lane lane--' + LANE.state;
+}
+
+// out_grade + disp_auto: contrast 1.06, then brightness normalised so the peak lands
+// near 0.88. The rig did this on the display path so dark sleeves were not crushed.
+let OUTLIFT = 1.0;
+const peakCanvas = document.createElement('canvas');
+peakCanvas.width = peakCanvas.height = 64;
+const peakCtx = peakCanvas.getContext('2d', {willReadFrequently:true});
+function measurePeak(){
+  // sample the source rather than the frame: the shader's peak tracks its own mean closely
+  peakCtx.drawImage(srcCanvas, 0, 0, 64, 64);
+  const dd = peakCtx.getImageData(0,0,64,64).data;
+  let mx = 0;
+  for(let i=0;i<dd.length;i+=4) mx = Math.max(mx, dd[i], dd[i+1], dd[i+2]);
+  const want = Math.max(0.5, Math.min(4.0, 0.88/Math.max(mx/255, 1e-3)));
+  OUTLIFT = OUTLIFT + (want - OUTLIFT)*0.5;
+}
+
+// A sleeve drawn from nothing, so the demo ships no third-party artwork.
+function drawDemoSleeve(){
+  const c = bctx, S = SRC;
+  const bg = c.createLinearGradient(0,0,S,S);
+  bg.addColorStop(0,'#12110d'); bg.addColorStop(.55,'#2b2a1c'); bg.addColorStop(1,'#0a0a0a');
+  c.fillStyle = bg; c.fillRect(0,0,S,S);
+
+  // big offset disc, the thing a print pass likes to chew on
+  c.save(); c.translate(S*.52, S*.47);
+  const rg = c.createRadialGradient(-S*.1,-S*.12,S*.03, 0,0,S*.42);
+  rg.addColorStop(0,'#e8dcc8'); rg.addColorStop(.42,'#c9a227'); rg.addColorStop(.75,'#8a5a1e'); rg.addColorStop(1,'#2b1c10');
+  c.fillStyle = rg; c.beginPath(); c.arc(0,0,S*.35,0,Math.PI*2); c.fill();
+  c.globalAlpha = .55; c.strokeStyle = '#e85d04'; c.lineWidth = S*.012;
+  for(let i=1;i<=3;i++){ c.beginPath(); c.arc(0,0,S*.35 - i*S*.022, 0, Math.PI*2); c.stroke(); }
+  c.restore();
+
+  // type block
+  c.fillStyle = '#0a0a0a';
+  c.fillRect(S*.08, S*.10, S*.42, S*.10);
+  c.fillStyle = '#e8e4de';
+  c.font = '700 '+Math.round(S*.052)+'px "IBM Plex Mono", monospace';
+  c.fillText('SIDE A', S*.095, S*.175);
+  c.font = '400 '+Math.round(S*.026)+'px "IBM Plex Mono", monospace';
+  c.fillStyle = '#cfcabf';
+  c.fillText('DEMO SLEEVE', S*.095, S*.225);
+  c.fillText('1024 x 1024', S*.095, S*.258);
+
+  // hairline frame + a few registration marks, which the screen will grab
+  c.strokeStyle = 'rgba(232,228,222,.35)'; c.lineWidth = 2;
+  c.strokeRect(S*.055, S*.055, S*.89, S*.89);
+  c.strokeStyle = 'rgba(232,93,4,.8)'; c.lineWidth = 3;
+  [[.055,.5],[.945,.5],[.5,.055],[.5,.945]].forEach(([x,y])=>{
+    c.beginPath(); c.moveTo(S*x-S*.02, S*y); c.lineTo(S*x+S*.02, S*y); c.stroke();
+  });
+  // noise so the screen has something to bite on
+  const id = c.getImageData(0,0,S,S), d = id.data;
+  for(let i=0;i<d.length;i+=4){ const n=(Math.random()-.5)*16; d[i]+=n; d[i+1]+=n; d[i+2]+=n; }
+  c.putImageData(id,0,0);
+}
+
+const tex = gl.createTexture();
+gl.bindTexture(gl.TEXTURE_2D, tex);
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+
+function upload(){
+  gl.bindTexture(gl.TEXTURE_2D, tex);
+  gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, srcCanvas);
+}
+
+function drawImageCover(img){
+  const S = SRC, ar = img.width/img.height;
+  bctx.clearRect(0,0,S,S);
+  bctx.fillStyle = '#0a0a0a'; bctx.fillRect(0,0,S,S);
+  // cover, not contain: fill the square and crop the overflow, so there are no
+  // black letterbox bars for the screen to chew on at the edges
+  let w = S, h = S;
+  if(ar > 1) w = S*ar; else h = S/ar;
+  bctx.drawImage(img, (S-w)/2, (S-h)/2, w, h);
+  prepFromBase(PREP);
+}
+
+let PREP = 0.85;
+drawDemoSleeve(); prepFromBase(PREP);
+
+// ---------------------------------------------------------------- state + render
+const S = {punch:.75, angle:45, reg:1, prep:PREP, beat:true, kick:0, energy:0, last:performance.now(), acc:0, fps:0};
+
+const el = id => document.getElementById(id);
+const inPunch = el('punch'), inAngle = el('angle'), inReg = el('reg'), inPrep = el('prep');
+function syncLabels(){
+  el('vPunch').textContent = S.punch.toFixed(2);
+  el('vAngle').textContent = S.angle + '°';
+  el('vReg').textContent   = S.reg.toFixed(2);
+  el('vPrep').textContent  = S.prep.toFixed(2);
+}
+inPunch.oninput = e => { S.punch = +e.target.value; syncLabels(); };
+inAngle.oninput = e => { S.angle = +e.target.value; syncLabels(); };
+inReg.oninput   = e => { S.reg   = +e.target.value; syncLabels(); };
+inPrep.oninput  = e => { S.prep = PREP = +e.target.value; syncLabels(); prepFromBase(PREP); };
+syncLabels();
+
+el('beat').onclick = e => {
+  S.beat = !S.beat;
+  e.currentTarget.classList.toggle('is-on', S.beat);
+};
+
+function render(now){
+  const dt = Math.min((now - S.last)/1000, .1); S.last = now;
+  S.fps = S.fps ? S.fps*.9 + (1/Math.max(dt,1e-4))*.1 : 1/Math.max(dt,1e-4);
+  if(S.beat){
+    // a 120 bpm pulse so the misregistration has something to breathe with
+    S.acc += dt;
+    const period = .5, ph = (S.acc % period)/period;
+    const k = Math.exp(-ph*9);
+    S.kick = S.kick*.6 + k*.4;
+    S.energy = S.energy*.92 + .35*.08;
+  } else { S.kick *= .9; S.energy *= .9; }
+
+  gl.viewport(0,0,cv.width,cv.height);
+  gl.useProgram(prog);
+  gl.activeTexture(gl.TEXTURE0);
+  gl.bindTexture(gl.TEXTURE_2D, tex);
+  gl.uniform1i(U.tex, 0);
+  gl.uniform4f(U.amt, S.punch, cv.width, cv.height, S.angle*Math.PI/180);
+  gl.uniform4f(U.aud, S.kick, .3, S.energy, OUTLIFT);
+  gl.drawArrays(gl.TRIANGLES, 0, 3);
+
+  el('metaFps').textContent = 'FPS ' + Math.round(S.fps);
+  requestAnimationFrame(render);
+}
+requestAnimationFrame(render);
+
+// ---------------------------------------------------------------- loading files
+function loadFile(file){
+  if(!file || !file.type.startsWith('image/')) return;
+  const url = URL.createObjectURL(file);
+  const img = new Image();
+  img.onload = () => {
+    drawImageCover(img);
+    srcLabel = file.name.slice(0,42).toUpperCase();
+    el('metaSrc').textContent = 'SOURCE // ' + srcLabel;
+    URL.revokeObjectURL(url);
+  };
+  img.onerror = () => fail('That file did not decode as an image.');
+  img.src = url;
+}
+el('file').onchange = e => loadFile(e.target.files[0]);
+
+['dragenter','dragover'].forEach(ev => stage.addEventListener(ev, e => {
+  e.preventDefault(); stage.classList.add('is-drag');
+}));
+['dragleave','drop'].forEach(ev => stage.addEventListener(ev, e => {
+  e.preventDefault();
+  if(ev === 'drop' || e.target === stage) stage.classList.remove('is-drag');
+  if(ev === 'drop' && e.dataTransfer.files.length) loadFile(e.dataTransfer.files[0]);
+}));
+window.addEventListener('paste', e => {
+  const item = [...(e.clipboardData?.items||[])].find(i => i.type.startsWith('image/'));
+  if(item) loadFile(item.getAsFile());
+});
+
+el('save').onclick = () => {
+  cv.toBlob(b => {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(b);
+    a.download = 'dadpunk-print-' + S.punch.toFixed(2) + '.png';
+    a.click();
+    setTimeout(()=>URL.revokeObjectURL(a.href), 4000);
+  }, 'image/png');
+};
+
+// expose for automated checking / console tinkering
+window.PRINTLAB = {state:S, sourceURL(){ return srcCanvas.toDataURL('image/png'); }, setPunch(v){ S.punch=v; inPunch.value=v; syncLabels(); },
+                   setPrep(v){ S.prep=PREP=v; inPrep.value=v; syncLabels(); prepFromBase(v); },
+                   setAngle(v){ S.angle=v; inAngle.value=v; syncLabels(); },
+                   setReg(v){ S.reg=v; inReg.value=v; syncLabels(); },
+                   get source(){ return srcLabel; }};
+})();
+</script>
+</body>
+</html>

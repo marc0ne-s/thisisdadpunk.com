@@ -1,943 +1,1069 @@
 {
   "playlist": "as heard on DadPunk",
-  "updated": "2026-10-25T09:25:59Z",
-  "total_tracks": 125,
-  "total_plays": 702,
-  "artist_count": 58,
-  "album_count": 45,
+  "updated": "2026-11-28T05:27:00Z",
+  "total_tracks": 143,
+  "total_plays": 573,
+  "artist_count": 75,
+  "album_count": 58,
   "tracks": [
-    {
-      "title": "Stay",
-      "artist": "Gracie Abrams",
-      "album": "Stay - Single",
-      "plays": 44,
-      "last_played": "2026-10-23T22:00:34"
-    },
     {
       "title": "bad guy",
       "artist": "Billie Eilish",
       "album": "WHEN WE ALL FALL ASLEEP, WHERE DO WE GO?",
-      "plays": 42,
-      "last_played": "2026-10-18T21:32:11"
+      "plays": 43,
+      "last_played": "2026-11-18T21:37:14"
     },
     {
-      "title": "tehe",
-      "artist": "Gracie Abrams",
-      "album": "minor",
-      "plays": 36,
-      "last_played": "2026-10-23T21:57:42"
-    },
-    {
-      "title": "this is what slow dancing feels like",
-      "artist": "JVKE",
-      "album": "this is what slow dancing feels like - Single",
-      "plays": 35,
-      "last_played": "2026-10-23T22:20:49"
-    },
-    {
-      "title": "ocean eyes",
+      "title": "everything i wanted",
       "artist": "Billie Eilish",
-      "album": "dont smile at me",
-      "plays": 35,
-      "last_played": "2026-10-23T20:56:16"
-    },
-    {
-      "title": "A-Punk",
-      "artist": "Vampire Weekend",
-      "album": "Vampire Weekend",
-      "plays": 29,
-      "last_played": "2026-10-16T20:17:14"
+      "album": "everything i wanted - Single",
+      "plays": 30,
+      "last_played": "2026-11-10T14:30:34"
     },
     {
       "title": "when the party's over",
       "artist": "Billie Eilish",
       "album": "WHEN WE ALL FALL ASLEEP, WHERE DO WE GO?",
-      "plays": 27,
-      "last_played": "2026-10-24T20:10:26"
+      "plays": 29,
+      "last_played": "2026-11-15T20:39:30"
     },
     {
-      "title": "vampire",
-      "artist": "Olivia Rodrigo",
-      "album": "GUTS (spilled)",
-      "plays": 25,
-      "last_played": "2026-10-17T18:55:14"
+      "title": "Queen",
+      "artist": "Melvins",
+      "album": "Singles 1-12",
+      "plays": 28,
+      "last_played": "2026-11-01T14:52:01"
     },
     {
-      "title": "24K Magic",
-      "artist": "Bruno Mars",
-      "album": "24K Magic",
-      "plays": 23,
-      "last_played": "2026-09-30T23:00:21"
-    },
-    {
-      "title": "bad idea right?",
-      "artist": "Olivia Rodrigo",
-      "album": "GUTS (spilled)",
+      "title": "Figure It Out",
+      "artist": "Royal Blood",
+      "album": "Royal Blood",
       "plays": 22,
-      "last_played": "2026-10-18T20:48:39"
+      "last_played": "2026-11-28T12:26:49"
     },
     {
-      "title": "Good Luck, Babe!",
-      "artist": "Chappell Roan",
-      "album": "Good Luck, Babe! - Single",
-      "plays": 21,
-      "last_played": "2026-10-23T20:49:05"
-    },
-    {
-      "title": "making the bed",
-      "artist": "Olivia Rodrigo",
-      "album": "GUTS (spilled)",
-      "plays": 18,
-      "last_played": "2026-10-23T14:30:43"
-    },
-    {
-      "title": "Your Power",
+      "title": "WILDFLOWER",
       "artist": "Billie Eilish",
-      "album": "Happier Than Ever",
-      "plays": 18,
-      "last_played": "2026-10-18T20:45:34"
+      "album": "HIT ME HARD AND SOFT",
+      "plays": 22,
+      "last_played": "2026-11-15T20:22:24"
+    },
+    {
+      "title": "Upside Down",
+      "artist": "JVKE",
+      "album": "Upside Down - Single",
+      "plays": 21,
+      "last_played": "2026-11-28T12:30:36"
     },
     {
       "title": "Happier Than Ever",
       "artist": "Billie Eilish",
       "album": "Happier Than Ever",
-      "plays": 17,
-      "last_played": "2026-10-23T22:46:48"
+      "plays": 18,
+      "last_played": "2026-11-15T11:31:02"
     },
     {
-      "title": "Jimmy",
-      "artist": "Tones And I",
-      "album": "The Kids Are Coming - EP",
-      "plays": 16,
-      "last_played": "2026-10-23T22:31:53"
+      "title": "CSIRAC",
+      "artist": "Ninajirachi",
+      "album": "I Love My Computer",
+      "plays": 15,
+      "last_played": "2026-11-28T12:10:26"
     },
     {
-      "title": "Turn On The Lights again.. (feat. Future)",
-      "artist": "Fred again.. & Swedish House Mafia",
-      "album": "USB",
-      "plays": 16,
-      "last_played": "2026-10-21T05:19:25"
+      "title": "logical",
+      "artist": "Olivia Rodrigo",
+      "album": "GUTS (spilled)",
+      "plays": 13,
+      "last_played": "2026-11-15T11:37:53"
     },
     {
-      "title": "Fortress",
-      "artist": "Bloc Party",
-      "album": "Hymns (Deluxe Edition)",
-      "plays": 14,
-      "last_played": "2026-10-23T22:25:19"
-    },
-    {
-      "title": "Busy Woman",
-      "artist": "Sabrina Carpenter",
-      "album": "Short n' Sweet (Deluxe)",
-      "plays": 11,
-      "last_played": "2026-10-17T18:28:31"
-    },
-    {
-      "title": "So U Kno",
-      "artist": "Overmono",
-      "album": "Good Lies",
-      "plays": 10,
-      "last_played": "2026-10-21T06:41:14"
+      "title": "Icky Thump",
+      "artist": "The White Stripes",
+      "album": "Icky Thump",
+      "plays": 12,
+      "last_played": "2026-11-10T14:47:01"
     },
     {
       "title": "Marea (We’ve Lost Dancing)",
       "artist": "Fred again.. & The Blessed Madonna",
       "album": "Actual Life (April 14 - December 17 2020)",
+      "plays": 11,
+      "last_played": "2026-11-01T16:31:12"
+    },
+    {
+      "title": "Sabotage",
+      "artist": "Beastie Boys",
+      "album": "Triple J Hottest 100 - 1994",
       "plays": 10,
-      "last_played": "2026-10-16T21:37:42"
+      "last_played": "2026-11-01T14:57:39"
     },
     {
-      "title": "Swimming Pools (Drank)",
-      "artist": "Kendrick Lamar",
-      "album": "good kid, m.A.A.d city (Deluxe)",
+      "title": "RESPEK (feat. Topaz Jones & Ezri) [CESCO REMIX]",
+      "artist": "Machinedrum",
+      "album": "3RMX82",
       "plays": 9,
-      "last_played": "2026-10-17T18:42:09"
+      "last_played": "2026-11-28T12:33:22"
     },
     {
-      "title": "Delilah (pull me out of this)",
-      "artist": "Fred again.. & Delilah Montagu",
-      "album": "Actual Life 3 (January 1 - September 9 2022)",
-      "plays": 8,
-      "last_played": "2026-10-21T05:58:13"
+      "title": "WyMEKE",
+      "artist": "Marco Shuttle",
+      "album": "MSP02 - Single",
+      "plays": 6,
+      "last_played": "2026-11-28T12:21:29"
     },
     {
-      "title": "Waited All Night",
-      "artist": "Jamie xx, Romy & Oliver Sim",
-      "album": "In Waves",
-      "plays": 8,
-      "last_played": "2026-10-16T20:25:24"
+      "title": "Sharpener",
+      "artist": "Cavetown",
+      "album": "Sharpener - Single",
+      "plays": 6,
+      "last_played": "2026-11-15T20:33:59"
     },
     {
-      "title": "Is U",
-      "artist": "Overmono",
-      "album": "Good Lies",
-      "plays": 7,
-      "last_played": "2026-10-16T22:48:48"
+      "title": "Red Wine Supernova",
+      "artist": "Chappell Roan",
+      "album": "The Rise and Fall of a Midwest Princess",
+      "plays": 6,
+      "last_played": "2026-11-15T11:26:03"
     },
     {
-      "title": "Bad Habit",
-      "artist": "Steve Lacy",
-      "album": "Gemini Rights",
-      "plays": 7,
-      "last_played": "2026-10-16T20:10:52"
+      "title": "Jingle Bell Rock",
+      "artist": "Bobby Helms",
+      "album": "Jingle Bell Rock / Captain Santa Claus (And His Reindeer Space Patrol) - Single",
+      "plays": 6,
+      "last_played": "2026-11-11T20:32:07"
+    },
+    {
+      "title": "Sleep Now In The Fire",
+      "artist": "Rage Against the Machine",
+      "album": "The Battle Of Los Angeles",
+      "plays": 6,
+      "last_played": "2026-11-10T14:26:31"
     },
     {
       "title": "Printerlude",
       "artist": "HAAi",
       "album": "DIGITiSE",
-      "plays": 5,
-      "last_played": "2026-10-21T03:13:29"
+      "plays": 6,
+      "last_played": "2026-11-02T15:05:57"
     },
     {
-      "title": "Casual",
-      "artist": "Chappell Roan",
-      "album": "The Rise and Fall of a Midwest Princess",
-      "plays": 5,
-      "last_played": "2026-10-18T21:09:54"
+      "title": "Lost",
+      "artist": "Frank Ocean",
+      "album": "Channel ORANGE",
+      "plays": 6,
+      "last_played": "2026-11-01T16:35:04"
     },
     {
       "title": "Friends Forever",
       "artist": "The Avalanches",
       "album": "No Bad Memories",
-      "plays": 5,
-      "last_played": "2026-10-17T02:59:56"
+      "plays": 6,
+      "last_played": "2026-11-01T15:39:33"
     },
     {
       "title": "Every Single Weekend (feat. Jamie xx)",
       "artist": "The Avalanches",
       "album": "No Bad Memories",
-      "plays": 5,
-      "last_played": "2026-10-17T02:59:29"
-    },
-    {
-      "title": "Rush",
-      "artist": "Logic1000",
-      "album": "Rush / Can't Stop Thinking About - Single",
-      "plays": 5,
-      "last_played": "2026-10-16T22:21:48"
-    },
-    {
-      "title": "GOLD",
-      "artist": "BROCKHAMPTON",
-      "album": "SATURATION",
-      "plays": 5,
-      "last_played": "2026-10-16T20:14:58"
+      "plays": 6,
+      "last_played": "2026-11-01T15:39:05"
     },
     {
       "title": "I Give Everything I Have 2 U (feat. Loaded Honey)",
       "artist": "The Avalanches",
       "album": "No Bad Memories",
-      "plays": 4,
-      "last_played": "2026-10-17T02:57:19"
+      "plays": 5,
+      "last_played": "2026-11-01T15:36:55"
     },
     {
-      "title": "Elephant",
+      "title": "My God Is The Sun",
+      "artist": "Queens Of The Stone Age",
+      "album": "...Like Clockwork",
+      "plays": 4,
+      "last_played": "2026-11-10T14:34:27"
+    },
+    {
+      "title": "BLEACH",
+      "artist": "BROCKHAMPTON",
+      "album": "SATURATION III",
+      "plays": 4,
+      "last_played": "2026-11-01T16:57:13"
+    },
+    {
+      "title": "I Can Change",
+      "artist": "LCD Soundsystem",
+      "album": "Hottest 100 2010",
+      "plays": 4,
+      "last_played": "2026-11-01T16:52:41"
+    },
+    {
+      "title": "Break Apart (feat. Rhye)",
+      "artist": "Bonobo",
+      "album": "Migration",
+      "plays": 4,
+      "last_played": "2026-11-01T16:46:47"
+    },
+    {
+      "title": "Feels Like We Only Go Backwards",
       "artist": "Tame Impala",
       "album": "Lonerism",
       "plays": 4,
-      "last_played": "2026-10-16T20:04:49"
-    },
-    {
-      "title": "02-Usher-Hey Daddy(Daddys Home)",
-      "artist": "Usher",
-      "album": "Raymond V Raymond",
-      "plays": 4,
-      "last_played": "2026-10-10T21:29:19"
-    },
-    {
-      "title": "DJ Friendly",
-      "artist": "Elkka",
-      "album": "DJ Friendly - Single",
-      "plays": 3,
-      "last_played": "2026-10-21T06:21:00"
-    },
-    {
-      "title": "Every Lil' (feat. Dj Plead & MJ Nebreda)",
-      "artist": "Logic1000",
-      "album": "Mother",
-      "plays": 3,
-      "last_played": "2026-10-21T05:54:44"
-    },
-    {
-      "title": "Jungle",
-      "artist": "Fred again..",
-      "album": "USB",
-      "plays": 3,
-      "last_played": "2026-10-21T04:58:01"
-    },
-    {
-      "title": "adore u",
-      "artist": "Fred again.. & Obongjayar",
-      "album": "ten days",
-      "plays": 3,
-      "last_played": "2026-10-21T04:10:39"
-    },
-    {
-      "title": "Lockup",
-      "artist": "Overmono",
-      "album": "Pure Devotion",
-      "plays": 3,
-      "last_played": "2026-10-21T03:01:33"
+      "last_played": "2026-11-01T16:26:28"
     },
     {
       "title": "Watch Out! It's Cloudy (feat. Khadija Al Hanafi)",
       "artist": "The Avalanches",
       "album": "No Bad Memories",
-      "plays": 3,
-      "last_played": "2026-10-17T03:19:11"
+      "plays": 4,
+      "last_played": "2026-11-01T15:58:28"
     },
     {
       "title": "Can't Get Over Losing You (feat. Portraits Of Tracy)",
       "artist": "The Avalanches",
       "album": "No Bad Memories",
-      "plays": 3,
-      "last_played": "2026-10-17T03:18:30"
+      "plays": 4,
+      "last_played": "2026-11-01T15:57:47"
     },
     {
       "title": "He Lives In The Old World",
       "artist": "The Avalanches",
       "album": "No Bad Memories",
-      "plays": 3,
-      "last_played": "2026-10-17T03:15:41"
+      "plays": 4,
+      "last_played": "2026-11-01T15:54:58"
     },
     {
       "title": "Far Away (feat. John Glacier & Khadija Al Hanafi)",
       "artist": "The Avalanches",
       "album": "No Bad Memories",
-      "plays": 3,
-      "last_played": "2026-10-17T03:14:38"
+      "plays": 4,
+      "last_played": "2026-11-01T15:53:55"
     },
     {
       "title": "Unicorn Quest™ (feat. Ryoji Ikeda)",
       "artist": "The Avalanches",
       "album": "No Bad Memories",
-      "plays": 3,
-      "last_played": "2026-10-17T03:11:41"
+      "plays": 4,
+      "last_played": "2026-11-01T15:51:17"
     },
     {
       "title": "Paradise Island (feat. Khadija Al Hanafi & Mike Patton)",
       "artist": "The Avalanches",
       "album": "No Bad Memories",
-      "plays": 3,
-      "last_played": "2026-10-17T03:10:58"
+      "plays": 4,
+      "last_played": "2026-11-01T15:50:34"
     },
     {
       "title": "Vida (feat. Erick the Architect)",
       "artist": "The Avalanches",
       "album": "No Bad Memories",
-      "plays": 3,
-      "last_played": "2026-10-17T03:10:31"
+      "plays": 4,
+      "last_played": "2026-11-01T15:50:07"
     },
     {
       "title": "3D Glasses Not Included",
       "artist": "The Avalanches",
       "album": "No Bad Memories",
-      "plays": 3,
-      "last_played": "2026-10-17T03:08:19"
+      "plays": 4,
+      "last_played": "2026-11-01T15:47:55"
     },
     {
       "title": "All The Time In The World (feat. Rivers Cuomo, Vegyn & Baby Marlboro)",
       "artist": "The Avalanches",
       "album": "No Bad Memories",
-      "plays": 3,
-      "last_played": "2026-10-17T03:07:46"
+      "plays": 4,
+      "last_played": "2026-11-01T15:47:23"
     },
     {
       "title": "Like Clockwork / Hit By Traffic (feat. Khadija Al Hanafi)",
       "artist": "The Avalanches",
       "album": "No Bad Memories",
-      "plays": 3,
-      "last_played": "2026-10-17T03:04:38"
+      "plays": 4,
+      "last_played": "2026-11-01T15:44:14"
     },
     {
       "title": "Logoland",
       "artist": "The Avalanches",
       "album": "No Bad Memories",
-      "plays": 3,
-      "last_played": "2026-10-17T03:03:01"
+      "plays": 4,
+      "last_played": "2026-11-01T15:42:38"
     },
     {
       "title": "Blue Shadows (feat. Karen O)",
       "artist": "The Avalanches",
       "album": "No Bad Memories",
-      "plays": 3,
-      "last_played": "2026-10-17T03:02:36"
+      "plays": 4,
+      "last_played": "2026-11-01T15:42:13"
     },
     {
       "title": "Xerox Altalink B8055 (feat. Ryoji Ikeda)",
       "artist": "The Avalanches",
       "album": "No Bad Memories",
-      "plays": 3,
-      "last_played": "2026-10-17T02:55:41"
+      "plays": 4,
+      "last_played": "2026-11-01T15:35:17"
     },
     {
       "title": "Together (feat. Nikki Nair, Jessy Lanza & Prentiss)",
       "artist": "The Avalanches",
       "album": "No Bad Memories",
-      "plays": 3,
-      "last_played": "2026-10-17T02:55:22"
+      "plays": 4,
+      "last_played": "2026-11-01T15:34:59"
     },
     {
       "title": "Bd-R",
       "artist": "The Avalanches",
       "album": "No Bad Memories",
-      "plays": 3,
-      "last_played": "2026-10-17T02:52:04"
+      "plays": 4,
+      "last_played": "2026-11-01T15:31:40"
     },
     {
-      "title": "Novacane",
-      "artist": "Frank Ocean",
-      "album": "Nostalgia-Ultra",
-      "plays": 3,
-      "last_played": "2026-10-16T20:30:16"
+      "title": "Feel Good Hit of the Summer",
+      "artist": "Queens Of The Stone Age",
+      "album": "R",
+      "plays": 4,
+      "last_played": "2026-11-01T14:54:43"
     },
     {
-      "title": "Black and Blue",
-      "artist": "Memphis LK",
-      "album": "True Love and Its Consequences - EP",
+      "title": "Sharks",
+      "artist": "Red Fang",
+      "album": "Red Fang",
       "plays": 3,
-      "last_played": "2026-10-06T17:13:46"
+      "last_played": "2026-11-28T12:00:17"
     },
     {
-      "title": "Even Angels Ghost",
-      "artist": "Overmono & Kindora",
-      "album": "Pure Devotion",
-      "plays": 2,
-      "last_played": "2026-10-21T05:12:12"
+      "title": "Blunderbuss",
+      "artist": "Jack White",
+      "album": "Blunderbuss",
+      "plays": 3,
+      "last_played": "2026-11-10T14:42:48"
     },
     {
       "title": "RE-HUMANiSE",
       "artist": "HAAi, Kaiden Ford & ILĀ",
       "album": "DIGITiSE",
-      "plays": 2,
-      "last_played": "2026-10-21T03:11:23"
-    },
-    {
-      "title": "Glastonbury Ocean Soundscape (Mixed)",
-      "artist": "Chris Watson",
-      "album": "DJ - Kicks: Djrum (DJ Mix)",
-      "plays": 2,
-      "last_played": "2026-10-17T01:31:25"
-    },
-    {
-      "title": "Clara (the night is dark)",
-      "artist": "Fred again..",
-      "album": "Actual Life 3 (January 1 - September 9 2022)",
-      "plays": 2,
-      "last_played": "2026-10-16T23:09:28"
+      "plays": 3,
+      "last_played": "2026-11-02T15:03:52"
     },
     {
       "title": "Final Credits (feat. Loaded Honey) [Loaded Honey Version]",
       "artist": "The Avalanches",
       "album": "No Bad Memories",
-      "plays": 2,
-      "last_played": "2026-10-16T19:59:07"
+      "plays": 3,
+      "last_played": "2026-11-01T16:21:04"
     },
     {
       "title": "Total Recall (feat. Mike Patton)",
       "artist": "The Avalanches",
       "album": "No Bad Memories",
-      "plays": 2,
-      "last_played": "2026-10-16T19:55:49"
+      "plays": 3,
+      "last_played": "2026-11-01T16:17:46"
     },
     {
       "title": "Our Love Is Alive (feat. Suzanne Ciani & Barry Can't Swim)",
       "artist": "The Avalanches",
       "album": "No Bad Memories",
-      "plays": 2,
-      "last_played": "2026-10-16T19:52:04"
+      "plays": 3,
+      "last_played": "2026-11-01T16:14:02"
     },
     {
       "title": "No Bad Memories",
       "artist": "The Avalanches",
       "album": "No Bad Memories",
-      "plays": 2,
-      "last_played": "2026-10-16T19:48:38"
+      "plays": 3,
+      "last_played": "2026-11-01T16:10:35"
     },
     {
       "title": "Superfun!™ TV Spot (feat. Mike Patton & Haley Joel Osment)",
       "artist": "The Avalanches",
       "album": "No Bad Memories",
-      "plays": 2,
-      "last_played": "2026-10-16T19:46:42"
+      "plays": 3,
+      "last_played": "2026-11-01T16:08:40"
     },
     {
       "title": "Magic Wand (feat. Barry Can't Swim)",
       "artist": "The Avalanches",
       "album": "No Bad Memories",
-      "plays": 2,
-      "last_played": "2026-10-16T19:46:08"
+      "plays": 3,
+      "last_played": "2026-11-01T16:08:06"
     },
     {
       "title": "Break Out Corporate Tag (feat. Ryoji Ikeda & Portraits Of Tracy)",
       "artist": "The Avalanches",
       "album": "No Bad Memories",
-      "plays": 2,
-      "last_played": "2026-10-16T19:43:41"
+      "plays": 3,
+      "last_played": "2026-11-01T16:05:41"
     },
     {
       "title": "One More Fantasy (feat. Carly Simon)",
       "artist": "The Avalanches",
       "album": "No Bad Memories",
-      "plays": 2,
-      "last_played": "2026-10-16T19:43:22"
+      "plays": 3,
+      "last_played": "2026-11-01T16:05:22"
     },
     {
       "title": "SUV Heaven (feat. Khadija Al Hanafi)",
       "artist": "The Avalanches",
       "album": "No Bad Memories",
-      "plays": 2,
-      "last_played": "2026-10-16T19:41:21"
+      "plays": 3,
+      "last_played": "2026-11-01T16:03:22"
     },
     {
       "title": "Under Yr Power",
       "artist": "The Avalanches",
       "album": "No Bad Memories",
-      "plays": 2,
-      "last_played": "2026-10-16T19:40:53"
+      "plays": 3,
+      "last_played": "2026-11-01T16:02:54"
     },
     {
       "title": "EL Dorado TV Spot (feat. Haley Joel Osment)",
       "artist": "The Avalanches",
       "album": "No Bad Memories",
-      "plays": 2,
-      "last_played": "2026-10-16T19:39:28"
+      "plays": 3,
+      "last_played": "2026-11-01T16:01:31"
     },
     {
       "title": "Highfield (feat. Panda Bear)",
       "artist": "The Avalanches",
       "album": "No Bad Memories",
+      "plays": 3,
+      "last_played": "2026-11-01T16:00:51"
+    },
+    {
+      "title": "I Know",
+      "artist": "Helmet",
+      "album": "Unsung-The Best Of Helmet ('91 - '97)",
+      "plays": 3,
+      "last_played": "2026-11-01T14:45:22"
+    },
+    {
+      "title": "Landmine",
+      "artist": "Polaris",
+      "album": "The Death Of Me",
+      "plays": 3,
+      "last_played": "2026-10-29T14:32:28"
+    },
+    {
+      "title": "Low",
+      "artist": "Wage War",
+      "album": "Pressure",
+      "plays": 3,
+      "last_played": "2026-10-29T13:37:22"
+    },
+    {
+      "title": "Blood Loss (feat. Carson Pace)",
+      "artist": "156/Silence",
+      "album": "People Watching",
+      "plays": 3,
+      "last_played": "2026-10-29T12:25:56"
+    },
+    {
+      "title": "Quixotica",
+      "artist": "The Used",
+      "album": "The Ocean of the Sky",
       "plays": 2,
-      "last_played": "2026-10-16T19:38:49"
+      "last_played": "2026-11-28T12:14:03"
     },
     {
-      "title": "I Can't Decide",
-      "artist": "Scissor Sisters",
-      "album": "Ta-Dah!",
+      "title": "Say",
+      "artist": "Method Man",
+      "album": "4:21... The Day After",
       "plays": 2,
-      "last_played": "2026-10-12T16:43:32"
+      "last_played": "2026-11-28T11:57:51"
     },
     {
-      "title": "After The Rain",
-      "artist": "Overmono",
-      "album": "Pure Devotion",
-      "plays": 1,
-      "last_played": "2026-10-21T05:52:24"
+      "title": "What Was I Made For? (From The Motion Picture \"Barbie\")",
+      "artist": "Billie Eilish",
+      "album": "What Was I Made For? (From The Motion Picture \"Barbie\") - Single",
+      "plays": 2,
+      "last_played": "2026-11-18T21:21:59"
     },
     {
-      "title": "Talking Walls",
-      "artist": "HAAi, Skybreak & Cantoalegre",
-      "album": "DIGITiSE",
-      "plays": 1,
-      "last_played": "2026-10-21T03:48:25"
-    },
-    {
-      "title": "I Wanna Feel Like Someone",
-      "artist": "HAAi & James Massiah",
-      "album": "DIGITiSE",
-      "plays": 1,
-      "last_played": "2026-10-21T03:42:09"
-    },
-    {
-      "title": "THANK U",
-      "artist": "HAAi",
-      "album": "DIGITiSE",
-      "plays": 1,
-      "last_played": "2026-10-21T03:36:18"
-    },
-    {
-      "title": "HUMANiSE Radio",
-      "artist": "HAAi",
-      "album": "DIGITiSE",
-      "plays": 1,
-      "last_played": "2026-10-21T03:31:18"
-    },
-    {
-      "title": "Technology",
-      "artist": "HAAi",
-      "album": "DIGITiSE",
-      "plays": 1,
-      "last_played": "2026-10-21T03:27:12"
-    },
-    {
-      "title": "DIGITiSE",
-      "artist": "HAAi & Pat Alvarez",
-      "album": "DIGITiSE",
-      "plays": 1,
-      "last_played": "2026-10-21T03:24:24"
+      "title": "Let It Snow! Let It Snow! Let It Snow!",
+      "artist": "Dean Martin",
+      "album": "Dino's Christmas",
+      "plays": 2,
+      "last_played": "2026-11-11T20:34:04"
     },
     {
       "title": "Depth Perception",
       "artist": "HAAi",
       "album": "DIGITiSE",
-      "plays": 1,
-      "last_played": "2026-10-21T03:20:17"
+      "plays": 2,
+      "last_played": "2026-11-02T15:12:46"
     },
     {
       "title": "Ignition",
       "artist": "HAAi & Echonomist",
       "album": "DIGITiSE",
-      "plays": 1,
-      "last_played": "2026-10-21T03:18:48"
+      "plays": 2,
+      "last_played": "2026-11-02T15:11:17"
     },
     {
-      "title": "Untitled 12 (Mixed)",
-      "artist": "Uwalmassa",
-      "album": "DJ - Kicks: Djrum (DJ Mix)",
-      "plays": 1,
-      "last_played": "2026-10-17T01:41:29"
-    },
-    {
-      "title": "Miss Balaton (Mixed)",
-      "artist": "Venetian Snares",
-      "album": "DJ - Kicks: Djrum (DJ Mix)",
-      "plays": 1,
-      "last_played": "2026-10-17T01:39:58"
-    },
-    {
-      "title": "Turning (Mixed)",
-      "artist": "Djrum",
-      "album": "DJ - Kicks: Djrum (DJ Mix)",
-      "plays": 1,
-      "last_played": "2026-10-17T01:35:49"
-    },
-    {
-      "title": "Back On 74",
-      "artist": "Jungle",
-      "album": "Volcano",
-      "plays": 1,
-      "last_played": "2026-10-16T20:07:47"
+      "title": "Insignificant Other",
+      "artist": "Queens of the Stone Age",
+      "album": "Perfecth",
+      "plays": 2,
+      "last_played": "2026-11-01T18:05:45"
     },
     {
       "title": "The Pavements Light (feat. Haruomi Hosono)",
       "artist": "The Avalanches",
       "album": "No Bad Memories",
-      "plays": 1,
-      "last_played": "2026-10-16T20:01:20"
+      "plays": 2,
+      "last_played": "2026-11-01T16:23:17"
     },
     {
-      "title": "Secrets Pt. II",
-      "artist": "Mike D",
-      "album": "Thank You",
-      "plays": 1,
-      "last_played": "2026-10-15T14:45:55"
+      "title": "Ironhead",
+      "artist": "Helmet",
+      "album": "Meantime",
+      "plays": 2,
+      "last_played": "2026-11-01T15:29:34"
     },
     {
-      "title": "Secrets Pt. I",
-      "artist": "Mike D",
-      "album": "Thank You",
-      "plays": 1,
-      "last_played": "2026-10-15T14:42:27"
+      "title": "Walk",
+      "artist": "Pantera",
+      "album": "Vulgar Display Of Power",
+      "plays": 2,
+      "last_played": "2026-11-01T15:06:32"
     },
     {
-      "title": "That’s Right",
-      "artist": "Mike D",
-      "album": "Thank You",
-      "plays": 1,
-      "last_played": "2026-10-15T14:41:03"
+      "title": "Abomination",
+      "artist": "Northlane",
+      "album": "Obsidian",
+      "plays": 2,
+      "last_played": "2026-10-29T14:18:38"
     },
     {
-      "title": "True Colors",
-      "artist": "Mike D",
-      "album": "Thank You",
+      "title": "White",
+      "artist": "Ehua",
+      "album": "Panta Rei",
       "plays": 1,
-      "last_played": "2026-10-15T14:38:54"
+      "last_played": "2026-11-28T12:28:52"
     },
     {
-      "title": "What We Got",
-      "artist": "Mike D",
-      "album": "Thank You",
+      "title": "Miss Murder",
+      "artist": "A.F.I.",
+      "album": "Triple J's Hottest 100, Vol. 14 [Disc 2]",
       "plays": 1,
-      "last_played": "2026-10-15T14:35:15"
+      "last_played": "2026-11-27T16:53:12"
     },
     {
-      "title": "Switch Up",
-      "artist": "Mike D",
-      "album": "Thank You",
+      "title": "The Myth",
+      "artist": "DOWN",
+      "album": "Volume V",
       "plays": 1,
-      "last_played": "2026-10-15T14:32:20"
+      "last_played": "2026-11-26T15:03:55"
     },
     {
-      "title": "Get Down",
-      "artist": "WARGASM (UK)",
-      "album": "Get Down - Single",
+      "title": "Nervous Breakdown",
+      "artist": "Circle Jerks",
+      "album": "Revenge Of Nervous Breakdown - EP",
       "plays": 1,
-      "last_played": "2026-10-12T15:16:34"
+      "last_played": "2026-11-23T15:01:23"
     },
     {
-      "title": "I Like",
-      "artist": "Loosie Grind",
-      "album": "I Like - Single",
+      "title": "Revenge",
+      "artist": "Circle Jerks",
+      "album": "Revenge Of Nervous Breakdown - EP",
       "plays": 1,
-      "last_played": "2026-10-06T18:39:51"
+      "last_played": "2026-11-23T14:59:23"
     },
     {
-      "title": "Want2",
-      "artist": "2touch",
-      "album": "Shug - EP",
+      "title": "Fix Me",
+      "artist": "Circle Jerks",
+      "album": "Revenge Of Nervous Breakdown - EP",
       "plays": 1,
-      "last_played": "2026-10-06T17:59:20"
+      "last_played": "2026-11-23T14:57:26"
     },
     {
-      "title": "Wasted Lands",
-      "artist": "Clutch",
-      "album": "Wasted Lands",
+      "title": "Depression",
+      "artist": "Circle Jerks",
+      "album": "Revenge Of Nervous Breakdown - EP",
       "plays": 1,
-      "last_played": "2026-10-06T15:45:30"
+      "last_played": "2026-11-23T14:56:26"
     },
     {
-      "title": "Famous",
-      "artist": "Peking Duk",
-      "album": "Paradise",
+      "title": "Breakcore Industrial (Even Slower)",
+      "artist": "marc0ne",
+      "album": "",
       "plays": 1,
-      "last_played": "2026-10-06T15:39:02"
+      "last_played": "2026-11-21T11:55:11"
     },
     {
-      "title": "Alone",
-      "artist": "Peking Duk",
-      "album": "Paradise",
+      "title": "Prefrontal Cortex",
+      "artist": "GRUB",
+      "album": "GRUB",
       "plays": 1,
-      "last_played": "2026-10-06T15:36:05"
+      "last_played": "2026-11-17T19:05:52"
     },
     {
-      "title": "Can't Fit In",
-      "artist": "Peking Duk, Kingstarlight, Nate Husser & Killer Mike",
-      "album": "Paradise",
+      "title": "Clint Eastwood/Tradies Get the Ladies",
+      "artist": "TISM",
+      "album": "Clint Eastwood/Tradies Get the Ladies - Single",
       "plays": 1,
-      "last_played": "2026-10-06T15:34:00"
+      "last_played": "2026-11-17T18:17:29"
     },
     {
-      "title": "About You",
-      "artist": "Peking Duk & Royal & the Serpent",
-      "album": "Paradise",
+      "title": "Frosty the Snowman (with The Cass County Boys) [78rpm Version]",
+      "artist": "Gene Autry",
+      "album": "Rudolph The Red Nosed Reindeer And Other Christmas Classics",
       "plays": 1,
-      "last_played": "2026-10-06T15:30:54"
+      "last_played": "2026-11-11T20:42:22"
     },
     {
-      "title": "Thrills",
-      "artist": "Peking Duk & Rico Nasty",
-      "album": "Paradise",
+      "title": "Sleigh Ride",
+      "artist": "The Ronettes",
+      "album": "A Christmas Gift For You From Phil Spector",
       "plays": 1,
-      "last_played": "2026-10-06T15:28:03"
+      "last_played": "2026-11-11T20:37:11"
     },
     {
-      "title": "Parramatta",
-      "artist": "Peking Duk",
-      "album": "Paradise",
+      "title": "All the Ladies (Mixed)",
+      "artist": "Fatboy Slim & Eats Everything",
+      "album": "Everybody Loves A Mixtape, Vol. 13: Current Grooves (DJ Mix)",
       "plays": 1,
-      "last_played": "2026-10-06T15:24:57"
+      "last_played": "2026-11-10T15:59:13"
     },
     {
-      "title": "Paradise",
-      "artist": "Peking Duk",
-      "album": "Paradise",
+      "title": "Funk Drunk / Spread Love / ABC (Mixed)",
+      "artist": "Fatback Band, Fatboy Slim, Carola, 7KY & Felix da Housecat",
+      "album": "Everybody Loves A Mixtape, Vol. 13: Current Grooves (DJ Mix)",
       "plays": 1,
-      "last_played": "2026-10-06T15:23:48"
+      "last_played": "2026-11-10T15:55:05"
     },
     {
-      "title": "Make U Feel",
-      "artist": "Peking Duk",
-      "album": "Paradise",
+      "title": "Work It (Soulwax Remix) / Fired Up! (Mixed)",
+      "artist": "Marie Davidson & Funky Green Dogs",
+      "album": "Everybody Loves A Mixtape, Vol. 13: Current Grooves (DJ Mix)",
       "plays": 1,
-      "last_played": "2026-10-06T15:20:30"
+      "last_played": "2026-11-10T15:50:28"
     },
     {
-      "title": "Do Your Best",
-      "artist": "Peking Duk & Kah-Lo",
-      "album": "Paradise",
+      "title": "Wonky Bassline Disco Banger (Mixed)",
+      "artist": "Red Rack'em",
+      "album": "Everybody Loves A Mixtape, Vol. 13: Current Grooves (DJ Mix)",
       "plays": 1,
-      "last_played": "2026-10-06T15:18:06"
+      "last_played": "2026-11-10T15:45:43"
     },
     {
-      "title": "Forever",
-      "artist": "Peking Duk & Phantogram",
-      "album": "Paradise",
+      "title": "Feels (feat. Jinadu) / Signs (Mixed)",
+      "artist": "Just Aaron, Wh0 & Five Man Electrical Band",
+      "album": "Everybody Loves A Mixtape, Vol. 13: Current Grooves (DJ Mix)",
       "plays": 1,
-      "last_played": "2026-10-06T15:15:31"
+      "last_played": "2026-11-10T15:41:25"
     },
     {
-      "title": "Forget Your Life",
-      "artist": "Peking Duk & Nate Husser",
-      "album": "Paradise",
+      "title": "Love You Feel (Wh0 Rolling Remix) / Where U Iz (Mixed)",
+      "artist": "Soul Avengerz & Fatboy Slim",
+      "album": "Everybody Loves A Mixtape, Vol. 13: Current Grooves (DJ Mix)",
       "plays": 1,
-      "last_played": "2026-10-06T15:12:00"
+      "last_played": "2026-11-10T15:39:08"
     },
     {
-      "title": "Spicy Margarita",
-      "artist": "Peking Duk, FEYI & Poe Leos",
-      "album": "Paradise",
+      "title": "Harder, Better, Faster, Stronger (Mixed)",
+      "artist": "Kevin McKay",
+      "album": "Everybody Loves A Mixtape, Vol. 13: Current Grooves (DJ Mix)",
       "plays": 1,
-      "last_played": "2026-10-06T15:08:56"
+      "last_played": "2026-11-10T15:37:24"
     },
     {
-      "title": "Let Go",
-      "artist": "Peking Duk & Matt Corby",
-      "album": "Paradise",
+      "title": "Do It /  ID3 (from Everybody Loves A Mixtape, Vol. 13: Current Grooves) / Do It to the Music (Mixed)",
+      "artist": "Nick Reach Up, Steve Mac, ID & Raw Silk",
+      "album": "Everybody Loves A Mixtape, Vol. 13: Current Grooves (DJ Mix)",
       "plays": 1,
-      "last_played": "2026-10-06T15:06:00"
+      "last_played": "2026-11-10T15:33:17"
     },
     {
-      "title": "Jack Thompson",
-      "artist": "Peking Duk",
-      "album": "Paradise",
+      "title": "Miamimita (Low Steppa + Nolek Remix) [Mixed]",
+      "artist": "Hatiras",
+      "album": "Everybody Loves A Mixtape, Vol. 13: Current Grooves (DJ Mix)",
       "plays": 1,
-      "last_played": "2026-10-06T15:02:41"
+      "last_played": "2026-11-10T15:28:02"
     },
     {
-      "title": "MOVE",
-      "artist": "Banks Arcade",
-      "album": "SECOND PLACE SUPERSTAR",
+      "title": "Shake Your (Mixed)",
+      "artist": "Sharam Jey & Marco Lys",
+      "album": "Everybody Loves A Mixtape, Vol. 13: Current Grooves (DJ Mix)",
       "plays": 1,
-      "last_played": "2026-10-06T14:14:31"
+      "last_played": "2026-11-10T15:24:39"
     },
     {
-      "title": "They Can't Kill Us All",
-      "artist": "Tom Morello",
-      "album": "Everyone Gets Everything They Want",
+      "title": "Go Again (feat. Brave Culture) / Baile da Plataforma (Mixed)",
+      "artist": "Felguk, The OtherZ, Dj Will DF & Mc Menor Do Alvorada",
+      "album": "Everybody Loves A Mixtape, Vol. 13: Current Grooves (DJ Mix)",
       "plays": 1,
-      "last_played": "2026-10-06T14:02:05"
+      "last_played": "2026-11-10T15:20:53"
     },
     {
-      "title": "Untethered",
-      "artist": "Tom Morello",
-      "album": "Everyone Gets Everything They Want",
+      "title": "ID2 (from Everybody Loves A Mixtape, Vol. 13: Current Grooves) [Mixed]",
+      "artist": "ID",
+      "album": "Everybody Loves A Mixtape, Vol. 13: Current Grooves (DJ Mix)",
       "plays": 1,
-      "last_played": "2026-10-06T13:58:15"
+      "last_played": "2026-11-10T15:17:15"
     },
     {
-      "title": "Pretend You Remember Me",
-      "artist": "Tom Morello",
-      "album": "Everyone Gets Everything They Want",
+      "title": "Just Another Groove / Get On The Floor (Mixed)",
+      "artist": "Mighty Dub Katz & MC Nas-D",
+      "album": "Everybody Loves A Mixtape, Vol. 13: Current Grooves (DJ Mix)",
       "plays": 1,
-      "last_played": "2026-10-06T13:55:31"
+      "last_played": "2026-11-10T15:12:38"
     },
     {
-      "title": "Everything Burns (feat. Beartooth)",
-      "artist": "Tom Morello",
-      "album": "Everyone Gets Everything They Want",
+      "title": "Such A Good Feeling / Hot Hot Summer Day (Mixed)",
+      "artist": "Alex Mills & The Sugarhill Gang",
+      "album": "Everybody Loves A Mixtape, Vol. 13: Current Grooves (DJ Mix)",
       "plays": 1,
-      "last_played": "2026-10-06T13:52:44"
+      "last_played": "2026-11-10T15:08:32"
     },
     {
-      "title": "The Last Rung on the Ladder",
-      "artist": "Tom Morello",
-      "album": "Everyone Gets Everything They Want",
+      "title": "ID1 (from Everybody Loves A Mixtape, Vol. 13: Current Grooves) [Mixed]",
+      "artist": "ID",
+      "album": "Everybody Loves A Mixtape, Vol. 13: Current Grooves (DJ Mix)",
       "plays": 1,
-      "last_played": "2026-10-06T13:49:42"
+      "last_played": "2026-11-10T15:04:47"
     },
     {
-      "title": "Date Night",
-      "artist": "Tom Morello & Roman Morello",
-      "album": "Everyone Gets Everything They Want",
+      "title": "The Closer",
+      "artist": "Royal Blood",
+      "album": "Dead Company",
       "plays": 1,
-      "last_played": "2026-10-06T13:45:36"
+      "last_played": "2026-11-10T14:23:11"
     },
     {
-      "title": "Unconquered (feat. KNEECAP)",
-      "artist": "Tom Morello",
-      "album": "Everyone Gets Everything They Want",
+      "title": "Tapping Out",
+      "artist": "Royal Blood",
+      "album": "Dead Company",
       "plays": 1,
-      "last_played": "2026-10-06T13:41:49"
+      "last_played": "2026-11-10T14:19:32"
     },
     {
-      "title": "Soldier in the Army of Love",
-      "artist": "Tom Morello & Roman Morello",
-      "album": "Everyone Gets Everything They Want",
+      "title": "Take Em All",
+      "artist": "Royal Blood",
+      "album": "Dead Company",
       "plays": 1,
-      "last_played": "2026-10-06T13:39:04"
+      "last_played": "2026-11-10T14:16:47"
     },
     {
-      "title": "I Am Not Yours to Command",
-      "artist": "Tom Morello",
-      "album": "Everyone Gets Everything They Want",
+      "title": "Rear View Mirror",
+      "artist": "Royal Blood",
+      "album": "Dead Company",
       "plays": 1,
-      "last_played": "2026-10-06T13:36:06"
+      "last_played": "2026-11-10T14:13:38"
     },
     {
-      "title": "Adjourn It (feat. Serj Tankian & Roman Morello)",
-      "artist": "Tom Morello",
-      "album": "Everyone Gets Everything They Want",
+      "title": "Ride",
+      "artist": "Royal Blood",
+      "album": "Dead Company",
       "plays": 1,
-      "last_played": "2026-10-06T13:32:23"
+      "last_played": "2026-11-10T14:10:47"
     },
     {
-      "title": "Everyone Gets Everything They Want",
-      "artist": "Tom Morello",
-      "album": "Everyone Gets Everything They Want",
+      "title": "Nowhere All Along",
+      "artist": "Royal Blood",
+      "album": "Dead Company",
       "plays": 1,
-      "last_played": "2026-10-06T13:29:36"
+      "last_played": "2026-11-10T14:07:17"
     },
     {
-      "title": "Beth From Electronics",
-      "artist": "Tom Morello",
-      "album": "Everyone Gets Everything They Want",
+      "title": "Mother Never Told You",
+      "artist": "Royal Blood",
+      "album": "Dead Company",
       "plays": 1,
-      "last_played": "2026-10-06T13:26:03"
+      "last_played": "2026-11-10T14:03:28"
     },
     {
-      "title": "Heartclub",
-      "artist": "Electric Callboy",
-      "album": "TANZNEID",
+      "title": "Ten Over Ten",
+      "artist": "Royal Blood",
+      "album": "Dead Company",
       "plays": 1,
-      "last_played": "2026-10-02T13:59:03"
+      "last_played": "2026-11-10T14:00:28"
+    },
+    {
+      "title": "Swallow The Bomb",
+      "artist": "Royal Blood",
+      "album": "Dead Company",
+      "plays": 1,
+      "last_played": "2026-11-10T13:57:11"
+    },
+    {
+      "title": "Dead Company",
+      "artist": "Royal Blood",
+      "album": "Dead Company",
+      "plays": 1,
+      "last_played": "2026-11-10T13:53:51"
+    },
+    {
+      "title": "Play-Doh",
+      "artist": "Ben Fester",
+      "album": "Lock Box - EP",
+      "plays": 1,
+      "last_played": "2026-11-09T15:03:18"
+    },
+    {
+      "title": "It's Only Love",
+      "artist": "Queens of the Stone Age",
+      "album": "Perfecth",
+      "plays": 1,
+      "last_played": "2026-11-01T17:59:51"
+    },
+    {
+      "title": "Your Ghost Again",
+      "artist": "Mastodon",
+      "album": "Marrow Deep",
+      "plays": 1,
+      "last_played": "2026-11-01T15:26:13"
+    },
+    {
+      "title": "Sultan's Curse",
+      "artist": "Mastodon",
+      "album": "Emperor of Sand",
+      "plays": 1,
+      "last_played": "2026-11-01T14:32:32"
+    },
+    {
+      "title": "Blistering",
+      "artist": "LANDMVRKS",
+      "album": "Fantasy",
+      "plays": 1,
+      "last_played": "2026-10-29T14:54:34"
+    },
+    {
+      "title": "Oscillator",
+      "artist": "Make Them Suffer",
+      "album": "Make Them Suffer",
+      "plays": 1,
+      "last_played": "2026-10-29T13:03:29"
+    },
+    {
+      "title": "some days",
+      "artist": "Windwaker",
+      "album": "smile, you're on camera",
+      "plays": 1,
+      "last_played": "2026-10-29T11:54:43"
+    },
+    {
+      "title": "overlord",
+      "artist": "Windwaker",
+      "album": "smile, you're on camera",
+      "plays": 1,
+      "last_played": "2026-10-29T11:50:34"
+    },
+    {
+      "title": "loser (feat. Mikaila Delgado)",
+      "artist": "Windwaker",
+      "album": "smile, you're on camera",
+      "plays": 1,
+      "last_played": "2026-10-29T11:47:50"
+    },
+    {
+      "title": "wait for me",
+      "artist": "Windwaker",
+      "album": "smile, you're on camera",
+      "plays": 1,
+      "last_played": "2026-10-29T11:44:26"
+    },
+    {
+      "title": "lie to me",
+      "artist": "Windwaker",
+      "album": "smile, you're on camera",
+      "plays": 1,
+      "last_played": "2026-10-29T11:42:58"
+    },
+    {
+      "title": "victory lap",
+      "artist": "Windwaker",
+      "album": "smile, you're on camera",
+      "plays": 1,
+      "last_played": "2026-10-29T11:40:16"
+    },
+    {
+      "title": "burn",
+      "artist": "Windwaker",
+      "album": "smile, you're on camera",
+      "plays": 1,
+      "last_played": "2026-10-29T11:37:20"
+    },
+    {
+      "title": "dna",
+      "artist": "Windwaker",
+      "album": "smile, you're on camera",
+      "plays": 1,
+      "last_played": "2026-10-29T11:34:15"
+    },
+    {
+      "title": "do or die",
+      "artist": "Windwaker",
+      "album": "smile, you're on camera",
+      "plays": 1,
+      "last_played": "2026-10-29T11:31:22"
+    },
+    {
+      "title": "click. (feat. RinRin)",
+      "artist": "Windwaker",
+      "album": "smile, you're on camera",
+      "plays": 1,
+      "last_played": "2026-10-29T11:27:57"
+    },
+    {
+      "title": "closer",
+      "artist": "Windwaker",
+      "album": "smile, you're on camera",
+      "plays": 1,
+      "last_played": "2026-10-29T11:24:38"
+    },
+    {
+      "title": "low",
+      "artist": "Windwaker",
+      "album": "smile, you're on camera",
+      "plays": 1,
+      "last_played": "2026-10-29T11:21:34"
+    },
+    {
+      "title": "Human Fly (Mixed)",
+      "artist": "The Cramps",
+      "album": "2manydjs at Trash: 30.08.04 (DJ Mix)",
+      "plays": 1,
+      "last_played": "2026-10-29T11:14:31"
+    },
+    {
+      "title": "Ace of Spades (Mixed)",
+      "artist": "Motörhead",
+      "album": "2manydjs at Trash: 30.08.04 (DJ Mix)",
+      "plays": 1,
+      "last_played": "2026-10-29T11:12:33"
+    },
+    {
+      "title": "Eruption (Mixed)",
+      "artist": "Van Halen",
+      "album": "2manydjs at Trash: 30.08.04 (DJ Mix)",
+      "plays": 1,
+      "last_played": "2026-10-29T11:11:19"
+    },
+    {
+      "title": "Kick out the Chairs! (feat. James Murphy & Nancy Wang) [Mixed]",
+      "artist": "Munk",
+      "album": "2manydjs at Trash: 30.08.04 (DJ Mix)",
+      "plays": 1,
+      "last_played": "2026-10-29T11:10:39"
+    },
+    {
+      "title": "Feel Good Hit of the Summer (Mixed)",
+      "artist": "Queens of the Stone Age",
+      "album": "2manydjs at Trash: 30.08.04 (DJ Mix)",
+      "plays": 1,
+      "last_played": "2026-10-29T11:07:33"
+    },
+    {
+      "title": "Give It Up (Mixed)",
+      "artist": "LCD Soundsystem",
+      "album": "2manydjs at Trash: 30.08.04 (DJ Mix)",
+      "plays": 1,
+      "last_played": "2026-10-29T11:05:04"
+    },
+    {
+      "title": "Kool Thing (Mixed)",
+      "artist": "Sonic Youth",
+      "album": "2manydjs at Trash: 30.08.04 (DJ Mix)",
+      "plays": 1,
+      "last_played": "2026-10-29T11:03:21"
+    },
+    {
+      "title": "I Can Only Give You Everything (Mixed)",
+      "artist": "Them",
+      "album": "2manydjs at Trash: 30.08.04 (DJ Mix)",
+      "plays": 1,
+      "last_played": "2026-10-29T11:01:54"
+    },
+    {
+      "title": "Prototype (Mixed)",
+      "artist": "Rex the Dog",
+      "album": "2manydjs at Trash: 30.08.04 (DJ Mix)",
+      "plays": 1,
+      "last_played": "2026-10-29T11:00:31"
+    },
+    {
+      "title": "Jetsetter (Mixed)",
+      "artist": "Morningwood",
+      "album": "2manydjs at Trash: 30.08.04 (DJ Mix)",
+      "plays": 1,
+      "last_played": "2026-10-29T10:58:20"
+    },
+    {
+      "title": "Rocket Ride (Soulwax Rock It Right Remix) [Mixed]",
+      "artist": "Felix da Housecat",
+      "album": "2manydjs at Trash: 30.08.04 (DJ Mix)",
+      "plays": 1,
+      "last_played": "2026-10-29T10:55:46"
+    },
+    {
+      "title": "I Can See Clearly Now (Christian Candid Remix) [Mixed]",
+      "artist": "Seelenluft",
+      "album": "2manydjs at Trash: 30.08.04 (DJ Mix)",
+      "plays": 1,
+      "last_played": "2026-10-29T10:51:16"
+    },
+    {
+      "title": "Rebel Rebel / D.J. (Mixed)",
+      "artist": "David Bowie",
+      "album": "2manydjs at Trash: 30.08.04 (DJ Mix)",
+      "plays": 1,
+      "last_played": "2026-10-29T10:48:11"
     }
   ],
   "albums": [
     {
       "album": "No Bad Memories",
       "artist": "The Avalanches",
-      "plays": 84,
+      "plays": 115,
       "tracks": 31,
-      "last_played": "2026-10-17T03:19:11"
+      "last_played": "2026-11-01T16:23:17"
     },
     {
       "album": "WHEN WE ALL FALL ASLEEP, WHERE DO WE GO?",
       "artist": "Billie Eilish",
-      "plays": 69,
+      "plays": 72,
       "tracks": 2,
-      "last_played": "2026-10-24T20:10:26"
+      "last_played": "2026-11-18T21:37:14"
     },
     {
-      "album": "GUTS (spilled)",
-      "artist": "Olivia Rodrigo",
-      "plays": 65,
-      "tracks": 3,
-      "last_played": "2026-10-23T14:30:43"
-    },
-    {
-      "album": "Stay - Single",
-      "artist": "Gracie Abrams",
-      "plays": 44,
+      "album": "everything i wanted - Single",
+      "artist": "Billie Eilish",
+      "plays": 30,
       "tracks": 1,
-      "last_played": "2026-10-23T22:00:34"
+      "last_played": "2026-11-10T14:30:34"
     },
     {
-      "album": "minor",
-      "artist": "Gracie Abrams",
-      "plays": 36,
+      "album": "Singles 1-12",
+      "artist": "Melvins",
+      "plays": 28,
       "tracks": 1,
-      "last_played": "2026-10-23T21:57:42"
+      "last_played": "2026-11-01T14:52:01"
+    },
+    {
+      "album": "Royal Blood",
+      "artist": "Royal Blood",
+      "plays": 22,
+      "tracks": 1,
+      "last_played": "2026-11-28T12:26:49"
+    },
+    {
+      "album": "HIT ME HARD AND SOFT",
+      "artist": "Billie Eilish",
+      "plays": 22,
+      "tracks": 1,
+      "last_played": "2026-11-15T20:22:24"
+    },
+    {
+      "album": "Upside Down - Single",
+      "artist": "JVKE",
+      "plays": 21,
+      "tracks": 1,
+      "last_played": "2026-11-28T12:30:36"
     },
     {
       "album": "Happier Than Ever",
       "artist": "Billie Eilish",
-      "plays": 35,
-      "tracks": 2,
-      "last_played": "2026-10-23T22:46:48"
-    },
-    {
-      "album": "this is what slow dancing feels like - Single",
-      "artist": "JVKE",
-      "plays": 35,
+      "plays": 18,
       "tracks": 1,
-      "last_played": "2026-10-23T22:20:49"
-    },
-    {
-      "album": "dont smile at me",
-      "artist": "Billie Eilish",
-      "plays": 35,
-      "tracks": 1,
-      "last_played": "2026-10-23T20:56:16"
+      "last_played": "2026-11-15T11:31:02"
     }
   ]
 }

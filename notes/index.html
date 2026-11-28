@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOTES — DADPUNK</title>
+  <meta name="description" content="Build logs from the machine room: what was measured, what failed, and what the numbers actually said.">
+  <meta name="theme-color" content="#0a0a0a">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/notes.css">
+  <style>
+    .list{list-style:none;padding:0;margin:2.2rem 0 0}
+    .list li{border-top:1px solid var(--olive-dark);padding:1.5rem 0}
+    .list li:last-child{border-bottom:1px solid var(--olive-dark)}
+    .list a{color:var(--ink);display:block}
+    .list a:hover{color:var(--orange)}
+    .list h2{border:0;padding:0;margin:0 0 .5rem;font-size:1.15rem;letter-spacing:.02em;
+      text-transform:none;font-family:var(--display);line-height:1.12;color:var(--ink)}
+    .list h2::before{content:none}
+    .list p{margin:0;font-size:.9rem;color:var(--olive-light);max-width:62ch}
+    .list .when{font-size:.68rem;letter-spacing:.2em;color:var(--olive);display:block;margin-bottom:.5rem}
+    .list em{color:var(--orange);font-style:normal;font-size:.72rem;letter-spacing:.16em}
+  </style>
+</head>
+<body>
+  <div class="grain"></div>
+
+  <div class="bar">
+    <span class="bar__brand">THIS IS <i>DAD</i>PUNK</span>
+    <span class="bar__tag">// NOTES</span>
+    <span class="bar__spacer"></span>
+    <a href="../index.html">&larr; index</a>
+  </div>
+
+  <article class="wrap">
+    <p class="kicker">// NOTES FROM THE MACHINE ROOM</p>
+    <h1>Build logs</h1>
+    <p class="dek">What was measured, what failed, and what the numbers actually said. No promises, no launch announcements — just work I can show evidence for.</p>
+
+    <ul class="list">
+      <li>
+        <a href="the-now-playing-rig/">
+          <span class="when">2026.11.28 &nbsp;·&nbsp; BUILD GUIDE · TOUCHDESIGNER · STREAMDIFFUSION</span>
+          <h2>Build the now-playing rig</h2>
+          <p>How the thing actually goes together: metadata out of Apple Music, a local diffusion lane, the print pass, and one audio-gated clock that means nothing moves in silence. Short version, traps included.</p>
+          <p style="margin-top:.6rem"><em>READ →</em></p>
+        </a>
+      </li>
+      <li>
+        <a href="the-print-is-in-the-shader/">
+          <span class="when">2026.11.28 &nbsp;·&nbsp; TOUCHDESIGNER · STREAMDIFFUSION</span>
+          <h2>The print is in the shader, not the prompt</h2>
+          <p>A now-playing rig that reprints album art. 41 print processes, one diffusion pass, and the measurements that killed most of my good ideas — including the base model, the knob that did nothing, and why a bigger prompt pool looked like one press.</p>
+          <p style="margin-top:.6rem"><em>READ →</em></p>
+        </a>
+      </li>
+    </ul>
+  </article>
+
+  <footer class="foot">
+    <span>© 2026 // BUDGEWOI, NSW</span>
+    <a href="../index.html">/index</a>
+    <a href="../lab/print/">/lab</a>
+    <a href="../videos/">/videos</a>
+    <a href="../music/">/music</a>
+    <a href="../shotlist/">/shotlist</a>
+    <a href="../punksurveyor/">/surveyor</a>
+    <a href="https://github.com/marc0ne-s">GITHUB</a>
+  </footer>
+</body>
+</html>

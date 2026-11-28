@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Build the now-playing rig — DADPUNK NOTES</title>
+  <meta name="description" content="Apple Music goes into a local diffusion lane and comes back as a halftone print that only moves when there is music. Everything here was measured on one M4 Pro, including the parts that went wrong.">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta property="og:title" content="Build the now-playing rig">
+  <meta property="og:description" content="Apple Music goes into a local diffusion lane and comes back as a halftone print that only moves when there is music. Everything here was measured on one M4 Pro, including the parts that went wrong.">
+  <meta property="og:type" content="article">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/notes.css">
+</head>
+<body>
+  <div class="grain"></div>
+
+  <div class="bar">
+    <span class="bar__brand">THIS IS <i>DAD</i>PUNK</span>
+    <span class="bar__tag">// NOTES</span>
+    <span class="bar__spacer"></span>
+    <a href="../../index.html">&larr; index</a>
+  </div>
+  <div class="hero hero--contain">
+    <img src="../../assets/img/rig-chain-v2.svg" alt="Signal path: Apple Music to now.json, a local StreamDiffusion lane on port 7866, the TouchDesigner print pass, the HUD, the screen.">
+  </div>
+
+  <article class="wrap">
+    <p class="kicker">// NOTE 002 · BUILD GUIDE</p>
+    <h1>Build the now-playing rig</h1>
+    <p class="dek">Apple Music goes into a local diffusion lane and comes back as a halftone print that only moves when there is music. Everything here was measured on one M4 Pro, including the parts that went wrong.</p>
+    <p class="tryit">No cloud, no API key, no subscription. When the music stops the frame holds at exactly 0.000/255 change — the hardest requirement to meet, and the last one to work.</p>
+
+    <div class="meta">
+      <span><b>2026.11.28</b></span>
+      <span>7 MIN READ</span>
+      <span>TOUCHDESIGNER · STREAMDIFFUSION · MAC</span>
+    </div>
+<hr />
+<p>A record goes on in Apple Music. The sleeve runs through a small local diffusion model, gets pushed around by the music, and comes back printed. Three lines in the corner say what is playing.</p>
+<p>Two rules decide everything. <strong>The picture is the model&#x27;s reply</strong> — no structure re-mixed back over it. And <strong>nothing moves without sound</strong>: not slowly, not a little. Silence gives a frozen frame, measured rather than hoped for.</p>
+<p>This is the build order, with the traps left in, because the traps are the useful part.</p>
+<h2>What you need</h2>
+<p>A Mac with an Apple Silicon GPU (this runs on MPS; there is no CUDA path), TouchDesigner 2025, a StreamDiffusion checkout with SD1.5 and LCM-LoRA, and BlackHole plus <code>ffmpeg</code> for the audio. The free TouchDesigner key is non-commercial — no paid work — which is one reason this stays a build log.</p>
+<h2>01 · Metadata out of Music.app</h2>
+<p>A poller asks Music.app what is playing once a second and writes two files: <code>now.json</code>, and the sleeve at 512 px.</p>
+<p>Two details matter. <strong><code>year</code> is always <code>&quot;0&quot;</code></strong> — Apple Music does not supply it, so anything built around era never fires. And <strong>write atomically</strong>, temp file then rename: TouchDesigner reads the same file, and catching it mid-write blanks the caption for a frame.</p>
+<h2>02 · The lane</h2>
+<p>A small HTTP server around StreamDiffusion. <code>POST /img2img</code> with a PNG body and the prompt in the query string, and back comes a 512×512 PNG. About <strong>860 ms a frame</strong>. The real settings live in the launcher&#x27;s environment:</p>
+<pre class="lang-bash"><code>SD_PORT=7866 SD_SIZE=512 SD_T_INDEX=18,24 SD_DELTA=0.0 \
+PYTORCH_ENABLE_MPS_FALLBACK=1 USE_PEFT_BACKEND=TRUE \
+exec .venv/bin/python -u sd_server.py</code></pre>
+<p><code>SD_T_INDEX</code> is the only knob that does anything: how many steps the sampler runs, and where they land. Early steps ignore your image and invent; late steps keep it and restyle. On one fixed sleeve:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>t_index</th>
+<th>reads as</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>46,48</td><td>near-copy of the artwork</td></tr>
+<tr><td>36,42</td><td>boldest redraw that still reads as the cover</td></tr>
+<tr><td>30,36</td><td>motif reshaped, cover no longer faithful</td></tr>
+<tr><td><strong>18,24</strong></td><td><strong>figures become blobs, type a barcode, layout survives — live</strong></td></tr>
+<tr><td>12,20</td><td>cover gone</td></tr>
+</tbody>
+</table></div>
+<p>The rig runs 18,24, which looks wrong beside the rest of that table. The reason is the crossfade: the cover supplies the quiet end, so the model only has to carry the destroyed end.</p>
+<p>Two hard lessons. <strong><code>SD_DELTA</code> is a no-op here</strong> — swept at 0.0, 0.35 and 0.5, and the outputs came back byte-identical. Don&#x27;t spend an evening on it. And <strong>never <code>POST /reset</code> while the bridge is live</strong>: it opens a second MPS encoder mid-pass, and the lane dies with a dead port and no error.</p>
+<p>On the base model, briefly: <code>sd-turbo</code> gave clean digital fill with no dot screen; SD1.5 with LCM-LoRA gave halftone bite with the layout held. Use the second, and set <code>SD_LCM=1</code>.</p>
+<h2>03 · Grade, blur, then the print</h2>
+<p>The reply passes a level TOP and a small blur — <code>Plateblur</code>, 2 px — on its way to the shader.</p>
+<p>The grade exists for one failure: <strong>dark sleeves</strong>. A halftone screen needs mid-tones to make dots in, and a genuinely dark cover collapses the chain while every stage reports healthy: source 18.5/255, model reply 32.5, final frame 7.3. So the bridge measures the frame every 0.75 s and lifts gamma toward a 0.20 mean, clamped 1.0–1.45 and never below 1.0. The same sleeve afterwards: mean 0.106, artwork legible.</p>
+<p>Then the important part. <strong>The print is in the shader, not the prompt.</strong> The model can only make soft pixels. Scored as a silkscreen finish, it read 5 out of 10 on the model alone and 7 out of 10 once a shader did the print work.</p>
+<p>The shader does three things: the colour plates offset by a hair, a rotated halftone screen in the midtones with a coarser one in the shadows, and flat quantised ink instead of gradients. All of it scales off one value, the punch. Zero is barely there. 0.75 is a strong, coherent screen. One is over-baked.</p>
+<p>Two mistakes, and the fixes are the useful bit. <strong>Coarsen the screen as punch rises, don&#x27;t tighten it</strong> — a finer screen at this size disappears into grain, and a print reads as a print because you can see the dots. And <strong>don&#x27;t drive the misregistration off the same knob as the screen</strong>: by 0.85 the colour fringing had swallowed the dot pattern and it read as digital glitch.</p>
+<p>Each finish also needs its own ink weight. A photogravure has no dot screen; a xerox is nothing but screen and crush. Applying one strength to all of them made 41 processes look like the same treatment with different labels. So <code>Sdamount = Punchbase × weight</code> — soft processes held back, hard ones pushed.</p>
+<h2>04 · Motion happens after the model</h2>
+<p>Diffusion reconstructs composition, so a zoomed or rotated input comes back as the same cover redrawn in place. Source drift on its own measured <strong>0.4 out of 255</strong>: frozen.</p>
+<p>That is why the movement lives on the far side of the reply. A displacement pass at weight 0.022, with a moving noise field, gives 13 out of 255 — visible — and the model cannot undo it.</p>
+<h2>05 · One clock, gated by sound</h2>
+<p>Every motion driver ran on wall clock at first, so a silent room still had a breathing print. Now there is exactly one clock and it only advances when there is signal:</p>
+<pre class="lang-text"><code>ctl -&gt; act_max -&gt; act_lp (smooth .25)
+    -&gt; act_gate -&gt; act_clamp -&gt; clock</code></pre>
+<p>Every animated expression reads <code>op(&#x27;clock&#x27;)[0]</code>. Measured: <strong>0.000/255 change across 12 seconds of silence</strong>.</p>
+<p>Three gotchas. The gate leaks negative values and runs the clock backwards unless you clamp at zero. <code>inputConnectors[0].connect()</code> onto an occupied input leaves the old wire, so disconnect first, then print <code>op.inputs</code> to prove it. And bind the speed channel by index, not by name — a speedCHOP renames its output after its input.</p>
+<h2>06 · The audio tap</h2>
+<p>The nastiest failure in the build, because the music is playing the whole time. The chain needs the OS input reachable, TouchDesigner&#x27;s audio device to actually be that device, and the player feeding it. Miss one and it looks exactly like a dead-reactive print.</p>
+<p>Mine: <code>now.json</code> said playing, the device was BlackHole, and two separate taps both read <strong>−91 dB in the same minute</strong>. That is not wiring — the multi-output group had stalled, because its master device was a USB interface that sleeps, and a stalled group outputs nothing to any member. Set the group&#x27;s master to the virtual device and audio returned everywhere at once: 8.05/255 mean, 37.8% of pixels moving over eight seconds.</p>
+<p>Two rules out of it. <strong>Never leave the system output on BlackHole to make the visuals work</strong> — it succeeds and costs you your audio. And <strong>measure the device, not the patch</strong>: four seconds of <code>ffmpeg -f avfoundation -i &quot;:N&quot; -t 3 -af volumedetect -f null -</code> settles it. When every tap reads −91 dB while the player says it is playing, toggle the group&#x27;s master before you open TouchDesigner.</p>
+<h2>07 · The HUD</h2>
+<p>Three lines, bottom left: track, artist, album · year. Three traps.</p>
+<p><strong><code>aligny=&#x27;bottom&#x27;</code> does not move the block.</strong> A text TOP keeps the text at the top of the frame whatever the alignment says; position it with <code>positiony</code>, in pixels. <strong><code>overTOP</code> and <code>compositeTOP</code> ate most of the text alpha</strong> — a white glyph came out at 0.68 instead of 1.0, so the caption was invisible while its veil still dimmed the picture. <code>addTOP</code> is plain arithmetic and cannot fail: black adds nothing. And <strong>long lines run under the sleeve</strong>, which sits at the right edge and leaves 813 px of width at 28 pt.</p>
+<p>There is no PIL inside TouchDesigner, so the honest way to fit a line is to render it: draw the candidate into a hidden text TOP at the same font and size, read its ink extent from the alpha channel, and add an ellipsis until it fits. A cast list measuring 1044 px fits to 763.</p>
+<h2>Things that cost me an evening</h2>
+<ul>
+<li><strong>A closed perform window starves the whole chain.</strong> Nothing requests the output, so the input freezes and the lane stops — identical to a crashed model. Comparing <code>op(&#x27;sd_send&#x27;).cookAbsFrame</code> with <code>absTime.frame</code> tells you in one line. The rig now runs a 2 Hz keepalive, and the window must be open when the project is saved.</li>
+<li><strong>The audio meters saturate.</strong> Energy sits at 1.000 for a whole track and kick retriggers every 0.166 s — 360 bpm. Never drive anything from them; measure RMS off the buffer.</li>
+<li><strong><code>project.save()</code> can block past 15 s</strong> and writes a new numbered file rather than overwriting. Check the folder; never retry the call.</li>
+<li><strong>TouchDesigner&#x27;s Python defaults to ASCII</strong>, so <code>open(path).read()</code> on a file containing an em dash raises <code>UnicodeDecodeError</code>. Pass <code>encoding=&#x27;utf-8&#x27;</code>, or <code>utf-8-sig</code> for a BOM.</li>
+<li><strong><code>/tmp</code> is wiped on reboot</strong>, which silently kills the bridge. One <code>rig-up.sh</code> brings back lane, poller and project.</li>
+</ul>
+<h2>What&#x27;s honestly weak</h2>
+<ul>
+<li><strong>Dark covers still fight it.</strong> The auto-level is a compensator, not a fix.</li>
+<li><strong>41 finishes that read as maybe six.</strong> The shader helps; one model pass cannot make a real cyanotype. If authenticity mattered more than variety I would keep four.</li>
+<li><strong>Track names in the prompt do nothing visual.</strong> A/B tested — no lettering, legible or garbled. They earn their place as seeds for ink behaviour, not as words.</li>
+</ul>
+<p>The thing it gets right: the record is not decoration on a visualiser, it is the input. Change the song and the print turns over. Stop the music and everything stops with it.</p>
+  </article>
+
+  <footer class="foot">
+    <span>© 2026 // BUDGEWOI, NSW</span>
+    <a href="../../index.html">/index</a>
+    <a href="../../notes/">/notes</a>
+    <a href="../../lab/print/">/lab</a>
+    <a href="https://github.com/marc0ne-s">GITHUB</a>
+  </footer>
+</body>
+</html>

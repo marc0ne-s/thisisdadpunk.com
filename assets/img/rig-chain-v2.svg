@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 340" width="1200" height="340" role="img"
+     aria-label="Signal path of the now-playing rig. Top row, stages 1 to 4 run left to right: Music.app, now.json, the local StreamDiffusion lane, reply.png. A return wire folds down to the second row, where stages 5 to 8 also run left to right: plate_grade, plate_blur, style_music.frag, then the output grade with the HUD. Stages 3 and 7 decide the look.">
+  <defs>
+    <style>
+      .box     { fill:#131311; stroke:#3a3925; stroke-width:1.5; }
+      .key     { stroke:#e85d04; stroke-width:1.6; }
+      .stage   { fill:#5c5b3a; font:600 9px "IBM Plex Mono", ui-monospace, monospace; letter-spacing:.18em; }
+      .stagek  { fill:#e85d04; }
+      .name    { fill:#e8e4de; font:600 13px "IBM Plex Mono", ui-monospace, monospace; }
+      .note    { fill:#a5a478; font:400 9.5px "IBM Plex Mono", ui-monospace, monospace; }
+      .wire    { stroke:#5c5b3a; stroke-width:1.5; fill:none; }
+      .head    { fill:#e85d04; font:600 10px "IBM Plex Mono", ui-monospace, monospace; letter-spacing:.22em; }
+      .sub     { fill:#8a8960; font:400 10px "IBM Plex Mono", ui-monospace, monospace; }
+      .band    { fill:#8a8960; font:500 9px "IBM Plex Mono", ui-monospace, monospace; letter-spacing:.2em; }
+      .fine    { fill:#5c5b3a; font:400 9px "IBM Plex Mono", ui-monospace, monospace; letter-spacing:.12em; }
+    </style>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#5c5b3a"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="340" fill="#0a0a0a"/>
+
+  <text class="head" x="44" y="36">SIGNAL PATH</text>
+  <text class="sub"  x="44" y="54">Apple Music → local diffusion lane → TouchDesigner print pass → HUD → screen</text>
+
+  <text class="band" x="44" y="82">CAPTURE &amp; DIFFUSE</text>
+  <text class="band" x="44" y="222">PRINT &amp; DISPLAY</text>
+
+  <!-- ================= row 1 ================= -->
+  <g>
+    <rect class="box" x="44" y="92" width="248" height="60" rx="2"/>
+    <text class="stage" x="58" y="110">01</text>
+    <text class="name"  x="58" y="129">Music.app</text>
+    <text class="note"  x="58" y="145">AppleScript poll · 1 s</text>
+  </g>
+  <path class="wire" d="M292 122 H344" marker-end="url(#a)"/>
+
+  <g>
+    <rect class="box" x="348" y="92" width="248" height="60" rx="2"/>
+    <text class="stage" x="362" y="110">02</text>
+    <text class="name"  x="362" y="129">now.json + art.png</text>
+    <text class="note"  x="362" y="145">atomic write · /tmp/td_music</text>
+  </g>
+  <path class="wire" d="M596 122 H648" marker-end="url(#a)"/>
+
+  <g>
+    <rect class="box key" x="652" y="92" width="248" height="60" rx="2"/>
+    <text class="stage stagek" x="666" y="110">03</text>
+    <text class="name"  x="666" y="129">StreamDiffusion :7866</text>
+    <text class="note"  x="666" y="145">512 px · t_index 18,24 · ~1.1 s</text>
+  </g>
+  <path class="wire" d="M900 122 H952" marker-end="url(#a)"/>
+
+  <g>
+    <rect class="box" x="956" y="92" width="200" height="60" rx="2"/>
+    <text class="stage" x="970" y="110">04</text>
+    <text class="name"  x="970" y="129">reply.png</text>
+    <text class="note"  x="970" y="145">512 px, low mid-tone</text>
+  </g>
+
+  <!-- return wire between the rows -->
+  <path class="wire" d="M1056 152 V186 H168 V214" marker-end="url(#a)"/>
+  <text class="fine" x="880" y="180">the chain folds back to the left edge</text>
+
+  <!-- ================= row 2 ================= -->
+  <g>
+    <rect class="box" x="44" y="230" width="248" height="60" rx="2"/>
+    <text class="stage" x="58" y="248">05</text>
+    <text class="name"  x="58" y="267">plate_grade</text>
+    <text class="note"  x="58" y="283">auto-level p95 · lift only when dark</text>
+  </g>
+  <path class="wire" d="M292 260 H344" marker-end="url(#a)"/>
+
+  <g>
+    <rect class="box" x="348" y="230" width="248" height="60" rx="2"/>
+    <text class="stage" x="362" y="248">06</text>
+    <text class="name"  x="362" y="267">plate_blur</text>
+    <text class="note"  x="362" y="283">2 px · the Plateblur par</text>
+  </g>
+  <path class="wire" d="M596 260 H648" marker-end="url(#a)"/>
+
+  <g>
+    <rect class="box key" x="652" y="230" width="248" height="60" rx="2"/>
+    <text class="stage stagek" x="666" y="248">07</text>
+    <text class="name"  x="666" y="267">style_music.frag</text>
+    <text class="note"  x="666" y="283">halftone · misregistration · grain</text>
+  </g>
+  <path class="wire" d="M900 260 H952" marker-end="url(#a)"/>
+
+  <g>
+    <rect class="box" x="956" y="230" width="200" height="60" rx="2"/>
+    <text class="stage" x="970" y="248">08</text>
+    <text class="name"  x="970" y="267">disp_auto + HUD</text>
+    <text class="note"  x="970" y="283">out_grade · three fitted lines</text>
+  </g>
+
+  <text class="note" x="44" y="318">Every number on this page was measured on this machine. The lane is local; nothing here talks to a cloud.</text>
+  <text class="fine" x="44" y="334">NO CLOUD · NO API KEY · NO THIRD-PARTY ARTWORK IN THE FIGURES</text>
+</svg>

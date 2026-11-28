@@ -1,0 +1,101 @@
+:root{
+  --black:#0a0a0a; --ink:#e8e4de; --ink-dim:#cfcabf; --orange:#e85d04; --orange-dim:#c44d03;
+  --olive:#8a8960; --olive-dark:#3a3925; --olive-light:#a5a478;
+  --display:'Archivo Black','Impact',sans-serif; --mono:'IBM Plex Mono','Courier New',monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--black);color:var(--ink);font-family:var(--mono);
+  font-size:15.5px;line-height:1.78;letter-spacing:.005em;overflow-x:hidden}
+.grain{position:fixed;inset:0;z-index:50;pointer-events:none;opacity:.055;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/></filter><rect width='140' height='140' filter='url(%23n)'/></svg>")}
+a{color:var(--orange);text-decoration:none}
+a:hover{color:var(--ink)}
+.bar{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:1.1rem;
+  padding:.7rem clamp(1rem,4vw,2.6rem);border-bottom:1px solid var(--olive-dark);
+  background:rgba(10,10,10,.86);backdrop-filter:blur(6px);font-size:.72rem;letter-spacing:.14em}
+.bar__brand{font-family:var(--display);font-size:.95rem;letter-spacing:.02em;color:var(--ink)}
+.bar__brand i{color:var(--orange);font-style:normal}
+.bar__tag{color:var(--olive-light)}
+.bar__spacer{flex:1}
+.bar a{color:var(--olive-light)}
+.bar a:hover{color:var(--orange)}
+.hero{position:relative;border-bottom:1px solid var(--olive-dark);overflow:hidden}
+.hero img{display:block;width:100%;height:clamp(180px,26vw,340px);object-fit:cover;
+  filter:contrast(1.04) saturate(1.02)}
+/* diagrams are wide and must be seen whole, not cropped to a band */
+.hero--contain img{object-fit:contain;height:auto;
+  padding:clamp(1rem,3vw,2.2rem) clamp(1rem,3vw,2.4rem);background:var(--black)}
+.hero__stamp{position:absolute;left:clamp(1rem,4vw,2.6rem);bottom:clamp(.9rem,2.4vw,1.6rem);
+  font-size:.72rem;letter-spacing:.18em;color:var(--ink);background:rgba(10,10,10,.94);
+  border:1px solid var(--olive);padding:.4rem .7rem;box-shadow:0 0 0 4px rgba(10,10,10,.55)}
+.wrap{max-width:67ch;margin:0 auto;padding:clamp(2rem,5vw,4.2rem) clamp(1.1rem,5vw,2.4rem) 0}
+.kicker{font-size:.7rem;letter-spacing:.22em;color:var(--orange);margin:0 0 1.1rem}
+h1{font-family:var(--display);font-size:clamp(1.9rem,5.4vw,3.5rem);line-height:.98;
+  letter-spacing:-.015em;margin:0 0 1.2rem;text-transform:uppercase}
+.dek{margin:0 0 1.4rem;padding-left:1rem;border-left:2px solid var(--orange);
+  color:var(--olive-light);font-size:1rem;line-height:1.7}
+.meta{display:flex;flex-wrap:wrap;gap:.5rem 1.2rem;font-size:.72rem;letter-spacing:.16em;
+  color:var(--olive-light);padding:1rem 0 1.3rem;border-bottom:1px solid var(--olive-dark);margin-bottom:0}
+.meta b{color:var(--ink);font-weight:500}
+h2{font-family:var(--mono);font-weight:600;font-size:1.02rem;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ink);margin:3rem 0 1rem;padding-top:1.1rem;
+  border-top:1px solid var(--olive-dark)}
+h2::before{content:'// ';color:var(--orange)}
+h3{font-family:var(--mono);font-weight:600;font-size:.9rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--olive-light);margin:2rem 0 .7rem}
+p{margin:0 0 1.1rem;color:var(--ink-dim)}
+strong{color:var(--ink);font-weight:600}
+em{color:var(--ink);font-style:italic}
+hr{border:0;border-top:1px solid var(--olive-dark);margin:2.4rem 0}
+ul,ol{margin:0 0 1.2rem;padding-left:1.15rem;color:var(--ink-dim)}
+li{margin:.4rem 0}
+li::marker{color:var(--orange)}
+code{font-family:var(--mono);font-size:.86em;background:rgba(138,137,96,.16);
+  border:1px solid var(--olive-dark);padding:.06em .34em;color:var(--ink)}
+/* A fenced block is ONE panel. Without this the inline chip above paints once per
+   line box and a code fence renders as a stack of separate boxes. */
+pre{font-family:var(--mono);font-size:.78em;line-height:1.62;color:var(--ink);
+  background:rgba(0,0,0,.42);border:1px solid var(--olive-dark);
+  border-left:2px solid var(--orange);padding:.85rem 1rem;margin:1.3rem 0;
+  overflow-x:auto;white-space:pre-wrap;overflow-wrap:anywhere;tab-size:2}
+pre code{display:block;background:none;border:0;padding:0;font-size:1em;
+  color:inherit;white-space:inherit}
+/* .78em, not .82: a 66-character chain measured ~503 px inside a 536 px panel at
+   .82 and lost its last two characters to the border. Wrap as a fallback - a
+   clipped word reads as a typo, a wrapped one does not. */
+/* the meta strip already draws the rule above the first section, and the closing
+   tail rule is drawn by .rule-tape - drop the markdown ones */
+.wrap>.meta+hr{display:none}
+.wrap>hr:first-of-type{display:none}
+.wrap>.meta+hr+h2{margin-top:1.9rem}
+.tw{overflow-x:auto;margin:1.4rem 0 1.8rem;border:1px solid var(--olive-dark)}
+table{border-collapse:collapse;width:100%;font-size:.82rem;line-height:1.5}
+th{text-align:left;padding:.55rem .7rem;background:rgba(138,137,96,.10);
+  color:var(--orange);font-weight:600;letter-spacing:.1em;text-transform:uppercase;font-size:.7rem;
+  border-bottom:1px solid var(--olive-dark);white-space:normal;
+  overflow-wrap:break-word;vertical-align:bottom}
+td{padding:.5rem .7rem;border-bottom:1px solid rgba(58,57,37,.7);color:var(--ink-dim);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td strong{color:var(--ink)}
+blockquote{margin:1.6rem 0;padding:.2rem 0 .2rem 1.1rem;border-left:2px solid var(--olive);
+  color:var(--olive-light)}
+.foot{max-width:74ch;margin:3rem auto 0;padding:1.6rem clamp(1.1rem,5vw,2.4rem) 3.4rem;
+  border-top:1px solid var(--olive-dark);font-size:.72rem;letter-spacing:.13em;color:var(--olive);
+  display:flex;flex-wrap:wrap;gap:.7rem 1.4rem}
+.foot a{color:var(--olive-light)}
+.foot a:hover{color:var(--orange)}
+.rule-tape{max-width:74ch;margin:2.6rem auto 0;height:10px;
+  background:repeating-linear-gradient(90deg,var(--olive-dark) 0 14px,transparent 14px 22px);opacity:.6}
+@media (max-width:620px){
+  body{font-size:15px}
+  .bar__tag{display:none}
+  h1{font-size:clamp(1.7rem,8vw,2.4rem)}
+}
+
+/* cross-link callout to the live demo */
+.tryit{margin:0 0 1.4rem;padding:.85rem 1rem;border-left:2px solid var(--orange);
+  background:rgba(232,93,4,.06);font-size:.84rem;color:var(--olive-light);max-width:62ch}
+.tryit strong{color:var(--ink);font-weight:500}
+.tryit a{color:var(--orange);text-decoration:none;border-bottom:1px solid rgba(232,93,4,.4)}
+.tryit a:hover{color:var(--ink);border-bottom-color:var(--ink)}

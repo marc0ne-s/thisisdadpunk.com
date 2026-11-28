@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The print is in the shader, not the prompt — DADPUNK NOTES</title>
+  <meta name="description" content="">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta property="og:title" content="The print is in the shader, not the prompt">
+  <meta property="og:description" content="">
+  <meta property="og:type" content="article">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/notes.css">
+</head>
+<body>
+  <div class="grain"></div>
+
+  <div class="bar">
+    <span class="bar__brand">THIS IS <i>DAD</i>PUNK</span>
+    <span class="bar__tag">// NOTES</span>
+    <span class="bar__spacer"></span>
+    <a href="../../index.html">&larr; index</a>
+  </div>
+
+  <article class="wrap">
+    <p class="kicker">// NOTE</p>
+    <h1>The print is in the shader, not the prompt</h1>
+    <p class="dek"></p>
+
+    <div class="meta">
+      <span><b></b></span>
+      <span>9 MIN READ</span>
+      <span>[touchdesigner, streamdiffusion, print, shaders, apple silicon]</span>
+    </div>
+<hr />
+<p># The print is in the shader, not the prompt</p>
+<p><em>A side project. Apple Music artwork → a local diffusion lane → a print pass in TouchDesigner, and two days of measurements that mostly told me my instincts were wrong.</em></p>
+<hr />
+<blockquote><p><strong>Try it:</strong> the print pass runs in your browser now — no TouchDesigner, no model. Drop any image into &lt;https://thisisdadpunk.com/lab/print/&gt; and push the ink punch.</p></blockquote>
+<h2>What it is</h2>
+<p>Whatever is playing in Apple Music gets its sleeve pulled, pushed through a local StreamDiffusion lane running on this M4 Pro, and printed — halftone, misregistration, flat ink — on a 1024 frame. Thirty-odd print processes rotate underneath it. It reacts to the audio, and when the music stops, nothing moves at all. That last part is a hard rule I set early and had to rebuild the patch twice to actually honour.</p>
+<p>Two things worth saying up front. It all runs locally; no cloud generation, no API. And it&#x27;s a side project, not a product — I&#x27;m writing it up because the measurements are the interesting part and almost none of them were what I expected. It was built with DadPunk, the agent that runs on this machine: I set the brief and made the calls, it did most of the typing and a lot of the arguing. The numbers below are real either way.</p>
+<h2>The brief I was actually working to</h2>
+<p>Three demands, and they pull against each other:</p>
+<ol>
+<li>Push the finishes hard — the picture shouldn&#x27;t look like a photo with a filter on it.</li>
+<li>Never lose touch with the original sleeve. It has to still read as that record.</li>
+<li>Silence means a still frame. Not a slow frame. A still one.</li>
+</ol>
+<p>Points 1 and 2 fight each other. Point 3 turned out to be an architecture problem, not a settings problem.</p>
+<h2>The two dials, and one of them was a lie</h2>
+<p>The lane is StreamDiffusion. The dominant knob is <code>t_index</code> — the denoise schedule. Early steps ignore the input; late steps preserve it. Measured on one fixed cover:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>schedule</th>
+<th>what you get</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>46,48</td><td>near-copy of the artwork</td></tr>
+<tr><td>40,45</td><td>same layout, sharper surface</td></tr>
+<tr><td><strong>36,42</strong></td><td><strong>boldest redraw that still reads as the cover</strong></td></tr>
+<tr><td>30,36</td><td>motif reshaped, no longer the artwork</td></tr>
+</tbody>
+</table></div>
+<p>The other knob in the code, <code>SD_DELTA</code>, does nothing in this build. I swept it at 0.0 / 0.35 / 0.5 at a fixed schedule and the outputs were <strong>byte-identical</strong> — same MD5. The argument never reaches the sampler. I tuned a parameter that was disconnected.</p>
+<p>That&#x27;s the first lesson and it repeats all the way down: test whether the knob is connected before you calibrate it.</p>
+<h2>The model can&#x27;t do print, and no setting fixes that</h2>
+<p>I kept pushing the schedule harder trying to get a screenprint out of it, and getting noisy digital soup instead.</p>
+<p>The lever wasn&#x27;t the dial. It was underneath it.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>base model</th>
+<th>schedule</th>
+<th>local contrast</th>
+<th>what it looks like</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>sd-turbo</td><td>30,36</td><td>2.78</td><td>clean digital fill, no screen, layout scrambled</td></tr>
+<tr><td><strong>SD1.5 + LCM-LoRA</strong></td><td><strong>30,36</strong></td><td><strong>3.63</strong></td><td><strong>coarse halftone bite, ink edges, layout held</strong></td></tr>
+<tr><td>SD1.5 + LCM-LoRA</td><td>24,30</td><td>2.68</td><td>texture past usefulness, typography gone</td></tr>
+<tr><td>SDXS-512</td><td>any</td><td>—</td><td>flat brown colour field in this build</td></tr>
+</tbody>
+</table></div>
+<p><code>local-contrast</code> here is the mean absolute greyscale gradient — a cheap proxy for &quot;is there visible surface&quot;. It isn&#x27;t a quality score; the frame still has to read. But as a comparison between two models on the same sleeve and prompt, it&#x27;s honest.</p>
+<p>sd-turbo is built for speed and it flattens everything into smooth digital fill. It has no concept of a dot screen. SD1.5 with an LCM LoRA at two steps doesn&#x27;t just score higher — it produces halftone, ink edges and misregistration that wasn&#x27;t in the prompt. Cost: about 860 ms per frame instead of 520–700 ms. Only the reply rate drops; the render stays at 29–37 fps.</p>
+<h2>The print lives after the model</h2>
+<p>The single most useful thing I learned: <strong>the model can only make soft pixels.</strong> Silkscreen scored 5/10 from the model alone and 7/10 once the shader did the print work. You cannot prompt your way to a halftone screen.</p>
+<p>So the print pass is a GLSL top: RGB plates offset by a hair, a rotated halftone screen in the midtones, flat quantised ink instead of gradients. Every strength in it scales off one parameter — <code>Sdamount</code>, 0 to 1 — instead of five constants I&#x27;d tuned by hand. Live at 0.75.</p>
+<p>Two rules, both found the hard way:</p>
+<p><strong>Coarsen the screen as the punch rises. Don&#x27;t tighten it.</strong> My first version went from a 3.4 px cell to 2.5 px, which is backwards. A finer screen at 512 disappears into grain at normal viewing distance. A print reads as a print because you can see the dots. It now goes 3.2 → 4.6 px, with a second coarser screen in the shadows.</p>
+<p><strong>Don&#x27;t drive the colour fringing off the same knob.</strong> The first pass scaled misregistration and saturation with punch too, and by 0.85 the chromatic mess had swamped the dot lattice — the frame read as digital glitch, not ink. Punch now barely touches registration and saturation.</p>
+<p>Calibration, on a frozen reply:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>punch</th>
+<th>local contrast</th>
+<th>reading</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>0.00</td><td>0.0174</td><td>dots barely there, smooth gradients</td></tr>
+<tr><td>0.62</td><td>0.0267</td><td>screen visible, still soft</td></tr>
+<tr><td><strong>0.75</strong></td><td><strong>0.0307</strong></td><td><strong>strong, coherent screen; sleeve legible</strong></td></tr>
+<tr><td>0.85</td><td>0.0321</td><td>strongest at 1:1, starts competing with the artwork</td></tr>
+<tr><td>1.00</td><td>0.0340</td><td>over-baked, dots dominate the forms</td></tr>
+</tbody>
+</table></div>
+<h3>Freeze the input before you A/B a shader</h3>
+<p>The lane replies about once a second. Measure a ladder live and you&#x27;re measuring five different frames. One of my runs reported punch 1.00 as <em>darker</em> than 0.00 purely because the track changed mid-loop.</p>
+<p>Point the input at a copied reply, run the ladder, restore. Same-frame deltas are the only deltas worth reading. Obvious in hindsight; wrong on my first attempt.</p>
+<h2>41 finishes, one press</h2>
+<p>The pool grew from 13 finishes to 41 print processes — cyanotype, photogravure, letterpress, mimeograph, dot matrix, microfilm — plus 41 ink behaviours describing what the ink is doing (squeegee drag, roller chatter, ink starving at the edges). Each album gets a playlist of 14 drawn from its genre family plus wildcards, so a punk record is usually print but not always.</p>
+<p>Then I put four of them side by side and had to admit the obvious: <strong>they looked like the same treatment with different labels.</strong></p>
+<p>Because they were. The shader applied one ink weight to all of them. A photogravure is a continuous-tone intaglio with no dot screen at all. A xerox is nothing but screen and crush. Rendering both at punch 0.75 is what made 41 prompts look like one.</p>
+<p>So each finish now carries its own ink weight, and the shader runs at <code>Punchbase × weight</code>. Same sleeve, measured local contrast:</p>
+<ul>
+<li>cyanotype <strong>4.76</strong></li>
+<li>photogravure <strong>5.27</strong></li>
+<li>letterpress <strong>6.27</strong></li>
+<li>xerox <strong>7.49</strong></li>
+</ul>
+<p>A 1.6× spread, where before they sat within a few percent of each other.</p>
+<p>The general version of the lesson: adding names to a pool doesn&#x27;t add range. The range lives in whatever the renderer does with them — and if that&#x27;s constant, the names are decoration.</p>
+<h2>Motion is not change, and drift is not motion</h2>
+<p>I kept being told the picture looked frozen, and kept answering with more frequent style switches. Wrong lever. Between switches the frame is a still image, and a still image is what reads as frozen.</p>
+<p>When I measured the actual motion with the prompt frozen — the only way to isolate it — source drift alone moved <strong>0.4/255 over four seconds</strong>. Effectively zero.</p>
+<p>The reason is a bit lovely: at this schedule the model <em>reconstructs</em> the composition. Zoom or rotate the input and it doesn&#x27;t return a zoomed or rotated output, it returns the same cover redrawn in place. Drift changes what the model is looking at, which is useful, but it cannot carry visible movement.</p>
+<p>So the motion stage sits after the model&#x27;s reply — a noise-displaced layer the lane can&#x27;t undo. At weight 0.022 and a noise speed of 0.22/s: <strong>13.2/255 mean change, p95 36</strong>. The panic setting I tried while hunting read 90/255, which looked like a bad VHS transfer.</p>
+<h2>Silence means a still frame</h2>
+<p>Every motion driver in the patch was free-running on wall time. Stop the music, and the print kept breathing. That&#x27;s the thing I refused to ship.</p>
+<p>The fix was one gated clock: audio level → max of all channels → smoothed → range-clamped → integrating speed. Zero input means the clock doesn&#x27;t advance, so every driver in the patch freezes together. Measured: <strong>0.000/255 over twelve seconds of silence</strong>, against 5.28/255 with audio.</p>
+<p>Three things bit me while building it. The range-mapping node extrapolates <em>below</em> its floor, so silence fed the clock <strong>-0.02</strong> and it ran backwards. Clamping after the map didn&#x27;t fix it; a limit node with min 0 did. Reconnecting an input left the old wire in place, so the clock kept integrating the leaking gate until I disconnected first. And the speed node renames its output channel after its input, so binding by name broke the moment the source changed — bind by index.</p>
+<p>The rig also obeys the same gate: no style swap can repaint a frozen frame, and no backlog fires the instant audio returns.</p>
+<h2>Things that were lying to me</h2>
+<p>A short list, because each one cost real time:</p>
+<ul>
+<li><strong>The energy channel sat at 1.0 for entire tracks.</strong> Three bands summed and multiplied by 3, clamped at 1 — with real music they&#x27;re already past the clamp. Anything driven by it was a constant. The kick channel had the same problem, retriggering every 0.166 s, which reads as 360 bpm.</li>
+<li><strong><code>aligny=&#x27;bottom&#x27;</code> does not move a text block.</strong> The text stays at the top of the frame regardless. Placement is pixel offsets.</li>
+<li><strong><code>overTOP</code> and <code>compositeTOP</code> threw away most of the text alpha</strong> — a white glyph composited at 0.68 instead of 1.0, so the caption was invisible while its background veil still dimmed the picture. An add node can&#x27;t fail that way.</li>
+<li><strong>Apple Music sends year <code>0</code>.</strong> The era leg of every playlist was dead in practice.</li>
+<li><strong>A missing window kills the whole chain.</strong> With the perform window closed nothing requests the output, so nothing cooks — including the bridge. It looks exactly like a crashed diffusion lane and isn&#x27;t one.</li>
+</ul>
+<h2>Honest limits</h2>
+<ul>
+<li>The lane runs at ~1.2 fps. The motion hides it; nothing else does.</li>
+<li>These read as clearly different <em>treatments</em>. They are not chemically authentic prints. One SD1.5 pass plus one shader cannot produce a real Prussian-blue cyanotype, and I&#x27;m not going to pretend it does.</li>
+<li>Putting the artist name in the prompt produces no lettering — at this schedule the model has no budget to render type. It earns its place elsewhere: the track title seeds which ink behaviour starts, so two tracks on one record look like siblings rather than twins.</li>
+<li>Dark sleeves collapse the print pass. A cover averaging 18.5/255 came out at 7.3/255 — every stage reported healthy while the picture was gone. The fix is upstream: measure the mix, lift the gamma toward a 0.20 mean, never darken.</li>
+<li>If authenticity matters more than variety, the honest move is a shortlist — xerox, letterpress, stencil, overprint — rather than more names.</li>
+</ul>
+<h2>Why this isn&#x27;t a stream</h2>
+<p>I looked at putting it on a stream and the answer is boring: the rig works on other people&#x27;s artwork and other people&#x27;s recordings, and neither of those rights is mine to publish. Transformative-looking output doesn&#x27;t change that.</p>
+<p>So the version worth building runs on my own catalogue — sleeves I generate, tracks I made — where there&#x27;s nothing to clear. Same rig, same measurements, no takedowns. That&#x27;s the next step, and the measurements above don&#x27;t change.</p>
+<hr />
+<p><em>Build notes, every failed idea included, live in <code>KNOBS.md</code> in the project. Numbers above are from that file, measured on this machine, with the source frozen where the comparison required it.</em></p>
+  </article>
+
+  <footer class="foot">
+    <span>© 2026 // BUDGEWOI, NSW</span>
+    <a href="../../index.html">/index</a>
+    <a href="../../notes/">/notes</a>
+    <a href="../../lab/print/">/lab</a>
+    <a href="https://github.com/marc0ne-s">GITHUB</a>
+  </footer>
+</body>
+</html>
